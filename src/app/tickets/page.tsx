@@ -1,7 +1,8 @@
+// This is a tickets page
 const TicketsPage = () => {
   return (
     <div>
-      <h2 className="text-lg font-bold">This is a tickets page</h2>
+      <h2 className="text-lg font-bold">Tickets Page</h2>
     </div>
   );
 };
