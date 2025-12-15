@@ -1,3 +1,4 @@
+import Placeholder from "@/components/placeholder";
 import { initialTickets } from "@/data";
 
 // This is a ticket page
@@ -11,7 +12,7 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
 
   if (!ticket) {
-    return <h1>Ticket not found</h1>;
+    return <Placeholder label="Ticket not found" />;
   }
 
   return (
