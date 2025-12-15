@@ -1,3 +1,4 @@
+import Heading from "@/components/heading";
 import {
   Card,
   CardContent,
@@ -5,30 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { initialTickets } from "@/data";
 import { ticketPath } from "@/path";
-
-export function SeparatorDemo() {
-  return (
-    <div>
-      <div className="space-y-1">
-        <h4 className="text-sm leading-none font-medium">Radix Primitives</h4>
-        <p className="text-muted-foreground text-sm">
-          An open-source UI component library.
-        </p>
-      </div>
-      <Separator className="my-4" />
-      <div className="flex h-5 items-center space-x-4 text-sm">
-        <div>Blog</div>
-        <Separator orientation="vertical" />
-        <div>Docs</div>
-        <Separator orientation="vertical" />
-        <div>Source</div>
-      </div>
-    </div>
-  );
-}
 
 import { LucideCircleCheck, LucideFileText, LucidePencil } from "lucide-react";
 import Link from "next/link";
@@ -43,15 +22,7 @@ const TICKET_ICONS = {
 const TicketsPage = () => {
   return (
     <div className="flex-1 flex flex-col gap-y-8">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">Tickets Page</h2>
-        <p className="text-sm text-muted-foreground">
-          All your tickets at one place
-        </p>
-      </div>
-
-      <Separator />
-
+      <Heading title="Tickets" desc="All your tickets at one place" />
       <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
         {initialTickets.map((ticket) => (
           <Card key={ticket.id} className="w-full max-w-[420px]">
