@@ -1,12 +1,13 @@
 import { initialTickets } from "@/data";
 import { ticketPath } from "@/path";
 import clsx from "clsx";
+import { FileText, Check, Pencil } from "lucide-react";
 import Link from "next/link";
 
 const TICKET_ICONS = {
-  OPEN: "O",
-  DONE: "X",
-  IN_PROGRESS: ">",
+  OPEN: <FileText />,
+  DONE: <Check />,
+  IN_PROGRESS: <Pencil />,
 };
 
 // This is a tickets page
@@ -20,7 +21,7 @@ const TicketsPage = () => {
         </p>
       </div>
 
-      <div className="flex-1 flex flex-col items-center gap-y-4">
+      <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
         {initialTickets.map((ticket) => (
           <div
             key={ticket.id}
