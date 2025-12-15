@@ -16,7 +16,7 @@ const Header = () => {
         w-full
         "
     >
-      <div>
+      <div className="flex items-center gap-x-2">
         <Button variant="ghost" asChild>
           <Link href={homePath()}>
             <LucideKanban />
