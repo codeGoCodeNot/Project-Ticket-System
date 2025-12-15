@@ -1,11 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { homePath, ticketsPath } from "@/path";
+import Header from "@/components/header";
+import ThemeProvider from "@/components/theme/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
-import { LucideKanban } from "lucide-react";
-import Header from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,20 +25,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <main
-          className="
-        py-24 px-8 min-h-screen 
-        flex-1 flex flex-col
-        overflow-y-auto overflow-x-hidden
-        "
-        >
-          {children}
-        </main>
+        <ThemeProvider>
+          <Header />
+          <main
+            className="
+          py-24 px-8 min-h-screen 
+          flex-1 flex flex-col
+          overflow-y-auto overflow-x-hidden
+          "
+          >
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

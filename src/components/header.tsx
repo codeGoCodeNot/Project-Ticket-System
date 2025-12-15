@@ -2,6 +2,7 @@ import { homePath, ticketsPath } from "@/path";
 import { LucideKanban } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import ThemeSwitcher from "./theme/theme-switcher";
 
 // this is navigation items for layout
 const Header = () => {
@@ -23,7 +24,8 @@ const Header = () => {
           </Link>
         </Button>
       </div>
-      <div>
+      <div className="flex items-center gap-x-2">
+        <ThemeSwitcher />
         <Button variant="default" asChild>
           <Link href={ticketsPath()}>
             <h1>Tickets</h1>
