@@ -2,7 +2,7 @@ import { Separator } from "./ui/separator";
 
 type HeadingProps = {
   title: string;
-  desc: string;
+  desc?: string;
 };
 
 // this component is use for TicketsPage
