@@ -1,4 +1,5 @@
 "use server";
+
 import prisma from "@/lib/prisma";
 
 const deleteTicket = async (id: string) => {
