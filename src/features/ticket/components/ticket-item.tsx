@@ -1,14 +1,12 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import deleteTicket from "@/features/actions/delete-ticket";
 import { ticketPath } from "@/path";
 import clsx from "clsx";
 import { LucideSquareArrowOutUpRight, LucideTrash2 } from "lucide-react";
 import Link from "next/link";
 import { Ticket } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
+import deleteTickets from "@/features/actions/delete-ticket";
 
 type TicketItemProps = {
   ticket: Ticket;
@@ -24,14 +22,12 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     </Button>
   );
 
-  const handleDeleteClick = async () => {
-    await deleteTicket(ticket.id);
-  };
-
   const deleteButton = (
-    <Button variant="outline" size="icon" onClick={handleDeleteClick}>
-      <LucideTrash2 className="h-4 w-4" />
-    </Button>
+    <form action={deleteTickets.bind(null, ticket.id)}>
+      <Button variant="outline" size="icon">
+        <LucideTrash2 className="h-4 w-4" />
+      </Button>
+    </form>
   );
 
   return (

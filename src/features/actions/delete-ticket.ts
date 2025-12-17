@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 
-const deleteTicket = async (id: string) => {
+const deleteTickets = async (id: string) => {
   await prisma.ticket.delete({
     where: {
       id,
@@ -10,4 +10,4 @@ const deleteTicket = async (id: string) => {
   });
 };
 
-export default deleteTicket;
+export default deleteTickets;
