@@ -1,6 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { ticketsPath } from "@/path";
+import { redirect } from "next/navigation";
 
 const deleteTickets = async (id: string) => {
   await prisma.ticket.delete({
@@ -8,6 +10,7 @@ const deleteTickets = async (id: string) => {
       id,
     },
   });
+  redirect(ticketsPath());
 };
 
 export default deleteTickets;
