@@ -1,18 +1,29 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import upsertTicket from "@/features/actions/upsert-ticket";
 import { Label } from "@radix-ui/react-label";
+import { LucideLoaderCircle } from "lucide-react";
+import { useActionState } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
-import SubmitButton from "@/components/form/submit-button";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
 };
 
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
+  const [actionState, action, isPending] = useActionState(
+    upsertTicket.bind(null, ticket?.id),
+    {
+      message: "",
+    }
+  );
+
   return (
     <form
-      action={upsertTicket.bind(null, ticket?.id)}
+      action={action}
       className="
     flex flex-col gap-y-2
     "
@@ -22,7 +33,11 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
 
       <Label htmlFor="content">Content</Label>
       <Textarea id="content" name="content" defaultValue={ticket?.content} />
-      <SubmitButton label={ticket ? "Edit" : "Create"} />
+      <Button disabled={isPending} type="submit">
+        {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
+        {ticket ? "Edit" : "Create"}
+      </Button>
+      {actionState.message}
     </form>
   );
 };
