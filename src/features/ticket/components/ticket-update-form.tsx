@@ -12,12 +12,11 @@ type TicketUpdateFormProps = {
 const TicketUpdateForm = ({ ticket }: TicketUpdateFormProps) => {
   return (
     <form
-      action={updateTicket}
+      action={updateTicket.bind(null, ticket.id)}
       className="
     flex flex-col gap-y-2
     "
     >
-      <Input type="hidden" name="id" defaultValue={ticket.id} />
       <Label htmlFor="title">Title</Label>
       <Input type="text" id="title" name="title" defaultValue={ticket.title} />
 

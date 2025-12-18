@@ -5,16 +5,15 @@ import { ticketsPath } from "@/path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-const updateTicket = async (formData: FormData) => {
+const updateTicket = async (id: string, formData: FormData) => {
   const data = {
-    id: formData.get("id"),
     title: formData.get("title"),
     content: formData.get("content"),
   };
 
   await prisma.ticket.update({
     where: {
-      id: data.id as string,
+      id,
     },
     data: {
       title: data.title as string,
