@@ -24,7 +24,7 @@ const CardCompact = ({
 }: CardCompactProps) => {
   return (
     <Card className="w-full max-w-[420px] self-center">
-      <CardHeader className="flex flex-col gap-y-2">
+      <CardHeader className={classname}>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{desc}</CardDescription>
       </CardHeader>
