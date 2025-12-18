@@ -1,8 +1,8 @@
 import CardCompact from "@/components/card-compact";
 import Heading from "@/components/heading";
 import Spinner from "@/components/spinner";
+import TicketCreateForm from "@/features/ticket/components/ticket-create-form";
 import TicketList from "@/features/ticket/components/ticket-list";
-import TicketCreateForm from "@/features/ticket/components/ticketCreateForm";
 import { Suspense } from "react";
 
 // This is a tickets page
@@ -14,7 +14,7 @@ const TicketsPage = () => {
       <CardCompact
         title="Create Ticket"
         desc="A new ticket will be created"
-        classname="flex flex-col gap-y-2"
+        classname="w-full max-w-[420px] self-center"
         content={<TicketCreateForm />}
       />
 

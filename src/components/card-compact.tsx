@@ -23,8 +23,8 @@ const CardCompact = ({
   classname,
 }: CardCompactProps) => {
   return (
-    <Card className="w-full max-w-[420px] self-center">
-      <CardHeader className={classname}>
+    <Card className={classname}>
+      <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{desc}</CardDescription>
       </CardHeader>
