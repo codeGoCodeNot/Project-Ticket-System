@@ -10,11 +10,9 @@ type TicketUpsertFormProps = {
 };
 
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
-  const ticketId = ticket?.id ?? "";
-
   return (
     <form
-      action={upsertTicket.bind(null, ticketId)}
+      action={upsertTicket.bind(null, ticket?.id)}
       className="
     flex flex-col gap-y-2
     "
