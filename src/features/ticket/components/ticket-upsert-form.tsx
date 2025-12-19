@@ -9,6 +9,7 @@ import { LucideLoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
 import FieldError from "@/components/form/field-error";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -17,10 +18,7 @@ type TicketUpsertFormProps = {
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   const [actionState, action, isPending] = useActionState(
     upsertTicket.bind(null, ticket?.id),
-    {
-      message: "",
-      fieldErrors: {},
-    }
+    EMPTY_ACTION_STATE
   );
 
   return (
