@@ -11,6 +11,7 @@ import { Label } from "@radix-ui/react-label";
 import { LucideLoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
+import { toast } from "sonner";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -24,10 +25,10 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
 
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
-      console.log(actionState.message);
+      if (actionState.message) toast.success(actionState.message);
     },
     onError: ({ actionState }) => {
-      console.log(actionState.message);
+      if (actionState.message) toast.error(actionState.message);
     },
   });
 
