@@ -13,6 +13,7 @@ const useActionFeedback = (
   options: UseActionFeedbackOptions
 ) => {
   const prevTimestamp = useRef(actionState.timestamp);
+  // eslint-disable-next-line react-hooks/refs
   const isUpdate = prevTimestamp.current !== actionState.timestamp;
   useEffect(() => {
     if (!isUpdate) return;
