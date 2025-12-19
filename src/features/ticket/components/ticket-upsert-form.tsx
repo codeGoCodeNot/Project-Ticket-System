@@ -29,10 +29,23 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     "
     >
       <Label htmlFor="title">Title</Label>
-      <Input type="text" id="title" name="title" defaultValue={ticket?.title} />
+      <Input
+        type="text"
+        id="title"
+        name="title"
+        defaultValue={
+          (actionState.payload?.get("title") as string) ?? ticket?.title
+        }
+      />
 
       <Label htmlFor="content">Content</Label>
-      <Textarea id="content" name="content" defaultValue={ticket?.content} />
+      <Textarea
+        id="content"
+        name="content"
+        defaultValue={
+          (actionState.payload?.get("content") as string) ?? ticket?.content
+        }
+      />
       <Button disabled={isPending} type="submit">
         {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
         {ticket ? "Edit" : "Create"}
