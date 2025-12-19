@@ -1,19 +1,22 @@
 "use server";
 
-import * as z from "zod";
+import fromErrorToActionState, {
+  ActionState,
+} from "@/components/form/utils/to-action-state";
 import prisma from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import * as z from "zod";
 
 const upsertTicketSchema = z.object({
-  title: z.string().min(1).max(191),
-  content: z.string().min(1).max(1024),
+  title: z.string().min(1, "Title must not be empty").max(191),
+  content: z.string().min(1, "Content must not be empty").max(1024),
 });
 
 const upsertTicket = async (
   id: string | undefined,
-  _actionState: { message: string; payload?: FormData },
+  _actionState: ActionState,
   formData: FormData
 ) => {
   try {
@@ -30,9 +33,8 @@ const upsertTicket = async (
       update: data, // update data if record is found
       create: data, // create data if record is not found
     });
-  } catch (err) {
-    console.log(err);
-    return { message: "Something went wrong", payload: formData };
+  } catch (error) {
+    return fromErrorToActionState(error, formData);
   }
 
   revalidatePath(ticketsPath());
