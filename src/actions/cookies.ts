@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 
 export const getCookieByKey = async (key: string) => {
-  const cookiesAwait = await cookies();
-  const cookie = cookiesAwait.get(key);
+  const cookiesStore = await cookies();
+  const cookie = cookiesStore.get(key);
 
   if (!cookie) {
     return null;
