@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import upsertTicket from "@/features/actions/upsert-ticket";
+import { fromCent } from "@/utils/currency";
 import { Label } from "@radix-ui/react-label";
 import { LucideLoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
-import { fr } from "zod/v4/locales";
-import { fromCent } from "@/utils/currency";
+import DatePickerDemo from "@/components/date-picker";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -50,8 +50,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       <div className="flex gap-x-2 mb-1">
         <div className="w-1/2">
           <Label htmlFor="deadline">Deadline</Label>
-          <Input
-            type="date"
+
+          <DatePickerDemo
             id="deadline"
             name="deadline"
             defaultValue={
