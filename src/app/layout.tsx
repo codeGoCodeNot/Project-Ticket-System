@@ -43,7 +43,6 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster expand />
-          <RedirectToast />
         </ThemeProvider>
       </body>
     </html>
