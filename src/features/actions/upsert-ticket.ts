@@ -25,7 +25,14 @@ const upsertTicket = async (
     const data = upsertTicketSchema.parse({
       title: formData.get("title"),
       content: formData.get("content"),
+      deadline: formData.get("deadline"),
+      bounty: formData.get("bounty"),
     });
+
+    const dbData = {
+      ...data,
+      bounty: (data.bounty = 100),
+    };
 
     await prisma.ticket.upsert({
       where: {
