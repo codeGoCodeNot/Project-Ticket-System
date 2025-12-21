@@ -11,6 +11,8 @@ import { Label } from "@radix-ui/react-label";
 import { LucideLoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
+import { fr } from "zod/v4/locales";
+import { fromCent } from "@/utils/currency";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -67,7 +69,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
             id="bounty"
             name="bounty"
             defaultValue={
-              (actionState.payload?.get("bounty") as string) ?? ticket?.bounty
+              (actionState.payload?.get("bounty") as string) ??
+              (ticket?.bounty ? fromCent(ticket?.bounty) : "")
             }
           />
           <FieldError actionState={actionState} name="bounty" />

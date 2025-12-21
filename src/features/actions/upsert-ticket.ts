@@ -7,6 +7,7 @@ import fromErrorToActionState, {
 } from "@/components/form/utils/to-action-state";
 import prisma from "@/lib/prisma";
 import { ticketPath, ticketsPath } from "@/path";
+import { toCent } from "@/utils/currency";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import * as z from "zod";
@@ -31,13 +32,14 @@ const upsertTicket = async (
       bounty: formData.get("bounty"),
     });
 
+    const dbData = { ...data, bounty: toCent(data.bounty) };
     await prisma.ticket.upsert({
       where: {
         id: id || "",
       },
 
-      update: data, // update data if record is found
-      create: data, // create data if record is not found
+      update: dbData, // update data if record is found
+      create: dbData, // create data if record is not found
     });
   } catch (error) {
     return fromErrorToActionState(error, formData);
