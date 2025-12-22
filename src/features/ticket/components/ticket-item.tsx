@@ -6,21 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import deleteTickets from "@/features/actions/delete-ticket";
 import { ticketEditPath, ticketPath } from "@/path";
+import toCurrencyFromCent from "@/utils/currency";
 import clsx from "clsx";
 import {
   LucideMoreVertical,
   LucidePencil,
   LucideSquareArrowOutUpRight,
-  LucideTrash2,
 } from "lucide-react";
 import Link from "next/link";
 import { Ticket } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
-import toCurrencyFromCent from "@/utils/currency";
 import TicketMoreMenu from "./ticket-more-menu";
-import useConfirmDialog from "@/components/confirm-dialog";
 
 type TicketItemProps = {
   ticket: Ticket;
