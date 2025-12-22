@@ -10,9 +10,11 @@ import upsertTicket from "@/features/actions/upsert-ticket";
 import { fromCent } from "@/utils/currency";
 import { Label } from "@radix-ui/react-label";
 import { LucideLoaderCircle } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useRef } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
-import DatePickerDemo from "@/components/date-picker";
+import DatePickerDemo, {
+  ImperativeHandleFromDatePickerDemo,
+} from "@/components/date-picker";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -24,8 +26,15 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     EMPTY_ACTION_STATE
   );
 
+  const datePickerImperativeHandleRef =
+    useRef<ImperativeHandleFromDatePickerDemo>(null);
+
+  const handleSuccess = () => {
+    datePickerImperativeHandleRef.current?.reset();
+  };
+
   return (
-    <Form action={action} actionState={actionState}>
+    <Form action={action} actionState={actionState} onSuccess={handleSuccess}>
       <Label htmlFor="title">Title</Label>
       <Input
         type="text"
@@ -52,13 +61,13 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
           <Label htmlFor="deadline">Deadline</Label>
 
           <DatePickerDemo
-            key={actionState.timestamp}
             id="deadline"
             name="deadline"
             defaultValue={
               (actionState.payload?.get("deadline") as string) ??
               ticket?.deadline
             }
+            imperativeHandleRef={datePickerImperativeHandleRef}
           />
           <FieldError actionState={actionState} name="deadline" />
         </div>
