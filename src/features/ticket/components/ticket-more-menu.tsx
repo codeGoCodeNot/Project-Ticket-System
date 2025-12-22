@@ -14,6 +14,8 @@ import { Ticket, TicketStatus } from "../../../../generated/prisma/client";
 import { TICKET_STATUS_LABELS } from "../constant";
 import updateTicketStatus from "@/features/actions/update-ticket-status";
 import { toast } from "sonner";
+import useConfirmDialog from "@/components/confirm-dialog";
+import deleteTickets from "@/features/actions/delete-ticket";
 
 type TicketMoreMenuProps = {
   ticket: Ticket;
@@ -21,12 +23,15 @@ type TicketMoreMenuProps = {
 };
 
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
-  const deleteButton = (
-    <DropdownMenuItem>
-      <LucideTrash2 className="h-4 w-4" />
-      <span>Delete</span>
-    </DropdownMenuItem>
-  );
+  const [deleteButton, deleteDialog] = useConfirmDialog({
+    action: deleteTickets.bind(null, ticket.id),
+    trigger: (
+      <DropdownMenuItem>
+        <LucideTrash2 className="h-4 w-4" />
+        <span>Delete</span>
+      </DropdownMenuItem>
+    ),
+  });
 
   const handleUpdateTicketStatus = async (value: string) => {
     const promise = updateTicketStatus(ticket.id, value as TicketStatus);
@@ -58,14 +63,17 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
   );
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" side="right">
-        {ticketStatusRadioGroupItems}
-        <DropdownMenuSeparator />
-        {deleteButton}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      {deleteDialog}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56" side="right">
+          {ticketStatusRadioGroupItems}
+          <DropdownMenuSeparator />
+          {deleteButton}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 };
 
