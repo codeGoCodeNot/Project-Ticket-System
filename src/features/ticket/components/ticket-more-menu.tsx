@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LucideTrash } from "lucide-react";
+import { LucideTrash2 } from "lucide-react";
 import { Ticket, TicketStatus } from "../../../../generated/prisma/client";
 import { TICKET_STATUS_LABELS } from "../constant";
 import updateTicketStatus from "@/features/actions/update-ticket-status";
@@ -23,7 +23,7 @@ type TicketMoreMenuProps = {
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
   const deleteButton = (
     <DropdownMenuItem>
-      <LucideTrash className="h-4 w-4" />
+      <LucideTrash2 className="h-4 w-4" />
       <span>Delete</span>
     </DropdownMenuItem>
   );

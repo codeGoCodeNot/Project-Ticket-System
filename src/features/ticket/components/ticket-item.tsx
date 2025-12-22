@@ -20,6 +20,7 @@ import { Ticket } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
 import toCurrencyFromCent from "@/utils/currency";
 import TicketMoreMenu from "./ticket-more-menu";
+import ConfirmDialog from "@/components/confirm-dialog";
 
 type TicketItemProps = {
   ticket: Ticket;
@@ -44,11 +45,14 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
   );
 
   const deleteButton = (
-    <form action={deleteTickets.bind(null, ticket.id)}>
-      <Button variant="outline" size="icon">
-        <LucideTrash2 className="h-4 w-4" />
-      </Button>
-    </form>
+    <ConfirmDialog
+      action={deleteTickets.bind(null, ticket.id)}
+      trigger={
+        <Button variant="outline" size="icon">
+          <LucideTrash2 className="h-4 w-4" />
+        </Button>
+      }
+    />
   );
 
   const moreMenu = (
