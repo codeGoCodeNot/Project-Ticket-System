@@ -16,7 +16,7 @@ export const EMPTY_ACTION_STATE: ActionState = {
 
 const fromErrorToActionState = (
   error: unknown,
-  formData: FormData
+  formData?: FormData
 ): ActionState => {
   // zod error
   if (error instanceof z.ZodError) {
@@ -44,7 +44,7 @@ const fromErrorToActionState = (
   else {
     return {
       status: "ERROR",
-      message: "An unknown error occured",
+      message: "An unknown error occurred",
       fieldErrors: {},
       payload: formData,
       timestamp: Date.now(),
