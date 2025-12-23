@@ -2,9 +2,8 @@ import Header from "@/components/header";
 import ThemeProvider from "@/components/theme/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "sonner";
-import RedirectToast from "@/components/redirect-toast";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Road to Next",
-  description: "My road to next application...",
+  title: "The Tickethub",
+  description: "Tickethub application.",
 };
 
 export default function RootLayout({
