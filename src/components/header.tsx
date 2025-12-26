@@ -1,4 +1,4 @@
-import { homePath, ticketsPath } from "@/path";
+import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
 import { LucideKanban } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -6,6 +6,26 @@ import ThemeSwitcher from "./theme/theme-switcher";
 
 // this is navigation items for layout
 const Header = () => {
+  const navItems = (
+    <>
+      <Button variant="default" asChild>
+        <Link href={ticketsPath()}>
+          <h1>Tickets</h1>
+        </Link>
+      </Button>
+      <Button variant="outline" asChild>
+        <Link href={signUpPath()}>
+          <h1>Sign Up</h1>
+        </Link>
+      </Button>
+      <Button variant="outline" asChild>
+        <Link href={signInPath()}>
+          <h1>Sign In</h1>
+        </Link>
+      </Button>
+    </>
+  );
+
   return (
     <nav
       className="
@@ -26,11 +46,7 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-x-2">
         <ThemeSwitcher />
-        <Button variant="default" asChild>
-          <Link href={ticketsPath()}>
-            <h1>Tickets</h1>
-          </Link>
-        </Button>
+        {navItems}
       </div>
     </nav>
   );
