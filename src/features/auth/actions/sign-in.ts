@@ -13,7 +13,10 @@ import { redirect } from "next/navigation";
 import z from "zod";
 
 const signInSchema = z.object({
-  email: z.string().min(1, { message: "Is required" }).max(191),
+  identifier: z
+    .string()
+    .min(1, { message: "Username or Email is required" })
+    .max(191),
   password: z
     .string()
     .min(6, "Password must not be less than 6 characters")
@@ -22,24 +25,32 @@ const signInSchema = z.object({
 
 const signIn = async (_actionState: ActionState, formData: FormData) => {
   try {
-    const { email, password } = signInSchema.parse(
+    const { identifier, password } = signInSchema.parse(
       Object.fromEntries(formData)
     );
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: {
-        email,
+        OR: [{ username: identifier }, { email: identifier }],
       },
     });
 
     if (!user) {
-      return toActionState("ERROR", "Incorrect email or password", formData);
+      return toActionState(
+        "ERROR",
+        "Incorrect username/email or password",
+        formData
+      );
     }
 
     const validPassword = await verify(user.passwordHash, password);
 
     if (!validPassword) {
-      return toActionState("ERROR", "Incorrect email or password", formData);
+      return toActionState(
+        "ERROR",
+        "Incorrect username/email or password",
+        formData
+      );
     }
 
     const session = await lucia.createSession(user.id, {});

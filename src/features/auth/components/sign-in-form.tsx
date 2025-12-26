@@ -18,11 +18,11 @@ const SignInForm = () => {
 
   return (
     <Form actionState={actionState} action={action}>
-      <Label htmlFor="email">Email</Label>
+      <Label htmlFor="identifier">Username or Email</Label>
       <Input
-        name="email"
-        placeholder="Email"
-        defaultValue={actionState.payload?.get("email") as string}
+        name="identifier"
+        placeholder="Username or Email"
+        defaultValue={actionState.payload?.get("identifier") as string}
       />
       <FieldError actionState={actionState} name="email" />
 
