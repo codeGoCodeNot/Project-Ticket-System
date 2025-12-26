@@ -1,12 +1,30 @@
+import signOut from "@/features/auth/actions/sign-out";
 import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
-import { LucideKanban } from "lucide-react";
+import { LucideKanban, LucideLogOut } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import ThemeSwitcher from "./theme/theme-switcher";
+import { Button } from "./ui/button";
+import getAuth from "@/features/queries/get-auth";
 
 // this is navigation items for layout
-const Header = () => {
-  const navItems = (
+const Header = async () => {
+  const { session } = await getAuth();
+
+  const navItems = session ? (
+    <>
+      <Button variant="default" asChild>
+        <Link href={ticketsPath()}>
+          <h1>Tickets</h1>
+        </Link>
+      </Button>
+      <form action={signOut}>
+        <Button variant="outline">
+          <h1>Sign Out</h1>
+          <LucideLogOut />
+        </Button>
+      </form>
+    </>
+  ) : (
     <>
       <Button variant="default" asChild>
         <Link href={ticketsPath()}>
