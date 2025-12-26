@@ -14,7 +14,7 @@ const SubmitButton = ({ label, icon }: SubmitButtonProps) => {
 
   return (
     <Button disabled={pending} type="submit">
-      {pending && <LucideLoaderCircle />}
+      {pending && <LucideLoaderCircle className="animate-spin" />}
       {label}
       {pending ? null : icon}
     </Button>
