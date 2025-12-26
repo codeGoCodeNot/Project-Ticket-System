@@ -27,7 +27,10 @@ const signUpSchema = z
       .string()
       .min(6, "Password must not be less than 6 characters")
       .max(191),
-    confirmPassword: z.string().min(6).max(191),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must not be less than 6 characters")
+      .max(191),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
     if (password !== confirmPassword) {
