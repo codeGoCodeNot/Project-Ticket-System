@@ -35,7 +35,7 @@ const Header = async () => {
             <h1>Sign Up</h1>
           </Link>
         </Button>
-        <Button variant="outline" asChild>
+        <Button variant="default" asChild>
           <Link href={signInPath()}>
             <h1>Sign In</h1>
           </Link>
