@@ -5,6 +5,7 @@ import Link from "next/link";
 import ThemeSwitcher from "./theme/theme-switcher";
 import { Button } from "./ui/button";
 import getAuth from "@/features/queries/get-auth";
+import SubmitButton from "./form/submit-button";
 
 // this is navigation items for layout
 const Header = async () => {
@@ -18,10 +19,7 @@ const Header = async () => {
         </Link>
       </Button>
       <form action={signOut}>
-        <Button variant="outline">
-          <h1>Sign Out</h1>
-          <LucideLogOut />
-        </Button>
+        <SubmitButton label="Sign out" icon={<LucideLogOut />} />
       </form>
     </>
   ) : (
