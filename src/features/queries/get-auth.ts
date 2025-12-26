@@ -1,7 +1,8 @@
 import { lucia } from "@/lib/lucia";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
-const getAuth = async () => {
+const getAuth = cache(async () => {
   const sessionId =
     (await cookies()).get(lucia.sessionCookieName)?.value ?? null;
   if (!sessionId) {
@@ -31,9 +32,11 @@ const getAuth = async () => {
         sessionCookie.attributes
       );
     }
-  } catch {}
+  } catch {
+    // do nothin if used in a RSC
+  }
 
   return result;
-};
+});
 
 export default getAuth;
