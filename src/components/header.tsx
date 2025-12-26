@@ -13,16 +13,18 @@ const Header = () => {
           <h1>Tickets</h1>
         </Link>
       </Button>
-      <Button variant="outline" asChild>
-        <Link href={signUpPath()}>
-          <h1>Sign Up</h1>
-        </Link>
-      </Button>
-      <Button variant="outline" asChild>
-        <Link href={signInPath()}>
-          <h1>Sign In</h1>
-        </Link>
-      </Button>
+      <div className="flex flex-col flex-1 gap-y-1  sm:flex-row sm:gap-x-1 sm:gap-y-0">
+        <Button variant="outline" asChild>
+          <Link href={signUpPath()}>
+            <h1>Sign Up</h1>
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link href={signInPath()}>
+            <h1>Sign In</h1>
+          </Link>
+        </Button>
+      </div>
     </>
   );
 
