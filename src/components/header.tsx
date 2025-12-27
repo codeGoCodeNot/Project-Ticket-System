@@ -1,17 +1,30 @@
+"use client";
+
 import signOut from "@/features/auth/actions/sign-out";
+import getAuth from "@/features/ticket/queries/get-auth";
 import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
+import { User as AuthUser } from "lucia";
 import { LucideKanban, LucideLogOut } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import SubmitButton from "./form/submit-button";
 import ThemeSwitcher from "./theme/theme-switcher";
 import { Button } from "./ui/button";
-import getAuth from "@/features/queries/get-auth";
-import SubmitButton from "./form/submit-button";
 
 // this is navigation items for layout
-const Header = async () => {
-  const { session } = await getAuth();
+const Header = () => {
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  const navItems = session ? (
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { user } = await getAuth();
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
+
+  const navItems = user ? (
     <>
       <Button variant="default" asChild>
         <Link href={ticketsPath()}>
@@ -46,8 +59,7 @@ const Header = async () => {
 
   return (
     <nav
-      className="
-        supports-backdrop-blur:bg-background/60
+      className=" supports-backdrop-blur:bg-background/60
         fixed left-0 right-0 top-0 z-20
         flex justify-between 
         py-2.5 px-5 border-b

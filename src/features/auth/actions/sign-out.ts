@@ -1,6 +1,6 @@
 "use server";
 
-import getAuth from "@/features/queries/get-auth";
+import getAuth from "@/features/ticket/queries/get-auth";
 import { lucia } from "@/lib/lucia";
 import { signInPath } from "@/path";
 import { cookies } from "next/headers";

@@ -6,7 +6,7 @@ import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import upsertTicket from "@/features/actions/upsert-ticket";
+import upsertTicket from "@/features/ticket/actions/upsert-ticket";
 import { fromCent } from "@/utils/currency";
 import { Label } from "@radix-ui/react-label";
 import { LucideLoaderCircle } from "lucide-react";

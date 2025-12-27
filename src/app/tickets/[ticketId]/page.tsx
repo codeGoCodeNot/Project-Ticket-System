@@ -1,4 +1,4 @@
-import getTicket from "@/features/queries/get-ticket";
+import getTicket from "@/features/ticket/queries/get-ticket";
 import TicketItem from "@/features/ticket/components/ticket-item";
 import { notFound } from "next/navigation";
 

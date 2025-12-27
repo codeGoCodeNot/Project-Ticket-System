@@ -12,10 +12,10 @@ import {
 import { LucideTrash2 } from "lucide-react";
 import { Ticket, TicketStatus } from "../../../../generated/prisma/client";
 import { TICKET_STATUS_LABELS } from "../constant";
-import updateTicketStatus from "@/features/actions/update-ticket-status";
+import updateTicketStatus from "@/features/ticket/actions/update-ticket-status";
 import { toast } from "sonner";
 import useConfirmDialog from "@/components/confirm-dialog";
-import deleteTickets from "@/features/actions/delete-ticket";
+import deleteTickets from "@/features/ticket/actions/delete-ticket";
 
 type TicketMoreMenuProps = {
   ticket: Ticket;
