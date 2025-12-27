@@ -37,7 +37,7 @@ model Ticket {
   userId String
   user User @relation(fields: [userId], references: [id])
 
-  @@index([[userId]])
+  @@index([userId])
 }
 
 enum TicketStatus { 
