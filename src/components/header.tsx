@@ -1,28 +1,21 @@
 "use client";
 
 import signOut from "@/features/auth/actions/sign-out";
-import getAuth from "@/features/ticket/queries/get-auth";
+import useAuth from "@/features/auth/hooks/use-auth";
 import { homePath, signInPath, signUpPath, ticketsPath } from "@/path";
-import { User as AuthUser } from "lucia";
 import { LucideKanban, LucideLogOut } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import SubmitButton from "./form/submit-button";
 import ThemeSwitcher from "./theme/theme-switcher";
 import { Button } from "./ui/button";
 
 // this is navigation items for layout
 const Header = () => {
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const { user, isFetched } = useAuth();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { user } = await getAuth();
-      setUser(user);
-    };
-
-    fetchUser();
-  }, []);
+  if (!isFetched) {
+    return null;
+  }
 
   const navItems = user ? (
     <>
@@ -37,11 +30,6 @@ const Header = () => {
     </>
   ) : (
     <>
-      <Button variant="default" asChild>
-        <Link href={ticketsPath()}>
-          <h1>Tickets</h1>
-        </Link>
-      </Button>
       <div className="flex flex-col flex-1 gap-y-1  sm:flex-row sm:gap-x-1 sm:gap-y-0">
         <Button variant="outline" asChild>
           <Link href={signUpPath()}>
@@ -59,7 +47,7 @@ const Header = () => {
 
   return (
     <nav
-      className=" supports-backdrop-blur:bg-background/60
+      className="animate-slide-from-top supports-backdrop-blur:bg-background/60
         fixed left-0 right-0 top-0 z-20
         flex justify-between 
         py-2.5 px-5 border-b
