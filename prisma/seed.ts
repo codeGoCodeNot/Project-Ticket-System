@@ -48,8 +48,8 @@ const tickets = [
 ];
 
 const seed = async () => {
-  await prisma.ticket.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.ticket.deleteMany();
 
   const passwordHash = await hash("berdin123");
 
