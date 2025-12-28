@@ -15,14 +15,14 @@ import {
   LucideSquareArrowOutUpRight,
 } from "lucide-react";
 import Link from "next/link";
-import { Ticket, User } from "../../../../generated/prisma/client";
+import { Prisma } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
 import TicketMoreMenu from "./ticket-more-menu";
 
 type TicketItemProps = {
-  ticket: Ticket & {
-    user: User;
-  };
+  ticket: Prisma.TicketGetPayload<{
+    include: { user: true };
+  }>;
   isDetail?: boolean;
 };
 
