@@ -5,6 +5,9 @@ const getTickets = async () => {
     orderBy: {
       createAt: "desc",
     },
+    include: {
+      user: true,
+    },
   });
 };
 

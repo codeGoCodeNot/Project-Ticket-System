@@ -6,7 +6,7 @@ import fromErrorToActionState, {
 } from "@/components/form/utils/to-action-state";
 import { lucia } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
-import { signInPath, ticketsPath } from "@/path";
+import { signInPath } from "@/path";
 import { hash } from "@node-rs/argon2";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

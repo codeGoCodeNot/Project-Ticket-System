@@ -15,12 +15,14 @@ import {
   LucideSquareArrowOutUpRight,
 } from "lucide-react";
 import Link from "next/link";
-import { Ticket } from "../../../../generated/prisma/client";
+import { Ticket, User } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
 import TicketMoreMenu from "./ticket-more-menu";
 
 type TicketItemProps = {
-  ticket: Ticket;
+  ticket: Ticket & {
+    user: User;
+  };
   isDetail?: boolean;
 };
 
@@ -77,7 +79,9 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
           </span>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <p className="text-sm text-muted-foreground">{ticket.deadline}</p>
+          <p className="text-sm text-muted-foreground">
+            {ticket.deadline} by {ticket.user.username}
+          </p>
           <p className="text-sm text-muted-foreground">
             {toCurrencyFromCent(ticket.bounty)}
           </p>
