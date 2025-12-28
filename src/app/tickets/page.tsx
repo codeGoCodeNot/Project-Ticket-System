@@ -1,12 +1,16 @@
 import CardCompact from "@/components/card-compact";
 import Heading from "@/components/heading";
 import Spinner from "@/components/spinner";
+import getAuth from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
+import { signInPath } from "@/path";
+import { redirect } from "next/navigation";
+
 import { Suspense } from "react";
 
 // This is a tickets page
-const TicketsPage = () => {
+const TicketsPage = async () => {
   return (
     <>
       <div className="flex-1 flex flex-col gap-y-8">
