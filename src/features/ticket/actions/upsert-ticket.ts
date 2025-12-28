@@ -36,7 +36,7 @@ const upsertTicket = async (
       });
 
       if (!ticket || !isOwner(user, ticket)) {
-        return toActionState("ERROR", "Not authorized!");
+        return toActionState("ERROR", "Not authorized");
       }
     }
 
