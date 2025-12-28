@@ -18,17 +18,10 @@ import Link from "next/link";
 import { Prisma } from "../../../../generated/prisma/client";
 import { TICKET_ICONS } from "../constant";
 import TicketMoreMenu from "./ticket-more-menu";
+import { TicketWithMetaData } from "../type";
 
 type TicketItemProps = {
-  ticket: Prisma.TicketGetPayload<{
-    include: {
-      user: {
-        select: {
-          username: true;
-        };
-      };
-    };
-  }>;
+  ticket: TicketWithMetaData;
   isDetail?: boolean;
 };
 
