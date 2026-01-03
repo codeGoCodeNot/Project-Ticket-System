@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   if (!user || !isFetched) {
-    return <div className="w-[78px] bg-background/20" />;
+    return null;
   }
 
   return (
@@ -27,7 +27,7 @@ const Sidebar = () => {
       <nav
         className={cn(
           "animate-sidebar-from-left",
-          "h-screen border-r pt-10",
+          "h-screen border-r pt-15",
           isTransition && "duration-200",
           isOpen ? "md:w-60 w-[78px]" : "w-[78px]"
         )}
