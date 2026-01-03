@@ -36,7 +36,7 @@ export default function RootLayout({
           <div className="flex h-screen overflow-hidden border-collapse">
             <Sidebar />
             <main
-              className="px-8 min-h-screen flex-1 flex flex-col pt-15
+              className="px-7 min-h-screen flex-1 flex flex-col pt-15
               bg-secondary/20
               overflow-y-auto overflow-x-hidden
               "
