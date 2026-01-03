@@ -49,7 +49,7 @@ const DatePickerDemo = ({
           variant="outline"
           className="justify-start font-normal text-left"
         >
-          <LucideCalendar className="mr-2 h-4 w-4" />
+          <LucideCalendar />
           {formattedDate}
           <input type="hidden" name={name} value={formattedDate} />
         </Button>

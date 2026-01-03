@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   if (!user || !isFetched) {
-    return <div className="w-[78px] bg-background/20" />;
+    return <div className="w-[78px] bg-[#0f0f10]" />;
   }
 
   return (
@@ -29,7 +29,7 @@ const Sidebar = () => {
           "animate-sidebar-from-left",
           "h-screen border-r pt-10",
           isTransition && "duration-200",
-          isOpen ? "md:w-50 w-[78px]" : "w-[78px]"
+          isOpen ? "md:w-60 w-[78px]" : "w-[78px]"
         )}
         onMouseEnter={() => handleToggle(true)}
         onMouseLeave={() => handleToggle(false)}
