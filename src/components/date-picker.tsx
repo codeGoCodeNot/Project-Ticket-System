@@ -44,7 +44,7 @@ const DatePickerDemo = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className="w-full" id={id} asChild>
+      <PopoverTrigger className="w-full text-xs" id={id} asChild>
         <Button
           variant="outline"
           className="justify-start font-normal text-left"

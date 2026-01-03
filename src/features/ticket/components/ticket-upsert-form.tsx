@@ -88,7 +88,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       </div>
 
       <Button disabled={isPending} type="submit">
-        {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
+        {isPending && <LucideLoaderCircle className="animate-spin" />}
         {ticket ? "Edit" : "Create"}
       </Button>
     </Form>
