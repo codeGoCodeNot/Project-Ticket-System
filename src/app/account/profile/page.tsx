@@ -9,6 +9,8 @@ const ProfilePage = () => {
         desc="All your profile information"
         tabs={<AccountTabs />}
       />
+
+      <h1>Under Construction</h1>
     </div>
   );
 };
