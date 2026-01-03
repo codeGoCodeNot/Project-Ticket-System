@@ -1,6 +1,9 @@
 import getTicket from "@/features/ticket/queries/get-ticket";
 import TicketItem from "@/features/ticket/components/ticket-item";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/breadcrumbs";
+import { homePath } from "@/path";
+import { Separator } from "@/components/ui/separator";
 
 // This is a ticket page
 type TicketPageProps = {
@@ -16,11 +19,20 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   }
 
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-y-8">
+      <Breadcrumbs
+        breadcrumbs={[
+          { title: "Tickets", href: homePath() },
+          { title: ticket.title },
+        ]}
+      />
+
+      <Separator />
+
       <div className="flex justify-center animate-fade-from-top">
         <TicketItem ticket={ticket} isDetail />
       </div>
-    </>
+    </div>
   );
 };
 
