@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import Sidebar from "@/components/sidebar/components/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +33,17 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Header />
-          <main
-            className="
-          py-24 px-8 min-h-screen 
-          flex-1 flex flex-col
-          overflow-y-auto overflow-x-hidden
-          "
-          >
-            {children}
-          </main>
+          <div className="flex h-screen overflow-hidden border-collapse">
+            <Sidebar />
+            <main
+              className="px-8 min-h-screen flex-1 flex flex-col pt-15
+              bg-secondary/20
+              overflow-y-auto overflow-x-hidden
+              "
+            >
+              {children}
+            </main>
+          </div>
           <Toaster expand />
         </ThemeProvider>
       </body>
