@@ -82,8 +82,9 @@ const TicketItem = async ({ ticket, isDetail }: TicketItemProps) => {
           </span>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <p className="text-sm text-muted-foreground">
-            {ticket.deadline} by {ticket.user.username}
+          <p className="text-sm text-muted-foreground flex flex-col justify-center self-center gap-y-1">
+            <span>{ticket.deadline}</span>
+            <span>by {ticket.user.username}</span>
           </p>
           <p className="text-sm text-muted-foreground">
             {toCurrencyFromCent(ticket.bounty)}
