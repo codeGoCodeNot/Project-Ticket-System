@@ -10,7 +10,7 @@ const ProfilePage = () => {
         tabs={<AccountTabs />}
       />
 
-      <h1>Under Construction</h1>
+      <h1 className="text-4xl font-black text-center">Under Construction</h1>
     </div>
   );
 };

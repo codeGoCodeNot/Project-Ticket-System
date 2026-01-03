@@ -1,5 +1,7 @@
 const ForgotPasswordPage = () => {
-  return <h2 className="text-lg">ForgotPasswordPage</h2>;
+  return (
+    <h1 className="text-4xl font-black text-center">Under Construction</h1>
+  );
 };
 
 export default ForgotPasswordPage;

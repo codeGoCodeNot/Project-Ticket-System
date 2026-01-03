@@ -9,6 +9,8 @@ const PasswordPage = () => {
         desc="Keep your account secure"
         tabs={<AccountTabs />}
       />
+
+      <h1 className="text-4xl font-black text-center">Under Construction</h1>
     </div>
   );
 };
