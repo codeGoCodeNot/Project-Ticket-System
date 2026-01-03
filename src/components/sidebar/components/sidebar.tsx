@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   if (!user || !isFetched) {
-    return <div className="w-[78px] bg-[#0f0f10]" />;
+    return <div className="w-[78px] bg-background/20" />;
   }
 
   return (

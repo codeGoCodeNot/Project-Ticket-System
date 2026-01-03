@@ -1,6 +1,6 @@
 import { NavItem } from "./type";
-import { LucideBook, LucideLibrary } from "lucide-react";
-import { homePath, ticketsPath } from "@/path";
+import { LucideBook, LucideCircleUser, LucideLibrary } from "lucide-react";
+import { accountProfilePath, homePath, ticketsPath } from "@/path";
 
 export const navItems: NavItem[] = [
   {
@@ -12,6 +12,12 @@ export const navItems: NavItem[] = [
     title: "My tickets",
     icon: <LucideBook />,
     href: ticketsPath(),
+  },
+  {
+    separator: true,
+    title: "Account",
+    icon: <LucideCircleUser />,
+    href: accountProfilePath(),
   },
 ];
 
