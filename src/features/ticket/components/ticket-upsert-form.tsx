@@ -1,27 +1,26 @@
 "use client";
 
+import DatePickerDemo, {
+  ImperativeHandleFromDatePickerDemo,
+} from "@/components/date-picker";
 import FieldError from "@/components/form/field-error";
 import Form from "@/components/form/form";
+import SubmitButton from "@/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import upsertTicket from "@/features/ticket/actions/upsert-ticket";
 import { fromCent } from "@/utils/currency";
 import { Label } from "@radix-ui/react-label";
-import { LucideLoaderCircle } from "lucide-react";
 import { useActionState, useRef } from "react";
 import { Ticket } from "../../../../generated/prisma/client";
-import DatePickerDemo, {
-  ImperativeHandleFromDatePickerDemo,
-} from "@/components/date-picker";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
 };
 
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
-  const [actionState, action, isPending] = useActionState(
+  const [actionState, action] = useActionState(
     upsertTicket.bind(null, ticket?.id),
     EMPTY_ACTION_STATE
   );
@@ -87,10 +86,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         </div>
       </div>
 
-      <Button disabled={isPending} type="submit">
-        {isPending && <LucideLoaderCircle className="animate-spin" />}
-        {ticket ? "Edit" : "Create"}
-      </Button>
+      <SubmitButton label={ticket ? "Edit" : "Create"} variant="default" />
     </Form>
   );
 };
