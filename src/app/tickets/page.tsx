@@ -1,6 +1,6 @@
 import CardCompact from "@/components/card-compact";
 import Heading from "@/components/heading";
-import Spinner from "@/components/spinner";
+import SkeletonComponents from "@/components/skeleton-components";
 import getAuth from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
@@ -23,7 +23,7 @@ const TicketsPage = async () => {
           content={<TicketUpsertForm />}
         />
 
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<SkeletonComponents length={5} />}>
           <TicketList userId={user?.id} />
         </Suspense>
       </div>

@@ -1,5 +1,5 @@
 import Heading from "@/components/heading";
-import Spinner from "@/components/spinner";
+import SkeletonComponents from "@/components/skeleton-components";
 import TicketList from "@/features/ticket/components/ticket-list";
 import { Suspense } from "react";
 
@@ -9,7 +9,7 @@ const HomePage = () => {
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading title="All tickets" desc="Tickets by everyone at one place" />
 
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<SkeletonComponents length={5} />}>
         <TicketList />
       </Suspense>
     </div>

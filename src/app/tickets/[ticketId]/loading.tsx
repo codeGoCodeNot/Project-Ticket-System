@@ -1,7 +1,7 @@
-import Spinner from "@/components/spinner";
+import SkeletonComponents from "@/components/skeleton-components";
 
 const loading = () => {
-  return <Spinner />;
+  return <SkeletonComponents length={1} isDetail />;
 };
 
 export default loading;
