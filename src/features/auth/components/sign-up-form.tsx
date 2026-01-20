@@ -9,11 +9,12 @@ import { useActionState } from "react";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import Form from "@/components/form/form";
 import FieldError from "@/components/form/field-error";
+import SubmitButton from "@/components/form/submit-button";
 
 const SignUpForm = () => {
   const [actionState, action, isPending] = useActionState(
     signUp,
-    EMPTY_ACTION_STATE
+    EMPTY_ACTION_STATE,
   );
 
   return (
@@ -51,11 +52,7 @@ const SignUpForm = () => {
         defaultValue={actionState.payload?.get("confirmPassword") as string}
       />
       <FieldError actionState={actionState} name="confirmPassword" />
-
-      <Button type="submit">
-        {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
-        SignUp
-      </Button>
+      <SubmitButton label="Sign Up" />
     </Form>
   );
 };

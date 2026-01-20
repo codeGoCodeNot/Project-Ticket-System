@@ -13,6 +13,7 @@ import Form from "./form/form";
 import { ActionState, EMPTY_ACTION_STATE } from "./form/utils/to-action-state";
 import { LucideLoaderCircle } from "lucide-react";
 import { Button } from "./ui/button";
+import SubmitButton from "./form/submit-button";
 
 type UseConfirmDialogProps = {
   title?: string;
@@ -35,7 +36,7 @@ const useConfirmDialog = ({
 
   const [actionState, formAction, isPending] = useActionState(
     action,
-    EMPTY_ACTION_STATE
+    EMPTY_ACTION_STATE,
   );
 
   const handleSuccess = () => {
@@ -57,12 +58,7 @@ const useConfirmDialog = ({
               actionState={actionState}
               onSuccess={handleSuccess}
             >
-              <Button disabled={isPending} type="submit">
-                {isPending && (
-                  <LucideLoaderCircle className="h-4 w-4 animate-spin" />
-                )}
-                Confirm
-              </Button>
+              <SubmitButton label="Confirm" />
             </Form>
           </AlertDialogAction>
         </AlertDialogFooter>

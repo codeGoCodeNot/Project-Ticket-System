@@ -9,11 +9,12 @@ import { Label } from "@/components/ui/label";
 import { LucideLoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 import signIn from "../actions/sign-in";
+import SubmitButton from "@/components/form/submit-button";
 
 const SignInForm = () => {
   const [actionState, action, isPending] = useActionState(
     signIn,
-    EMPTY_ACTION_STATE
+    EMPTY_ACTION_STATE,
   );
 
   return (
@@ -24,7 +25,7 @@ const SignInForm = () => {
         placeholder="Username or Email"
         defaultValue={actionState.payload?.get("identifier") as string}
       />
-      <FieldError actionState={actionState} name="email" />
+      <FieldError actionState={actionState} name="identifier" />
 
       <Label htmlFor="password">Password</Label>
       <Input
@@ -35,10 +36,7 @@ const SignInForm = () => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <Button type="submit" className="w-full">
-        {isPending && <LucideLoaderCircle className="h-4 w-4 animate-spin" />}
-        Sign In
-      </Button>
+      <SubmitButton label="Sign In" />
     </Form>
   );
 };

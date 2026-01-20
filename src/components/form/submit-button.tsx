@@ -4,30 +4,31 @@ import { LucideLoader } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { Button } from "../ui/button";
 
-interface SubmitButtonProps {
+type SubmitButtonProps = {
   label?: string;
-  icon?: React.ReactElement;
   variant?:
     | "default"
     | "destructive"
-    | "outline"
-    | "secondary"
     | "ghost"
-    | "link";
-}
+    | "link"
+    | "outline"
+    | "secondary";
+  icon?: React.ReactElement;
+};
 
-const SubmitButton = ({
-  label,
-  icon,
-  variant = "outline",
-}: SubmitButtonProps) => {
+const SubmitButton = ({ label, variant, icon }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button disabled={pending} type="submit" variant={variant}>
+    <Button
+      className="w-full"
+      type="submit"
+      disabled={pending}
+      variant={variant}
+    >
       {pending && <LucideLoader className="animate-spin" />}
+      {icon}
       {label}
-      {pending ? null : icon}
     </Button>
   );
 };
