@@ -34,12 +34,14 @@ const SkeletonComponents = ({ length, isDetail }: SkeletonComponentsProps) => {
               <Skeleton className="w-9/12 h-4" />
             </CardContent>
             <CardFooter className="flex justify-between items-center">
-              <Skeleton className="w-20 h-4" />
+              <div className="flex flex-col gap-y-2">
+                <Skeleton className="w-20 h-4" />
+                <Skeleton className="w-20 h-4" />
+              </div>
               <Skeleton className="w-8 h-4" />
             </CardFooter>
           </Card>
           <div className="flex flex-col gap-y-1 mb-1">
-            <Skeleton className="w-8 h-8" />
             <Skeleton className="w-8 h-8" />
           </div>
         </div>
