@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 import useAuth from "@/features/auth/hooks/use-auth";
 
-import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { navItems } from "../constants";
 
@@ -28,15 +28,15 @@ const SidebarComponent = () => {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu className="py-10 sm:py-20">
-              {navItems.map((item, idx) => (
+              {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
+                  {item.separator && <Separator />}
                   <SidebarMenuButton asChild>
                     <Link href={item.href}>
                       {item.icon}
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
-                  {idx < navItems.length - 1 && <DropdownMenuSeparator />}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
