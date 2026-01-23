@@ -7,6 +7,7 @@ import Link from "next/link";
 import AccountDropdown from "./account-dropdown";
 import ThemeSwitcher from "./theme/theme-switcher";
 import { Button } from "./ui/button";
+import { SidebarTrigger } from "./ui/sidebar";
 
 // this is navigation items for layout
 const Header = () => {
@@ -43,6 +44,8 @@ const Header = () => {
       "
     >
       <div className="flex items-center gap-x-2">
+        <SidebarTrigger className="opacity-50" />
+
         <Button variant="ghost" asChild>
           <Link href={homePath()}>
             <LucideKanban />

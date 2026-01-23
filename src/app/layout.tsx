@@ -1,6 +1,7 @@
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar/components/sidebar";
+import SidebarComponent from "@/components/sidebar/components/sidebar";
 import ThemeProvider from "@/components/theme/theme-provider";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
@@ -24,9 +25,9 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider>
-          <Header />
-          <div className="flex h-screen overflow-hidden border-collapse">
-            <Sidebar />
+          <SidebarProvider>
+            <Header />
+            <SidebarComponent />
             <main
               className="px-7 min-h-screen flex-1 flex flex-col py-24
               bg-secondary/20
@@ -35,7 +36,7 @@ export default function RootLayout({
             >
               {children}
             </main>
-          </div>
+          </SidebarProvider>
           <Toaster expand />
         </ThemeProvider>
       </body>
