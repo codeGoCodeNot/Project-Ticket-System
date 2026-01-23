@@ -44,7 +44,7 @@ const Header = () => {
       "
     >
       <div className="flex items-center gap-x-2">
-        <SidebarTrigger className="opacity-50" />
+        {user && <SidebarTrigger className="opacity-50" />}
 
         <Button variant="ghost" asChild>
           <Link href={homePath()}>
