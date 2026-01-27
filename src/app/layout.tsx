@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,21 +25,23 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          <SidebarProvider>
-            <Header />
-            <SidebarComponent />
-            <main
-              className="px-7 min-h-screen flex-1 flex flex-col py-24
+        <NuqsAdapter>
+          <ThemeProvider>
+            <SidebarProvider>
+              <Header />
+              <SidebarComponent />
+              <main
+                className="px-7 min-h-screen flex-1 flex flex-col py-24
               bg-secondary/20
               overflow-y-auto overflow-x-hidden
               "
-            >
-              {children}
-            </main>
-          </SidebarProvider>
-          <Toaster expand />
-        </ThemeProvider>
+              >
+                {children}
+              </main>
+            </SidebarProvider>
+            <Toaster expand />
+          </ThemeProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

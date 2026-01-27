@@ -4,7 +4,8 @@ import SkeletonComponents from "@/components/skeleton-components";
 import getAuth from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
-import { SearchParams } from "@/features/ticket/type";
+import { searchParamsCache } from "@/features/ticket/search-params";
+import { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 
 type TicketsPageProps = {
@@ -27,7 +28,10 @@ const TicketsPage = async ({ searchParams }: TicketsPageProps) => {
         />
 
         <Suspense fallback={<SkeletonComponents length={5} />}>
-          <TicketList userId={user?.id} searchParams={await searchParams} />
+          <TicketList
+            userId={user?.id}
+            searchParams={await searchParamsCache.parse(searchParams)}
+          />
         </Suspense>
       </div>
     </>

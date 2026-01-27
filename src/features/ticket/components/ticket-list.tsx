@@ -1,13 +1,13 @@
-import getTickets from "@/features/ticket/queries/get-tickets";
-import TicketItem from "./ticket-item";
-import SearchInput from "@/components/search-input";
-import { SearchParams } from "../type";
 import Placeholder from "@/components/placeholder";
+import SearchInput from "@/components/search-input";
 import SortSelect from "@/components/sort-select";
+import getTickets from "@/features/ticket/queries/get-tickets";
+import { ParsedSearchParams } from "../search-params";
+import TicketItem from "./ticket-item";
 
 type TicketListProps = {
   userId?: string;
-  searchParams: SearchParams;
+  searchParams: ParsedSearchParams;
 };
 
 const TicketList = async ({ userId, searchParams }: TicketListProps) => {

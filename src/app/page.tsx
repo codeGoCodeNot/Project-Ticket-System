@@ -1,7 +1,8 @@
 import Heading from "@/components/heading";
 import SkeletonComponents from "@/components/skeleton-components";
 import TicketList from "@/features/ticket/components/ticket-list";
-import { SearchParams } from "@/features/ticket/type";
+import { searchParamsCache } from "@/features/ticket/search-params";
+import { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 
 type HomePageProps = {
@@ -14,7 +15,9 @@ const HomePage = async ({ searchParams }: HomePageProps) => {
       <Heading title="All tickets" desc="Tickets by everyone at one place" />
 
       <Suspense fallback={<SkeletonComponents length={5} />}>
-        <TicketList searchParams={await searchParams} />
+        <TicketList
+          searchParams={await searchParamsCache.parse(searchParams)}
+        />
       </Suspense>
     </div>
   );
