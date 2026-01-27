@@ -44,7 +44,8 @@ const updateProfile = async (_actionState: ActionState, formData: FormData) => {
     });
 
     if (!dbUser) return toActionState("ERROR", "User not found", formData);
-    if (!isOwner) return toActionState("ERROR", "Not Authorized", formData);
+    if (!isOwner(user, { userId: dbUser.id }))
+      return toActionState("ERROR", "Not Authorized", formData);
 
     if (dbUser.username === username && dbUser.email === email)
       return toActionState("ERROR", "No action change");
@@ -74,7 +75,7 @@ const updateProfile = async (_actionState: ActionState, formData: FormData) => {
 
   revalidatePath(accountProfilePath());
 
-  return toActionState("SUCCESS", "User updated");
+  return toActionState("SUCCESS", "User updated", formData);
 };
 
 export default updateProfile;
