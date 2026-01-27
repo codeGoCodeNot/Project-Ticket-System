@@ -4,11 +4,14 @@ import SkeletonComponents from "@/components/skeleton-components";
 import getAuth from "@/features/auth/queries/get-auth";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
-
+import { SearchParams } from "@/features/ticket/type";
 import { Suspense } from "react";
 
-// This is a tickets page
-const TicketsPage = async () => {
+type TicketsPageProps = {
+  searchParams: Promise<SearchParams>;
+};
+
+const TicketsPage = async ({ searchParams }: TicketsPageProps) => {
   const { user } = await getAuth();
 
   return (
@@ -24,7 +27,7 @@ const TicketsPage = async () => {
         />
 
         <Suspense fallback={<SkeletonComponents length={5} />}>
-          <TicketList userId={user?.id} />
+          <TicketList userId={user?.id} searchParams={await searchParams} />
         </Suspense>
       </div>
     </>

@@ -9,3 +9,7 @@ export type TicketWithMetaData = Prisma.TicketGetPayload<{
     };
   };
 }>;
+
+export type SearchParams = {
+  search: string;
+};
