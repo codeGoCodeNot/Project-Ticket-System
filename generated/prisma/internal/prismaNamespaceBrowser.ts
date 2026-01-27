@@ -93,7 +93,7 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 export const TicketScalarFieldEnum = {
   id: 'id',
-  createAt: 'createAt',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   title: 'title',
   content: 'content',
