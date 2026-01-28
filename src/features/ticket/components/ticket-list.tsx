@@ -30,6 +30,11 @@ const TicketList = async ({ userId, searchParams }: TicketListProps) => {
               label: "Oldest",
             },
             {
+              sortKey: "deadline",
+              sortValue: "asc",
+              label: "Earliest Deadline",
+            },
+            {
               sortKey: "bounty",
               sortValue: "desc",
               label: "Bounty",
