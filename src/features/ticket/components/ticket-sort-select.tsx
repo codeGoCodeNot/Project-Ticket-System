@@ -2,12 +2,12 @@
 
 import SortSelect, { SortSelectOption } from "@/components/sort-select";
 import { useQueryStates } from "nuqs";
-import { sortParser, sortOptions } from "../search-params";
+import { sortParser, paginationOptions } from "../search-params";
 
 type TicketSortSelectProps = { options: SortSelectOption[] };
 
 const TicketSortSelect = ({ options }: TicketSortSelectProps) => {
-  const [sort, setSort] = useQueryStates(sortParser, sortOptions);
+  const [sort, setSort] = useQueryStates(sortParser, paginationOptions);
 
   return <SortSelect options={options} value={sort} onChange={setSort} />;
 };
