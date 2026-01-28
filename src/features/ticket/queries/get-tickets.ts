@@ -16,7 +16,7 @@ const getTickets = async (
   const skip = searchParams.page * searchParams.size;
   const take = searchParams.size;
 
-  return await prisma.ticket.findMany({
+  const tickets = await prisma.ticket.findMany({
     where,
     skip,
     take,
@@ -31,6 +31,18 @@ const getTickets = async (
       },
     },
   });
+
+  const count = await prisma.ticket.count({
+    where,
+  });
+
+  return {
+    list: tickets,
+    metadata: {
+      count,
+      hasNextPage: count > skip + take,
+    },
+  };
 };
 
 export default getTickets;
