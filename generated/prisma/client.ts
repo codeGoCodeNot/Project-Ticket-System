@@ -54,3 +54,8 @@ export type Session = Prisma.SessionModel
  * 
  */
 export type Ticket = Prisma.TicketModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
