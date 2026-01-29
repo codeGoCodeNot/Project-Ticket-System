@@ -49,6 +49,8 @@ model Comment {
   content String @db.VarChar(1024)
   ticketId String
   ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  // Optional relation to User; comment can exist without a user (e.g., if user is deleted)
   userId String?
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
