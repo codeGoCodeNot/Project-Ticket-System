@@ -10,10 +10,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { cloneElement, useActionState, useState } from "react";
 import Form from "./form/form";
-import { ActionState, EMPTY_ACTION_STATE } from "./form/utils/to-action-state";
-import { LucideLoaderCircle } from "lucide-react";
-import { Button } from "./ui/button";
 import SubmitButton from "./form/submit-button";
+import { ActionState, EMPTY_ACTION_STATE } from "./form/utils/to-action-state";
 
 type UseConfirmDialogProps = {
   title?: string;
@@ -34,10 +32,7 @@ const useConfirmDialog = ({
     onClick: () => setIsOpen((prev) => !prev),
   });
 
-  const [actionState, formAction, isPending] = useActionState(
-    action,
-    EMPTY_ACTION_STATE,
-  );
+  const [actionState, formAction] = useActionState(action, EMPTY_ACTION_STATE);
 
   const handleSuccess = () => {
     setIsOpen(false);
