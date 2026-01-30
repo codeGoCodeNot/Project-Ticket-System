@@ -1,11 +1,10 @@
 import Placeholder from "@/components/placeholder";
-
+import getTickets from "../queries/get-tickets";
 import { ParsedSearchParams } from "../search-params";
 import TicketItem from "./ticket-item";
 import TicketPagination from "./ticket-pagination";
 import TicketSearchInputProps from "./ticket-search-input";
 import TicketSortSelect from "./ticket-sort-select";
-import getTickets from "../queries/get-tickets";
 
 type TicketListProps = {
   userId?: string;

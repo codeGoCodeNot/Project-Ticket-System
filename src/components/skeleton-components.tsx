@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
-import { Separator } from "./ui/separator";
 
 type SkeletonComponentsProps = { length: number; isDetail?: boolean };
 
