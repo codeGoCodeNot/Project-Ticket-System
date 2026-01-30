@@ -7,14 +7,15 @@ import getAuth from "@/features/auth/queries/get-auth";
 import isOwner from "@/features/auth/utils/is-owner";
 import CommentUpdateButton from "./comment-update-button";
 import getComment from "../queries/get-comment";
+import { CommentWithMetaData } from "../type";
 
 type CommentsProps = {
   ticketId: string;
   commentId?: string;
+  comments: CommentWithMetaData[];
 };
 
-const Comments = async ({ ticketId, commentId }: CommentsProps) => {
-  const comments = await getComments(ticketId);
+const Comments = async ({ ticketId, commentId, comments }: CommentsProps) => {
   const comment = await getComment(commentId ?? "");
   const { user } = await getAuth();
 

@@ -10,6 +10,7 @@ import {
 import getAuth from "@/features/auth/queries/get-auth";
 import isOwner from "@/features/auth/utils/is-owner";
 import Comments from "@/features/comments/components/comments";
+import { CommentWithMetaData } from "@/features/comments/type";
 import { ticketEditPath, ticketPath } from "@/path";
 import toCurrencyFromCent from "@/utils/currency";
 import clsx from "clsx";
@@ -27,9 +28,14 @@ import TicketMoreMenu from "./ticket-more-menu";
 type TicketItemProps = {
   ticket: TicketWithMetaData;
   isDetail?: boolean;
+  comments?: CommentWithMetaData[];
 };
 
-const TicketItem = async ({ ticket, isDetail }: TicketItemProps) => {
+const TicketItem = async ({
+  ticket,
+  isDetail,
+  comments = [],
+}: TicketItemProps) => {
   const { user } = await getAuth();
   const isTicketOwner = isOwner(user, ticket);
 
@@ -110,7 +116,7 @@ const TicketItem = async ({ ticket, isDetail }: TicketItemProps) => {
         </div>
       </div>
       <Suspense fallback={<CommentSkeleton />}>
-        {isDetail && <Comments ticketId={ticket.id} />}
+        {isDetail && <Comments ticketId={ticket.id} comments={comments} />}
       </Suspense>
     </div>
   );
