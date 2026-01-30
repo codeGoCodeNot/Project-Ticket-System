@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { commentEditPath } from "@/path";
 import { LucidePencil } from "lucide-react";
 import Link from "next/link";
 
@@ -11,7 +12,7 @@ const CommentUpdateButton = ({
 }) => {
   return (
     <Button variant="outline" size="icon" asChild>
-      <Link href={`/tickets/${ticketId}/edit/${commentId}/edit`}>
+      <Link href={commentEditPath(ticketId, commentId)}>
         <LucidePencil className="h-4 w-4" />
       </Link>
     </Button>
