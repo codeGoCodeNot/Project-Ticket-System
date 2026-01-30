@@ -27,7 +27,7 @@ const TicketsPage = async ({ searchParams }: TicketsPageProps) => {
           content={<TicketUpsertForm />}
         />
 
-        <Suspense fallback={<SkeletonComponents length={5} />}>
+        <Suspense fallback={<SkeletonComponents length={3} />}>
           <TicketList
             userId={user?.id}
             searchParams={await searchParamsCache.parse(searchParams)}

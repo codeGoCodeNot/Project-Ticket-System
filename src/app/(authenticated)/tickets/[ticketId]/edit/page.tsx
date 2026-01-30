@@ -1,6 +1,5 @@
 import Breadcrumbs from "@/components/breadcrumbs";
 import CardCompact from "@/components/card-compact";
-import { Separator } from "@/components/ui/separator";
 import getAuth from "@/features/auth/queries/get-auth";
 import isOwner from "@/features/auth/utils/is-owner";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
@@ -34,8 +33,6 @@ const TicketEditPage = async ({ params }: TicketEditPageProps) => {
           { title: "Edit" },
         ]}
       />
-
-      <Separator />
 
       <div className="flex-1 flex flex-col items-center justify-center">
         <CardCompact
