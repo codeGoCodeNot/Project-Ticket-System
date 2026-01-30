@@ -8,27 +8,33 @@ import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
 import prisma from "@/lib/prisma";
 import { ticketPath } from "@/path";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import z from "zod";
 
-const createCommentSchema = z.object({
+const upsertCommentSchema = z.object({
   content: z
     .string()
     .min(1, "Content is required")
     .max(1024, "Content is too long"),
 });
 
-const createComment = async (
+const upsertComment = async (
   ticketId: string,
+  commentId: string,
   _actionState: ActionState,
   formData: FormData,
 ) => {
   const { user } = await getAuthOrRedirect();
 
   try {
-    const data = createCommentSchema.parse(Object.fromEntries(formData));
+    const data = upsertCommentSchema.parse(Object.fromEntries(formData));
 
-    await prisma.comment.create({
-      data: {
+    await prisma.comment.upsert({
+      where: { id: commentId },
+      update: {
+        ...data,
+      },
+      create: {
         userId: user.id,
         ticketId,
         ...data,
@@ -40,7 +46,14 @@ const createComment = async (
 
   revalidatePath(ticketPath(ticketId));
 
-  return toActionState("SUCCESS", "Comment created successfully");
+  if (commentId) {
+    redirect(ticketPath(ticketId));
+  }
+
+  return toActionState(
+    "SUCCESS",
+    commentId ? "Comment updated successfully" : "Comment created successfully",
+  );
 };
 
-export default createComment;
+export default upsertComment;

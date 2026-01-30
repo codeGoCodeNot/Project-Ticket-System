@@ -6,6 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import getAuth from "@/features/auth/queries/get-auth";
+import isOwner from "@/features/auth/utils/is-owner";
+import Comments from "@/features/comments/components/comments";
 import { ticketEditPath, ticketPath } from "@/path";
 import toCurrencyFromCent from "@/utils/currency";
 import clsx from "clsx";
@@ -18,9 +21,6 @@ import Link from "next/link";
 import { TICKET_ICONS } from "../constant";
 import { TicketWithMetaData } from "../type";
 import TicketMoreMenu from "./ticket-more-menu";
-import getAuth from "@/features/auth/queries/get-auth";
-import isOwner from "@/features/auth/utils/is-owner";
-import Comments from "@/features/comments/components/comments";
 
 type TicketItemProps = {
   ticket: TicketWithMetaData;
