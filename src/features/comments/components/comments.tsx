@@ -1,13 +1,12 @@
-import CommentItem from "@/components/comment-item";
-import getComments from "../queries/get-comments";
 import CardCompact from "@/components/card-compact";
-import CommentUpsertForm from "./comment-upsert-form";
-import CommentDeleteButton from "./comment-delete-button";
+import CommentItem from "@/components/comment-item";
 import getAuth from "@/features/auth/queries/get-auth";
 import isOwner from "@/features/auth/utils/is-owner";
-import CommentUpdateButton from "./comment-update-button";
 import getComment from "../queries/get-comment";
 import { CommentWithMetaData } from "../type";
+import CommentDeleteButton from "./comment-delete-button";
+import CommentUpdateButton from "./comment-update-button";
+import CommentUpsertForm from "./comment-upsert-form";
 
 type CommentsProps = {
   ticketId: string;
