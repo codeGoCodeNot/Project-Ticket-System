@@ -13,3 +13,6 @@ export const accountPasswordPath = () => "/account/password";
 
 export const commentEditPath = (ticketId: string, commentId: string) =>
   `/tickets/${ticketId}/edit/${commentId}/edit`;
+
+export const commentIdPath = (commentId: string) =>
+  `/api/comments/${commentId}`;

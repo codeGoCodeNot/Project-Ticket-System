@@ -1,6 +1,5 @@
 import Breadcrumbs from "@/components/breadcrumbs";
 import CardCompact from "@/components/card-compact";
-import getAuth from "@/features/auth/queries/get-auth";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import getTicket from "@/features/ticket/queries/get-ticket";
 import { homePath, ticketPath } from "@/path";

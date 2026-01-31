@@ -1,3 +1,5 @@
+"use client";
+
 import CommentSkeleton from "@/components/comment-skeleton";
 import { Button } from "@/components/ui/button";
 import {

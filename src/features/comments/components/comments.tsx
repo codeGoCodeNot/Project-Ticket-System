@@ -1,12 +1,12 @@
 import CardCompact from "@/components/card-compact";
 import CommentItem from "@/components/comment-item";
-import getAuth from "@/features/auth/queries/get-auth";
-import isOwner from "@/features/auth/utils/is-owner";
-import getComment from "../queries/get-comment";
+import useSWR from "swr";
 import { CommentWithMetaData } from "../type";
 import CommentDeleteButton from "./comment-delete-button";
 import CommentUpdateButton from "./comment-update-button";
 import CommentUpsertForm from "./comment-upsert-form";
+import { commentIdPath } from "@/path";
+import { fetcher } from "@/fetcher";
 
 type CommentsProps = {
   ticketId: string;
@@ -14,9 +14,11 @@ type CommentsProps = {
   comments: CommentWithMetaData[];
 };
 
-const Comments = async ({ ticketId, commentId, comments }: CommentsProps) => {
-  const comment = await getComment(commentId ?? "");
-  const { user } = await getAuth();
+const Comments = ({ ticketId, commentId, comments }: CommentsProps) => {
+  const { data: comment } = useSWR(
+    commentId ? commentIdPath(commentId) : null,
+    fetcher,
+  );
 
   return (
     <>
@@ -37,7 +39,7 @@ const Comments = async ({ ticketId, commentId, comments }: CommentsProps) => {
             key={comment.id}
             comment={comment}
             buttons={[
-              ...(isOwner(user, comment)
+              ...(comment.isOwner
                 ? [
                     <CommentUpdateButton
                       key={comment.id + "-edit"}
