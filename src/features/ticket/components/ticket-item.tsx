@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,8 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Comments from "@/features/comments/components/comments";
-import { CommentWithMetaData } from "@/features/comments/type";
 import { ticketEditPath, ticketPath } from "@/path";
 import toCurrencyFromCent from "@/utils/currency";
 import clsx from "clsx";
@@ -19,6 +15,7 @@ import {
   LucideSquareArrowOutUpRight,
 } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 import { TICKET_ICONS } from "../constant";
 import { TicketWithMetaData } from "../type";
 import TicketMoreMenu from "./ticket-more-menu";
@@ -26,10 +23,10 @@ import TicketMoreMenu from "./ticket-more-menu";
 type TicketItemProps = {
   ticket: TicketWithMetaData;
   isDetail?: boolean;
-  comments?: CommentWithMetaData[];
+  comments?: React.ReactElement;
 };
 
-const TicketItem = ({ ticket, isDetail, comments = [] }: TicketItemProps) => {
+const TicketItem = ({ ticket, isDetail, comments }: TicketItemProps) => {
   const detailButton = (
     <Button asChild variant="outline" size="icon">
       <Link prefetch href={ticketPath(ticket.id)}>
@@ -106,7 +103,7 @@ const TicketItem = ({ ticket, isDetail, comments = [] }: TicketItemProps) => {
           )}
         </div>
       </div>
-      {isDetail && <Comments ticketId={ticket.id} comments={comments} />}
+      {comments}
     </div>
   );
 };

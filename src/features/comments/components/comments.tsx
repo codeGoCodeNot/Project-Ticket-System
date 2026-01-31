@@ -1,24 +1,23 @@
 import CardCompact from "@/components/card-compact";
 import CommentItem from "@/components/comment-item";
-import useSWR from "swr";
+import getComment from "../queries/get-comment";
 import { CommentWithMetaData } from "../type";
 import CommentDeleteButton from "./comment-delete-button";
 import CommentUpdateButton from "./comment-update-button";
 import CommentUpsertForm from "./comment-upsert-form";
-import { commentIdPath } from "@/path";
-import { fetcher } from "@/fetcher";
 
 type CommentsProps = {
   ticketId: string;
   commentId?: string;
-  comments: CommentWithMetaData[];
+  comments?: CommentWithMetaData[];
 };
 
-const Comments = ({ ticketId, commentId, comments }: CommentsProps) => {
-  const { data: comment } = useSWR(
-    commentId ? commentIdPath(commentId) : null,
-    fetcher,
-  );
+const Comments = async ({
+  ticketId,
+  commentId,
+  comments = [],
+}: CommentsProps) => {
+  const comment = await getComment(commentId ?? "");
 
   return (
     <>

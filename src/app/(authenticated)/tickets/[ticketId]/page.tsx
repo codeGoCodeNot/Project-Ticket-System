@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/breadcrumbs";
 import { homePath } from "@/path";
 import { Separator } from "@/components/ui/separator";
 import getComments from "@/features/comments/queries/get-comments";
+import Comments from "@/features/comments/components/comments";
 
 // This is a ticket page
 type TicketPageProps = {
@@ -37,7 +38,11 @@ const TicketPage = async ({ params }: TicketPageProps) => {
       <Separator />
 
       <div className="flex justify-center animate-fade-from-top">
-        <TicketItem ticket={ticket} isDetail comments={comments} />
+        <TicketItem
+          ticket={ticket}
+          isDetail
+          comments={<Comments ticketId={ticket.id} comments={comments} />}
+        />
       </div>
     </div>
   );
