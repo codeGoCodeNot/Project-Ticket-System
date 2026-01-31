@@ -7,6 +7,8 @@ import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import React from "react";
+import { ReactQueryProvider } from "./_navigation/_providers/react-query";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,19 +29,21 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <NuqsAdapter>
           <ThemeProvider>
-            <SidebarProvider>
-              <Header />
-              <SidebarComponent />
-              <main
-                className="px-7 min-h-screen flex-1 flex flex-col py-24
-              bg-secondary/20
-              overflow-y-auto overflow-x-hidden
-              "
-              >
-                {children}
-              </main>
-            </SidebarProvider>
-            <Toaster expand />
+            <ReactQueryProvider>
+              <SidebarProvider>
+                <Header />
+                <SidebarComponent />
+                <main
+                  className="px-7 min-h-screen flex-1 flex flex-col py-24
+                  bg-secondary/20
+                  overflow-y-auto overflow-x-hidden
+                  "
+                >
+                  {children}
+                </main>
+              </SidebarProvider>
+              <Toaster expand />
+            </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>
       </body>
