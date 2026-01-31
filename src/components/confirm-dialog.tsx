@@ -24,7 +24,9 @@ type UseConfirmDialogProps = {
   title?: string;
   description?: string;
   action: () => Promise<ActionState>;
-  trigger: React.ReactElement<{ onClick?: () => void }>;
+  trigger:
+    | React.ReactElement<{ onClick?: () => void }>
+    | ((isPending: boolean) => React.ReactElement<{ onClick?: () => void }>);
   onSuccess?: (actionState: ActionState) => void;
 };
 
@@ -37,13 +39,16 @@ const useConfirmDialog = ({
 }: UseConfirmDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const dialogTrigger = cloneElement(trigger, {
-    onClick: () => setIsOpen((prev) => !prev),
-  });
-
   const [actionState, formAction, isPending] = useActionState(
     action,
     EMPTY_ACTION_STATE,
+  );
+
+  const dialogTrigger = cloneElement(
+    typeof trigger === "function" ? trigger(isPending) : trigger,
+    {
+      onClick: () => setIsOpen((prev) => !prev),
+    },
   );
 
   const toastRef = useRef<string | number | null>(null);
