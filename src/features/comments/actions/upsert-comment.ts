@@ -26,10 +26,13 @@ const upsertComment = async (
 ) => {
   const { user } = await getAuthOrRedirect();
 
+  let comment;
+
   try {
     const data = upsertCommentSchema.parse(Object.fromEntries(formData));
 
-    await prisma.comment.upsert({
+    comment = await prisma.comment.upsert({
+      include: { user: true },
       where: { id: commentId },
       update: {
         ...data,
@@ -53,6 +56,8 @@ const upsertComment = async (
   return toActionState(
     "SUCCESS",
     commentId ? "Comment updated successfully" : "Comment created successfully",
+    undefined,
+    comment,
   );
 };
 

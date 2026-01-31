@@ -40,6 +40,10 @@ const Comments = ({
     setMetadata(morePaginatedComments.metadata);
   };
 
+  const handleCreateComment = (comment: CommentWithMetaData) => {
+    setComments((prev) => [comment, ...prev]);
+  };
+
   const handleDelete = (id: string) => {
     setComments((prev) => prev.filter((comment) => comment.id !== id));
   };
@@ -54,6 +58,7 @@ const Comments = ({
             ticketId={ticketId}
             commentId={commentId ?? ""}
             content={comment?.content}
+            onCreateComment={handleCreateComment}
           />
         }
       />
