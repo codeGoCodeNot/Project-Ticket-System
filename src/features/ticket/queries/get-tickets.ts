@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
 import { ParsedSearchParams } from "../search-params";
+import isOwner from "@/features/auth/utils/is-owner";
+import getAuth from "@/features/auth/queries/get-auth";
 
 const getTickets = async (
   userId: string | undefined,
@@ -15,6 +17,7 @@ const getTickets = async (
 
   const skip = searchParams.page * searchParams.size;
   const take = searchParams.size;
+  const { user } = await getAuth();
 
   const [tickets, count] = await prisma.$transaction([
     prisma.ticket.findMany({
@@ -38,7 +41,10 @@ const getTickets = async (
   ]);
 
   return {
-    list: tickets,
+    list: tickets.map((ticket) => ({
+      ...ticket,
+      isOwner: isOwner(user, ticket),
+    })),
     metadata: {
       count,
       hasNextPage: count > skip + take,
