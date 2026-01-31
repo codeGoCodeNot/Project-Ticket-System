@@ -19,6 +19,7 @@ const getComments = async (
     ticketId,
   };
 
+  // eslint-disable-next-line prefer-const
   let [comments, count] = await prisma.$transaction([
     prisma.comment.findMany({
       where,
