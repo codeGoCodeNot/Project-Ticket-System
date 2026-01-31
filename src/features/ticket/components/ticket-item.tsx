@@ -23,10 +23,14 @@ import TicketMoreMenu from "./ticket-more-menu";
 type TicketItemProps = {
   ticket: TicketWithMetaData;
   isDetail?: boolean;
-  comments?: React.ReactElement;
+  paginatedComments?: React.ReactElement;
 };
 
-const TicketItem = ({ ticket, isDetail, comments }: TicketItemProps) => {
+const TicketItem = ({
+  ticket,
+  isDetail,
+  paginatedComments: comments,
+}: TicketItemProps) => {
   const detailButton = (
     <Button asChild variant="outline" size="icon">
       <Link prefetch href={ticketPath(ticket.id)}>

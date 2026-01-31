@@ -1,11 +1,11 @@
-import getTicket from "@/features/ticket/queries/get-ticket";
-import TicketItem from "@/features/ticket/components/ticket-item";
-import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/breadcrumbs";
-import { homePath } from "@/path";
 import { Separator } from "@/components/ui/separator";
-import getComments from "@/features/comments/queries/get-comments";
 import Comments from "@/features/comments/components/comments";
+import getComments from "@/features/comments/queries/get-comments";
+import TicketItem from "@/features/ticket/components/ticket-item";
+import getTicket from "@/features/ticket/queries/get-ticket";
+import { homePath } from "@/path";
+import { notFound } from "next/navigation";
 
 // This is a ticket page
 type TicketPageProps = {
@@ -17,7 +17,7 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   const ticketPromise = getTicket(ticketId);
   const commentsPromise = getComments(ticketId);
 
-  const [ticket, comments] = await Promise.all([
+  const [ticket, paginatedComments] = await Promise.all([
     ticketPromise,
     commentsPromise,
   ]);
@@ -41,7 +41,12 @@ const TicketPage = async ({ params }: TicketPageProps) => {
         <TicketItem
           ticket={ticket}
           isDetail
-          comments={<Comments ticketId={ticket.id} comments={comments} />}
+          paginatedComments={
+            <Comments
+              ticketId={ticket.id}
+              paginatedComments={paginatedComments}
+            />
+          }
         />
       </div>
     </div>

@@ -1,23 +1,41 @@
+"use client";
+
 import CardCompact from "@/components/card-compact";
 import CommentItem from "@/components/comment-item";
-import getComment from "../queries/get-comment";
+import { fetcher } from "@/fetcher";
+import { commentAPIPath } from "@/path";
+import useSWR from "swr";
 import { CommentWithMetaData } from "../type";
 import CommentDeleteButton from "./comment-delete-button";
 import CommentUpdateButton from "./comment-update-button";
 import CommentUpsertForm from "./comment-upsert-form";
+import { Button } from "@/components/ui/button";
+import getComments from "../queries/get-comments";
 
 type CommentsProps = {
   ticketId: string;
   commentId?: string;
-  comments?: CommentWithMetaData[];
+  paginatedComments: {
+    list: CommentWithMetaData[];
+    metadata: { count: number; hasNextPage: boolean };
+  };
 };
 
-const Comments = async ({
+const Comments = ({
   ticketId,
   commentId,
-  comments = [],
+  paginatedComments,
 }: CommentsProps) => {
-  const comment = await getComment(commentId ?? "");
+  const { data: comment } = useSWR(commentAPIPath(commentId ?? ""), fetcher);
+
+  const comments = paginatedComments.list;
+
+  const handleMore = async () => {
+    const morePaginatedComments = await getComments(ticketId);
+    const moreComments = morePaginatedComments.list;
+
+    console.log(moreComments);
+  };
 
   return (
     <>
@@ -54,6 +72,12 @@ const Comments = async ({
             ]}
           />
         ))}
+      </div>
+
+      <div className="flex flex-col justify-center ml-8">
+        <Button variant="ghost" onClick={handleMore}>
+          More
+        </Button>
       </div>
     </>
   );
