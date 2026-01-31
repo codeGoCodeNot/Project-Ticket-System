@@ -12,18 +12,12 @@ import { CommentWithMetaData } from "../type";
 import CommentDeleteButton from "./comment-delete-button";
 import CommentUpdateButton from "./comment-update-button";
 import CommentUpsertForm from "./comment-upsert-form";
+import { paginatedData } from "../../../../types/paginations";
 
 type CommentsProps = {
   ticketId: string;
   commentId?: string;
-  paginatedComments: {
-    list: CommentWithMetaData[];
-    metadata: {
-      count: number;
-      hasNextPage: boolean;
-      cursor?: { id: string; createdAt: number };
-    };
-  };
+  paginatedComments: paginatedData<CommentWithMetaData>;
 };
 
 const Comments = ({

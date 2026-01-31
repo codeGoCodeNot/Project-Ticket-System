@@ -8,9 +8,11 @@ import {
 } from "../search-params";
 import Pagination from "@/components/pagination";
 import { useEffect, useRef } from "react";
+import { paginatedData } from "../../../../types/paginations";
+import { TicketWithMetaData } from "../type";
 
 type TicketPaginationProps = {
-  paginatedTicketMetadata: { count: number; hasNextPage: boolean };
+  paginatedTicketMetadata: paginatedData<TicketWithMetaData>["metadata"];
 };
 
 const TicketPagination = ({
