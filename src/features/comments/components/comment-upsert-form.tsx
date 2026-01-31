@@ -16,7 +16,7 @@ type CommentUpsertFormProps = {
   ticketId: string;
   commentId: string;
   content?: string;
-  onCreateComment?: (comment: CommentWithMetaData) => void;
+  onCreateComment?: (comment: CommentWithMetaData | undefined) => void;
 };
 
 const CommentUpsertForm = ({
@@ -30,8 +30,10 @@ const CommentUpsertForm = ({
     EMPTY_ACTION_STATE,
   );
 
-  const handleSuccess = (actionState: ActionState) => {
-    onCreateComment?.(actionState.data as CommentWithMetaData);
+  const handleSuccess = (
+    actionState: ActionState<CommentWithMetaData | undefined>,
+  ) => {
+    onCreateComment?.(actionState.data);
   };
 
   return (
