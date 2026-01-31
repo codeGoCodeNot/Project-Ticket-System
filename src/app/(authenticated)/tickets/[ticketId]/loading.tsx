@@ -1,7 +1,11 @@
-import SkeletonComponents from "@/components/skeleton-components";
+import Spinner from "@/components/spinner";
 
 const loading = () => {
-  return <SkeletonComponents length={1} isDetail />;
+  return (
+    <div className="flex justify-center items-center h-full">
+      <Spinner />
+    </div>
+  );
 };
 
 export default loading;
