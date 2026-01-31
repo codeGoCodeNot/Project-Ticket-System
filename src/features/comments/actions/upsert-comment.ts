@@ -5,10 +5,10 @@ import fromErrorToActionState, {
   toActionState,
 } from "@/components/form/utils/to-action-state";
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
+import isOwner from "@/features/auth/utils/is-owner";
 import prisma from "@/lib/prisma";
 import { ticketPath } from "@/path";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import z from "zod";
 
 const upsertCommentSchema = z.object({
@@ -49,15 +49,11 @@ const upsertComment = async (
 
   revalidatePath(ticketPath(ticketId));
 
-  if (commentId) {
-    redirect(ticketPath(ticketId));
-  }
-
   return toActionState(
     "SUCCESS",
     commentId ? "Comment updated successfully" : "Comment created successfully",
     undefined, //formdata
-    comment,
+    { ...comment, isOwner: isOwner(user, comment) },
   );
 };
 

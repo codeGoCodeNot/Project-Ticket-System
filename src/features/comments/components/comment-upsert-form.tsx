@@ -8,6 +8,8 @@ import {
   EMPTY_ACTION_STATE,
 } from "@/components/form/utils/to-action-state";
 import { Textarea } from "@/components/ui/textarea";
+import { ticketPath } from "@/path";
+import { useRouter } from "next/navigation";
 import { useActionState } from "react";
 import upsertComment from "../actions/upsert-comment";
 import { CommentWithMetaData } from "../type";
@@ -30,9 +32,12 @@ const CommentUpsertForm = ({
     EMPTY_ACTION_STATE,
   );
 
+  const router = useRouter();
+
   const handleSuccess = (
     actionState: ActionState<CommentWithMetaData | undefined>,
   ) => {
+    router.push(ticketPath(ticketId));
     onCreateComment?.(actionState.data);
   };
 
