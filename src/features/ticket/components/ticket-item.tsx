@@ -1,6 +1,5 @@
 "use client";
 
-import CommentSkeleton from "@/components/comment-skeleton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,7 +19,6 @@ import {
   LucideSquareArrowOutUpRight,
 } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 import { TICKET_ICONS } from "../constant";
 import { TicketWithMetaData } from "../type";
 import TicketMoreMenu from "./ticket-more-menu";
@@ -108,9 +106,7 @@ const TicketItem = ({ ticket, isDetail, comments = [] }: TicketItemProps) => {
           )}
         </div>
       </div>
-      <Suspense fallback={<CommentSkeleton />}>
-        {isDetail && <Comments ticketId={ticket.id} comments={comments} />}
-      </Suspense>
+      {isDetail && <Comments ticketId={ticket.id} comments={comments} />}
     </div>
   );
 };
