@@ -8,9 +8,10 @@ import { toast } from "sonner";
 
 type CommentDeleteButtonProps = {
   id: string;
+  onDelete?: (id: string) => void;
 };
 
-const CommentDeleteButton = ({ id }: CommentDeleteButtonProps) => {
+const CommentDeleteButton = ({ id, onDelete }: CommentDeleteButtonProps) => {
   const deleteWithToast = async () => {
     const promise = deleteComment(id);
 
@@ -34,6 +35,7 @@ const CommentDeleteButton = ({ id }: CommentDeleteButtonProps) => {
         <LucideTrash2 />
       </Button>
     ),
+    onSuccess: () => onDelete?.(id),
   });
 
   return (
