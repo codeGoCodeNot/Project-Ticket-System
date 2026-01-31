@@ -40,7 +40,9 @@ const Comments = ({
     setMetadata(morePaginatedComments.metadata);
   };
 
-  const handleCreateComment = (comment: CommentWithMetaData) => {
+  const handleCreateComment = (comment: CommentWithMetaData | undefined) => {
+    if (!comment) return;
+
     setComments((prev) => [comment, ...prev]);
   };
 
