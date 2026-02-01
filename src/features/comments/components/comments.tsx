@@ -81,26 +81,17 @@ const Comments = ({
       if (!comment) return oldData;
       if (!oldData) return oldData;
 
-      const commentId = comment.id;
-      let found = false;
-
-      const pages = oldData.pages.map((page, idx) => {
-        const idxInPage = page.list.findIndex((c) => c.id === commentId);
-        if (idxInPage !== -1) {
-          found = true;
-          const newList = [...page.list];
-          newList[idxInPage] = comment;
-          return { ...page, list: newList };
-        }
-        return page;
-      });
-
-      // If not found, treat as a create
-      if (!found && pages.length > 0) {
-        pages[0] = { ...pages[0], list: [comment, ...pages[0].list] };
-      }
-
-      return { ...oldData, pages };
+      const upsertPages = {
+        ...oldData,
+        pages: [
+          {
+            ...oldData.pages[0],
+            list: [comment, ...(oldData.pages[0]?.list ?? [])],
+          },
+          ...oldData.pages.slice(1),
+        ],
+      };
+      return upsertPages;
     });
   };
 
