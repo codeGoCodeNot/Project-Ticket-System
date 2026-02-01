@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useActionState } from "react";
 import upsertComment from "../actions/upsert-comment";
 import { CommentWithMetaData } from "../type";
+import { useQueryClient } from "@tanstack/react-query";
 
 type CommentUpsertFormProps = {
   ticketId: string;
@@ -33,12 +34,14 @@ const CommentUpsertForm = ({
   );
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const handleSuccess = (
     actionState: ActionState<CommentWithMetaData | undefined>,
   ) => {
     router.push(ticketPath(ticketId));
     onCreateComment?.(actionState.data);
+    queryClient.invalidateQueries({ queryKey: ["comments", ticketId] });
   };
 
   return (
