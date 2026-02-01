@@ -31,7 +31,7 @@ const Comments = ({
 
   const queryKey = ["comments", ticketId];
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey,
       queryFn: ({ pageParam }) => getComments(ticketId, pageParam),
