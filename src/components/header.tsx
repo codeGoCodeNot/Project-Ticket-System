@@ -17,7 +17,7 @@ const Header = () => {
     return null;
   }
 
-  const navItems = user ? (
+  const navItems: React.ReactNode = user ? (
     <AccountDropdown user={user} />
   ) : (
     <>
