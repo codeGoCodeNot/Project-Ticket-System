@@ -4,13 +4,14 @@ import fromErrorToActionState, {
   ActionState,
   toActionState,
 } from "@/components/form/utils/to-action-state";
-import { lucia } from "@/lib/lucia";
+import { verifyPasswordHash } from "@/features/password/utils/hash-and-verify";
+import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
 import { ticketsPath } from "@/path";
-import { verify } from "@node-rs/argon2";
-import { cookies } from "next/headers";
+import { generateRandomToken } from "@/utils/crypto";
 import { redirect } from "next/navigation";
 import z from "zod";
+import { setSessionCookie } from "../utils/session-cookie";
 
 const signInSchema = z.object({
   identifier: z
@@ -26,7 +27,7 @@ const signInSchema = z.object({
 const signIn = async (_actionState: ActionState, formData: FormData) => {
   try {
     const { identifier, password } = signInSchema.parse(
-      Object.fromEntries(formData)
+      Object.fromEntries(formData),
     );
 
     const user = await prisma.user.findFirst({
@@ -39,29 +40,24 @@ const signIn = async (_actionState: ActionState, formData: FormData) => {
       return toActionState(
         "ERROR",
         "Incorrect username/email or password",
-        formData
+        formData,
       );
     }
 
-    const validPassword = await verify(user.passwordHash, password);
+    const validPassword = await verifyPasswordHash(user.passwordHash, password);
 
     if (!validPassword) {
       return toActionState(
         "ERROR",
         "Incorrect username/email or password",
-        formData
+        formData,
       );
     }
 
-    const session = await lucia.createSession(user.id, {});
-    const sessionCookie = await lucia.createSessionCookie(session.id);
+    const sessionToken = generateRandomToken();
+    const session = await createSession(sessionToken, user.id);
 
-    const cookiesAwait = await cookies();
-    cookiesAwait.set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
+    await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
     return fromErrorToActionState(error, formData);
   }
