@@ -10,7 +10,7 @@ type UseActionFeedbackOptions = {
 
 const useActionFeedback = (
   actionState: ActionState,
-  options: UseActionFeedbackOptions
+  options: UseActionFeedbackOptions,
 ) => {
   const prevTimestamp = useRef(actionState.timestamp);
   // eslint-disable-next-line react-hooks/refs
@@ -24,7 +24,7 @@ const useActionFeedback = (
       options.onError?.({ actionState });
     }
 
-    prevTimestamp.current = actionState.timestamp;
+            prevTimestamp.current = actionState.timestamp;
   }, [isUpdate, actionState, options]);
 };
 

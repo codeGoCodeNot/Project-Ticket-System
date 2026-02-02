@@ -24,7 +24,7 @@ const upsertTicketSchema = z.object({
 const upsertTicket = async (
   id: string | undefined,
   _actionState: ActionState,
-  formData: FormData
+  formData: FormData,
 ) => {
   const { user } = await getAuthOrRedirect();
   try {

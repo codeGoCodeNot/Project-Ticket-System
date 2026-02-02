@@ -31,7 +31,7 @@ const DatePickerDemo = ({
 }: DatePickerDemoProps) => {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(
-    defaultValue ? new Date(defaultValue) : new Date()
+    defaultValue ? new Date(defaultValue) : new Date(),
   );
 
   React.useImperativeHandle(imperativeHandleRef, () => ({
