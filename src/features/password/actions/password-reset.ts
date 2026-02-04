@@ -12,13 +12,23 @@ import { redirect } from "next/navigation";
 
 import z from "zod";
 import { hashPassword } from "../utils/hash-and-verify";
+import zxcvbn from "zxcvbn";
 
 const passwordResetSchema = z
   .object({
     password: z
       .string()
       .min(6, "Password must not be less than 6 characters")
-      .max(191),
+      .max(191)
+      .refine(
+        (password) => {
+          const result = zxcvbn(password);
+          return result.score >= 2;
+        },
+        {
+          message: "Password is too weak. Please choose a stronger password.",
+        },
+      ),
     confirmPassword: z
       .string()
       .min(6, "Password must not be less than 6 characters")

@@ -49,7 +49,7 @@ const TicketList = async ({ userId, searchParams }: TicketListProps) => {
       {tickets.length ? (
         tickets.map((ticket) => <TicketItem ticket={ticket} key={ticket.id} />)
       ) : (
-        <Placeholder label="No tickets found" />
+        <Placeholder label="No tickets found" button={null} />
       )}
 
       <div className="w-full max-w-[420px]">
