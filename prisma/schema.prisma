@@ -15,7 +15,16 @@ model User {
   sessions Session[]
   tickets Ticket[]
   comments Comment[]
+  passwordResetToken PasswordResetToken[]
+}
 
+model PasswordResetToken {
+  tokenHash String @id
+  expiresAt DateTime
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Session {
