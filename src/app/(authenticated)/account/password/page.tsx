@@ -15,7 +15,7 @@ const PasswordPage = () => {
       <div className="flex-1 flex flex-col items-center">
         <CardCompact
           title="Change Password"
-          desc="Enter your current password."
+          desc="Enter your current password to change your password."
           classname="w-full max-w-[420px] animate-fade-from-top"
           content={<PasswordChangeForm />}
         />
