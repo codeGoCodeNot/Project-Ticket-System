@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { Prisma } from "../../../../generated/prisma/client";
 import { setSessionCookie } from "../utils/session-cookie";
+import zxcvbn from "zxcvbn";
 
 const signUpSchema = z
   .object({
@@ -29,7 +30,16 @@ const signUpSchema = z
     password: z
       .string()
       .min(6, "Password must not be less than 6 characters")
-      .max(191),
+      .max(191)
+      .refine(
+        (password) => {
+          const result = zxcvbn(password);
+          return result.score >= 2;
+        },
+        {
+          message: "Password is too weak. Please choose a stronger password.",
+        },
+      ),
     confirmPassword: z
       .string()
       .min(6, "Password must not be less than 6 characters")

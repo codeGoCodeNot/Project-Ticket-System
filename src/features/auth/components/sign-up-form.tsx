@@ -1,21 +1,22 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import FieldError from "@/components/form/field-error";
+import Form from "@/components/form/form";
+import SubmitButton from "@/components/form/submit-button";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
+import PasswordStrengthMeter from "@/components/password-strength-meter";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LucideLoaderCircle } from "lucide-react";
+import { useActionState, useState } from "react";
 import signUp from "../actions/sign-up";
-import { useActionState } from "react";
-import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
-import Form from "@/components/form/form";
-import FieldError from "@/components/form/field-error";
-import SubmitButton from "@/components/form/submit-button";
 
 const SignUpForm = () => {
   const [actionState, action, isPending] = useActionState(
     signUp,
     EMPTY_ACTION_STATE,
   );
+
+  const [password, setPassword] = useState("");
 
   return (
     <Form action={action} actionState={actionState}>
@@ -41,7 +42,9 @@ const SignUpForm = () => {
         placeholder="Password"
         type="password"
         defaultValue={actionState.payload?.get("password") as string}
+        onChange={(e) => setPassword(e.target.value)}
       />
+      <PasswordStrengthMeter password={password} />
       <FieldError actionState={actionState} name="password" />
 
       <Label htmlFor="confirmPassword">Confirm password</Label>
