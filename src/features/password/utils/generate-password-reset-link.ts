@@ -27,7 +27,7 @@ const generatePasswordResetLink = async (userId: string) => {
 
   const pageUrl = getBaseUrl() + passwordResetPath();
 
-  const passwordResetLink = pageUrl + `${tokenId}`;
+  const passwordResetLink = pageUrl + `/${tokenId}`;
 
   return passwordResetLink;
 };

@@ -7,7 +7,7 @@ import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useActionState } from "react";
-import passwordForgot from "../actions/passwordForgot";
+import passwordForgot from "../actions/password-forgot";
 
 const PasswordForgotForm = () => {
   const [actionState, action] = useActionState(
