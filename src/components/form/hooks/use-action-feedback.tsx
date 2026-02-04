@@ -24,7 +24,7 @@ const useActionFeedback = (
       options.onError?.({ actionState });
     }
 
-            prevTimestamp.current = actionState.timestamp;
+    prevTimestamp.current = actionState.timestamp;
   }, [isUpdate, actionState, options]);
 };
 
