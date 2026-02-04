@@ -1,5 +1,7 @@
+import CardCompact from "@/components/card-compact";
 import Heading from "@/components/heading";
 import AccountTabs from "@/features/account/components/account-tabs";
+import PasswordChangeForm from "@/features/password/components/password-change-form";
 
 const PasswordPage = () => {
   return (
@@ -10,7 +12,14 @@ const PasswordPage = () => {
         tabs={<AccountTabs />}
       />
 
-      <h1 className="text-4xl font-black text-center">Under Construction</h1>
+      <div className="flex-1 flex flex-col items-center">
+        <CardCompact
+          title="Change Password"
+          desc="Enter your current password."
+          classname="w-full max-w-[420px] animate-fade-from-top"
+          content={<PasswordChangeForm />}
+        />
+      </div>
     </div>
   );
 };
