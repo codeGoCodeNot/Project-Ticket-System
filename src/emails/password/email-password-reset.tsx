@@ -1,12 +1,7 @@
-import {
-  Button,
-  Html,
-  Head,
-  Body,
-  Container,
-  Section,
-  Text,
-} from "@react-email/components";
+import { Section, Text } from "@react-email/components";
+import { EmailLayout, textColor, mutedColor } from "../components/email-layout";
+import { EmailButton } from "../components/email-button";
+import { EmailHeading } from "../components/email-heading";
 
 type EmailPasswordResetProps = {
   toName: string;
@@ -15,45 +10,38 @@ type EmailPasswordResetProps = {
 
 const EmailPasswordReset = ({ toName, url }: EmailPasswordResetProps) => {
   return (
-    <Html>
-      <Head />
-      <Body
-        style={{
-          fontFamily: "sans-serif",
-          margin: "32px",
-          textAlign: "center",
-        }}
+    <EmailLayout previewText="Reset your password">
+      <EmailHeading
+        title="Reset Your Password"
+        subtitle="Click below to reset your password. This link expires in 24 hours."
+      />
+
+      {/* Main action button */}
+      <Section
+        style={{ textAlign: "center", marginBottom: "24px", marginTop: "24px" }}
       >
-        <Container>
-          <Section>
-            <Text>
-              Hello {toName}, you have requested to reset your password. Please
-              click the button below to proceed.
-            </Text>
-          </Section>
-          <Section>
-            <Button
-              href={url}
-              style={{
-                backgroundColor: "#000000",
-                borderRadius: "4px",
-                color: "#ffffff",
-                padding: "8px",
-                margin: "8px",
-              }}
-            >
-              Reset Password
-            </Button>
-          </Section>
-        </Container>
-      </Body>
-    </Html>
+        <EmailButton href={url}>Reset Password</EmailButton>
+      </Section>
+
+      {/* Security notice */}
+      <Section style={{ textAlign: "center" }}>
+        <Text
+          style={{
+            margin: "0",
+            fontSize: "12px",
+            color: mutedColor,
+          }}
+        >
+          Didn't request this? Ignore this email.
+        </Text>
+      </Section>
+    </EmailLayout>
   );
 };
 
 EmailPasswordReset.PreviewProps = {
   toName: "Johnsen Berdin",
-  url: "http://localhost:3000/password-reset/berdin123",
+  url: "http://localhost:3000/password-reset/abc123xyz789",
 };
 
 export default EmailPasswordReset;
