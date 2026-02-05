@@ -7,7 +7,7 @@ export const sendEmailPasswordReset = async (
   passwordResetLink: string,
 ) => {
   return await resend.emails.send({
-    from: "no-reply@tickethub.johnsenb.dev",
+    from: "noreply@johnsenb.dev",
     to: email,
     subject: "Password Reset Request from TicketHub",
     react: <EmailPasswordReset toName={username} url={passwordResetLink} />,
