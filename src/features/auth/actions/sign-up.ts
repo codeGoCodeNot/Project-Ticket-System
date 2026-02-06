@@ -14,7 +14,7 @@ import { z } from "zod";
 import { Prisma } from "../../../../generated/prisma/client";
 import { setSessionCookie } from "../utils/session-cookie";
 import zxcvbn from "zxcvbn";
-import { sendEmailWelcome } from "../emails/send-email-welcome";
+import { inngest } from "@/lib/inngest";
 
 const signUpSchema = z
   .object({
@@ -72,9 +72,10 @@ const signUp = async (_actionState: ActionState, formData: FormData) => {
       },
     });
 
-    // Send welcome email (don't block signup if email fails)
-    sendEmailWelcome(user.username, user.email).catch((emailError) => {
-      console.error("Failed to send welcome email:", emailError);
+    // Queue delayed welcome email
+    await inngest.send({
+      name: "app/auth.welcome-email",
+      data: { userId: user.id },
     });
 
     const sessionToken = generateRandomToken();
