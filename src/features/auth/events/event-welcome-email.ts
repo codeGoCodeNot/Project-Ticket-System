@@ -14,7 +14,7 @@ export const welcomeEmailEvent = inngest.createFunction(
   async ({ event, step }) => {
     const { userId } = event.data;
 
-    await step.sleep("welcome-email-delay", "5m");
+    await step.sleep("welcome-email-delay", "10s");
 
     const user = await prisma.user.findUniqueOrThrow({
       where: { id: userId },

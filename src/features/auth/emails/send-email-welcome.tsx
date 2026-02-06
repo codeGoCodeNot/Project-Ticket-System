@@ -6,7 +6,7 @@ export const sendEmailWelcome = async (username: string, email: string) => {
   const loginUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}${signInPath()}`;
 
   return await resend.emails.send({
-    from: "noreply@johnsenb.dev",
+    from: "hello@tickethub.johnsenb.dev",
     to: email,
     subject: "Welcome to TicketHub!",
     react: <EmailWelcome toName={username} loginUrl={loginUrl} />,
