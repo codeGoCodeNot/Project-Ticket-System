@@ -6,12 +6,14 @@ export const ticketEditPath = (ticketId: string) => `/tickets/${ticketId}/edit`;
 
 export const signUpPath = () => "/sign-up";
 export const signInPath = () => "/sign-in";
-export const passwordForgotPath = () => "/password-forgot";
+
+export const emailVerificationPath = () => "/email-verification";
 
 export const accountProfilePath = () => "/account/profile";
 export const accountPasswordPath = () => "/account/password";
 
 export const passwordResetPath = () => "/password-reset";
+export const passwordForgotPath = () => "/password-forgot";
 
 export const commentEditPath = (ticketId: string, commentId: string) =>
   `/tickets/${ticketId}/edit/${commentId}/edit`;

@@ -15,6 +15,7 @@ import { Prisma } from "../../../../generated/prisma/client";
 import { setSessionCookie } from "../utils/session-cookie";
 import zxcvbn from "zxcvbn";
 import { inngest } from "@/lib/inngest";
+import generateEmailVerificationCode from "../utils/generate-email-verification-code";
 
 const signUpSchema = z
   .object({
@@ -71,6 +72,13 @@ const signUp = async (_actionState: ActionState, formData: FormData) => {
         passwordHash,
       },
     });
+
+    const verificationCode = await generateEmailVerificationCode(
+      user.id,
+      email,
+    );
+
+    console.log(verificationCode);
 
     // Queue delayed welcome email
     await inngest.send({

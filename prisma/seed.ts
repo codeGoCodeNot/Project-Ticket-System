@@ -2,6 +2,7 @@ import { hash } from "@node-rs/argon2";
 import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
+import { email } from "zod";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -15,10 +16,12 @@ const users = [
   {
     username: "johnsen30",
     email: "johnsenberdin30@gmail.com",
+    emailVerified: false,
   },
   {
     username: "user2",
     email: "johnsenberdin2930@gmail.com",
+    emailVerified: false,
   },
 ];
 
