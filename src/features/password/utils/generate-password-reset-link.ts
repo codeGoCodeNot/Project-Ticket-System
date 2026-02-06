@@ -3,7 +3,7 @@ import { passwordResetPath } from "@/path";
 import { generateRandomToken, hashToken } from "@/utils/crypto";
 import getBaseUrl from "@/utils/url";
 
-const PASSWORD_RESET_TOKEN_LIFETIME_MS = 1000 * 60 * 60 * 24;
+const PASSWORD_RESET_TOKEN_LIFETIME_MS = 1000 * 60 * 60; // 1 hour
 
 const generatePasswordResetLink = async (userId: string) => {
   await prisma.passwordResetToken.deleteMany({

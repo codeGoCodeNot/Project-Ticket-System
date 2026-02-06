@@ -13,7 +13,7 @@ const EmailPasswordReset = ({ toName, url }: EmailPasswordResetProps) => {
     <EmailLayout previewText="Reset your password">
       <EmailHeading
         title="Reset Your Password"
-        subtitle="Click below to reset your password. This link expires in 24 hours."
+        subtitle="Click below to reset your password. This link expires in 1 hour."
       />
 
       {/* Main action button */}
