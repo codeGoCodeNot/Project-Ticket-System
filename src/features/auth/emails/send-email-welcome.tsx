@@ -8,7 +8,7 @@ export const sendEmailWelcome = async (username: string, email: string) => {
   return await resend.emails.send({
     from: "noreply@johnsenb.dev",
     to: email,
-    subject: "Welcome to Ticket System! 🎫",
+    subject: "Welcome to TicketHub!",
     react: <EmailWelcome toName={username} loginUrl={loginUrl} />,
   });
 };
