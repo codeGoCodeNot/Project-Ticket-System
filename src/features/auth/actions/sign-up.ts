@@ -74,12 +74,12 @@ const signUp = async (_actionState: ActionState, formData: FormData) => {
       },
     });
 
-    const verificationCode = await generateEmailVerificationCode(
-      user.id,
-      email,
-    );
-
-    await sendEmailVerification(username, email, verificationCode);
+    await inngest.send({
+      name: "app/auth.sign-up",
+      data: {
+        userId: user.id,
+      },
+    });
 
     // Queue delayed welcome email
     await inngest.send({
