@@ -22,7 +22,7 @@ export const validateEmailVerificationCode = async (
 
   const isExpired = Date.now() > emailVerificationToken.expiresAt.getTime();
 
-  if (!isExpired) return false;
+  if (isExpired) return false;
 
   if (emailVerificationToken.email !== email) return false;
 
