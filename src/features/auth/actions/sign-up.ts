@@ -16,6 +16,7 @@ import { setSessionCookie } from "../utils/session-cookie";
 import zxcvbn from "zxcvbn";
 import { inngest } from "@/lib/inngest";
 import generateEmailVerificationCode from "../utils/generate-email-verification-code";
+import { sendEmailVerification } from "../emails/sent-email-verification";
 
 const signUpSchema = z
   .object({
@@ -78,7 +79,7 @@ const signUp = async (_actionState: ActionState, formData: FormData) => {
       email,
     );
 
-    console.log(verificationCode);
+    await sendEmailVerification(username, email, verificationCode);
 
     // Queue delayed welcome email
     await inngest.send({
