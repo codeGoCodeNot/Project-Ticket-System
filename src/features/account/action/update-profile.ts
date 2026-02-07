@@ -29,12 +29,12 @@ const updateUserSchema = z.object({
 });
 
 const updateProfile = async (_actionState: ActionState, formData: FormData) => {
+  const { user } = await getAuthOrRedirect();
+
   try {
     const { username, email } = updateUserSchema.parse(
       Object.fromEntries(formData),
     );
-
-    const { user } = await getAuthOrRedirect();
 
     const dbUser = await prisma.user.findUnique({
       where: {
@@ -112,6 +112,11 @@ const updateProfile = async (_actionState: ActionState, formData: FormData) => {
       return toActionState("SUCCESS", "Profile updated successfully", formData);
     }
   } catch (error) {
+    // Re-throw redirect errors to allow Next.js to handle them properly
+    if ((error as any).digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === "P2002"
