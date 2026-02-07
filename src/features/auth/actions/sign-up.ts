@@ -5,18 +5,16 @@ import fromErrorToActionState, {
   toActionState,
 } from "@/components/form/utils/to-action-state";
 import { hashPassword } from "@/features/password/utils/hash-and-verify";
+import { inngest } from "@/lib/inngest";
 import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
 import { ticketsPath } from "@/path";
 import { generateRandomToken } from "@/utils/crypto";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import zxcvbn from "zxcvbn";
 import { Prisma } from "../../../../generated/prisma/client";
 import { setSessionCookie } from "../utils/session-cookie";
-import zxcvbn from "zxcvbn";
-import { inngest } from "@/lib/inngest";
-import generateEmailVerificationCode from "../utils/generate-email-verification-code";
-import { sendEmailVerification } from "../emails/sent-email-verification";
 
 const signUpSchema = z
   .object({

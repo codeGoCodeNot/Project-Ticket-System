@@ -1,7 +1,7 @@
 import { inngest } from "@/lib/inngest";
+import prisma from "@/lib/prisma";
 import { sendEmailVerification } from "../emails/sent-email-verification";
 import generateEmailVerificationCode from "../utils/generate-email-verification-code";
-import prisma from "@/lib/prisma";
 
 export type EmailVerificationEventArgs = {
   data: {
@@ -15,22 +15,30 @@ export const emailVerificationEvent = inngest.createFunction(
   async ({ event, step }) => {
     const { userId } = event.data;
 
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        id: userId,
-      },
+    await step.sleep("email-verification-delay", "2s");
+
+    const user = await step.run("fetch-user", async () => {
+      return await prisma.user.findUniqueOrThrow({
+        where: {
+          id: userId,
+        },
+      });
     });
 
-    const verificationCode = await generateEmailVerificationCode(
-      user.id,
-      user.email,
-    );
+    const verificationCode = await step.run("generate-verification-code", async () => {
+      return await generateEmailVerificationCode(
+        user.id,
+        user.email,
+      );
+    });
 
-    const result = await sendEmailVerification(
-      user.username,
-      user.email,
-      verificationCode,
-    );
+    const result = await step.run("send-verification-email", async () => {
+      return await sendEmailVerification(
+        user.username,
+        user.email,
+        verificationCode,
+      );
+    });
 
     if (result.error) {
       throw new Error("Failed to send verification email: " + result.error);
