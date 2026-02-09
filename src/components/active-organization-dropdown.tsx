@@ -1,6 +1,5 @@
 "use client";
 
-import useActionFeedback from "@/components/form/hooks/use-action-feedback";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,8 +12,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import switchOrganization from "@/features/organization/actions/switch-organization";
 import { useActionState } from "react";
-import { toast } from "sonner";
 import Form from "./form/form";
+import Spinner from "./spinner";
+import { LucideLoader } from "lucide-react";
 
 type OrganizationOption = {
   id: string;
@@ -44,15 +44,6 @@ const OrganizationSwitchMenuItem = ({
     EMPTY_ACTION_STATE,
   );
 
-  useActionFeedback(actionState, {
-    onSuccess: ({ actionState: nextState }) => {
-      if (nextState.message) toast.success(nextState.message);
-    },
-    onError: ({ actionState: nextState }) => {
-      if (nextState.message) toast.error(nextState.message);
-    },
-  });
-
   return (
     <DropdownMenuItem asChild>
       <Form action={action} actionState={actionState}>
@@ -65,9 +56,13 @@ const OrganizationSwitchMenuItem = ({
             {organization.name}
           </span>
 
-          {isActive ? (
-            <span className="text-[10px] text-muted-foreground">Active</span>
-          ) : null}
+          <span className="text-[10px] text-muted-foreground">
+            {isPending ? (
+              <LucideLoader className="animate-spin" />
+            ) : isActive ? (
+              "Active"
+            ) : null}
+          </span>
         </button>
       </Form>
     </DropdownMenuItem>
