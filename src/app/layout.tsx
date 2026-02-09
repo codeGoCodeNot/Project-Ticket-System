@@ -1,3 +1,4 @@
+import ActiveOrganizationFooter from "@/components/active-organization-footer";
 import Header from "@/components/header";
 import SidebarComponent from "@/components/sidebar/components/sidebar";
 import ThemeProvider from "@/components/theme/theme-provider";
@@ -34,7 +35,7 @@ export default function RootLayout({
                 <Header />
                 <SidebarComponent />
                 <main
-                  className="px-7 min-h-screen flex-1 flex flex-col py-24
+                  className="px-7 min-h-screen flex-1 flex flex-col py-24 pb-32
                   bg-secondary/20
                   overflow-y-auto overflow-x-hidden
                   "
@@ -42,6 +43,7 @@ export default function RootLayout({
                   {children}
                 </main>
               </SidebarProvider>
+              <ActiveOrganizationFooter />
               <Toaster expand />
             </ReactQueryProvider>
           </ThemeProvider>
