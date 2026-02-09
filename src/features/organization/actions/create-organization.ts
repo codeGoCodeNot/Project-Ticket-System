@@ -18,7 +18,9 @@ const createOrganization = async (
   _actionState: ActionState,
   formData: FormData,
 ) => {
-  const { user } = await getAuthOrRedirect();
+  const { user } = await getAuthOrRedirect({
+    checkOrganization: false,
+  });
 
   try {
     const data = createOrganizationSchema.parse(Object.fromEntries(formData));
