@@ -30,6 +30,7 @@ const getAuthOrRedirect = async (options?: GetAuthOrRedirectOptions) => {
 
   if (checkOrganization || checkActiveOrganization) {
     const organizations = await getOrganizationsByUser();
+
     if (checkOrganization && !organizations.length) redirect(onBoardingPath());
 
     const hasActive = organizations.some(

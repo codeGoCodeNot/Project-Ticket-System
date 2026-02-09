@@ -20,6 +20,7 @@ const createOrganization = async (
 ) => {
   const { user } = await getAuthOrRedirect({
     checkOrganization: false,
+    checkActiveOrganization: false,
   });
 
   try {
