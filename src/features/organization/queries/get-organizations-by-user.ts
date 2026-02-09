@@ -15,11 +15,23 @@ const getOrganizationsByUser = async () => {
       },
     },
     include: {
-      memberships: true,
+      memberships: {
+        where: {
+          userId: user.id,
+        },
+      },
+      _count: {
+        select: {
+          memberships: true,
+        },
+      },
     },
   });
 
-  return organizations;
+  return (await organizations).map(({ memberships, ...organization }) => ({
+    ...organization,
+    membershipByUser: memberships[0],
+  }));
 };
 
 export default getOrganizationsByUser;

@@ -10,6 +10,7 @@ import getAuthOrRedirect from "../queries/get-auth-or-redirect";
 const resendEmailVerification = async (_actionState: ActionState) => {
   const { user } = await getAuthOrRedirect({
     checkEmailVerified: false,
+    checkOrganization: false,
   });
   try {
     // Queue through Inngest (same as sign-up)
