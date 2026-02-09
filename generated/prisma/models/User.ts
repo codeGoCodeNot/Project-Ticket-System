@@ -371,10 +371,6 @@ export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMembershipsInput, Prisma.UserUpdateWithoutMembershipsInput>, Prisma.UserUncheckedUpdateWithoutMembershipsInput>
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type UserCreateNestedOneWithoutEmailVerificationTokenInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationTokenInput, Prisma.UserUncheckedCreateWithoutEmailVerificationTokenInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationTokenInput

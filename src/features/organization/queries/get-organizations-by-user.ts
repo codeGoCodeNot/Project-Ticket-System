@@ -26,6 +26,9 @@ const getOrganizationsByUser = async () => {
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return (await organizations).map(({ memberships, ...organization }) => ({

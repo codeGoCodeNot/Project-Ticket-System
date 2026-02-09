@@ -85,6 +85,7 @@ const seed = async () => {
     data: {
       userId: dbUsers[0].id,
       organizationId: dbOrganization.id,
+      isActive: true,
     },
   });
 

@@ -27,7 +27,7 @@ const SubmitButton = ({ label, variant, icon }: SubmitButtonProps) => {
       variant={variant}
     >
       {pending && <LucideLoader className="animate-spin" />}
-      {icon}
+      {icon ? icon : null}
       {label}
     </Button>
   );
