@@ -25,13 +25,22 @@ const createOrganization = async (
   try {
     const data = createOrganizationSchema.parse(Object.fromEntries(formData));
 
+    await prisma.membership.updateMany({
+      where: {
+        userId: user.id,
+      },
+      data: {
+        isActive: false,
+      },
+    });
+
     await prisma.organization.create({
       data: {
         ...data,
         memberships: {
           create: {
             userId: user.id,
-            isActive: false,
+            isActive: true,
           },
         },
       },

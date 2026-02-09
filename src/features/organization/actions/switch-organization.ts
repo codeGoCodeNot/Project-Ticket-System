@@ -10,7 +10,9 @@ import { revalidatePath } from "next/cache";
 import getOrganizationsByUser from "../queries/get-organizations-by-user";
 
 const switchOrganization = async (organizationId: string) => {
-  const { user } = await getAuthOrRedirect();
+  const { user } = await getAuthOrRedirect({
+    checkOrganization: false,
+  });
 
   try {
     const organizations = await getOrganizationsByUser();
@@ -38,9 +40,9 @@ const switchOrganization = async (organizationId: string) => {
 
     await prisma.membership.update({
       where: {
-        organizationId_userId: {
-          organizationId,
+        membershipId: {
           userId: user.id,
+          organizationId,
         },
       },
       data: {
@@ -50,6 +52,7 @@ const switchOrganization = async (organizationId: string) => {
   } catch (error) {
     return fromErrorToActionState(error);
   }
+
   revalidatePath(organizationsPath());
   return toActionState("SUCCESS", "Organization switched successfully!");
 };

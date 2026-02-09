@@ -11,6 +11,7 @@ const resendEmailVerification = async (_actionState: ActionState) => {
   const { user } = await getAuthOrRedirect({
     checkEmailVerified: false,
     checkOrganization: false,
+    checkActiveOrganization: false,
   });
   try {
     // Queue through Inngest (same as sign-up)
@@ -23,7 +24,7 @@ const resendEmailVerification = async (_actionState: ActionState) => {
 
     return toActionState("SUCCESS", "Verification code sent to your email!");
   } catch (error) {
-    return fromErrorToActionState(error, new FormData());
+    return fromErrorToActionState(error);
   }
 };
 

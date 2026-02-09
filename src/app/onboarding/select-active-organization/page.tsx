@@ -2,19 +2,19 @@ import Heading from "@/components/heading";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import OrganizationList from "@/features/organization/components/organization-list";
-import { organizationCreatePath } from "@/path";
+import { onBoardingPath } from "@/path";
 import Link from "next/link";
 import { Suspense } from "react";
 
-const OrganizationsPage = () => {
+const SelectActiveOrganizationPage = () => {
   return (
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading
-        title="Organizations"
-        desc="All your organizations"
+        title="Select Organizations"
+        desc="Pick one of your organizations to continue."
         actions={
           <Button asChild>
-            <Link href={organizationCreatePath()}>+ Create Organization</Link>
+            <Link href={onBoardingPath()}>+ Create Organization</Link>
           </Button>
         }
       />
@@ -26,4 +26,4 @@ const OrganizationsPage = () => {
   );
 };
 
-export default OrganizationsPage;
+export default SelectActiveOrganizationPage;
