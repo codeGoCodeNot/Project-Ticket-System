@@ -11,7 +11,7 @@ import getOrganizationsByUser from "../queries/get-organizations-by-user";
 
 const switchOrganization = async (organizationId: string) => {
   const { user } = await getAuthOrRedirect({
-    checkOrganization: false,
+    checkActiveOrganization: false,
   });
 
   try {
