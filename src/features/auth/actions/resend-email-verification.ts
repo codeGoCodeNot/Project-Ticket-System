@@ -8,11 +8,10 @@ import { inngest } from "@/lib/inngest";
 import getAuthOrRedirect from "../queries/get-auth-or-redirect";
 
 const resendEmailVerification = async (_actionState: ActionState) => {
+  const { user } = await getAuthOrRedirect({
+    checkEmailVerified: false,
+  });
   try {
-    const { user } = await getAuthOrRedirect({
-      checkEmailVerified: false,
-    });
-
     // Queue through Inngest (same as sign-up)
     await inngest.send({
       name: "app/auth.sign-up",
