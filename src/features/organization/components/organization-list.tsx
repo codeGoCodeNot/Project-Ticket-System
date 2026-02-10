@@ -10,18 +10,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import MembershipDeleteButton from "@/features/membership/components/membership-delete-button";
+import { membershipPath } from "@/path";
 import { format } from "date-fns";
 import {
   LucideArrowLeftRight,
   LucideArrowUpRightFromSquare,
   LucidePen,
 } from "lucide-react";
+import Link from "next/link";
 import getOrganizationsByUser from "../queries/get-organizations-by-user";
 import OrganizationDeleteButton from "./organization-delete-button";
 import OrganizationSwitchButton from "./organization-switch-button";
-import Link from "next/link";
-import { membershipPath } from "@/path";
-import MembershipDeleteButton from "@/features/membership/components/membership-delete-button";
 
 type OrganizationListProps = {
   limitedAccess?: boolean;

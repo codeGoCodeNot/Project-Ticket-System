@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -7,10 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent } from "@/components/ui/card";
-import getMemberships from "../queries/get-memberships";
-import { LucideBan, LucideCheck } from "lucide-react";
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
+import { LucideBan, LucideCheck } from "lucide-react";
+import getMemberships from "../queries/get-memberships";
 import MembershipDeleteButton from "./membership-delete-button";
 
 type MembershipListProps = {
@@ -76,6 +76,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
               <MembershipDeleteButton
                 organizationId={organizationId}
                 userId={membership.userId}
+                currentUserId={currentUserId}
               />
             </div>
           </div>
@@ -119,6 +120,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                 <MembershipDeleteButton
                   organizationId={organizationId}
                   userId={membership.userId}
+                  currentUserId={currentUserId}
                 />
               </TableCell>
             </TableRow>

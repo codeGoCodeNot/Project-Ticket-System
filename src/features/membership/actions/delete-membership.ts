@@ -10,11 +10,13 @@ import getMemberships from "../queries/get-memberships";
 type DeleteMembershipParams = {
   userId: string;
   organizationId: string;
+  isOwnMembership: boolean;
 };
 
 const deleteMembership = async ({
   userId,
   organizationId,
+  isOwnMembership,
 }: DeleteMembershipParams) => {
   await getAuthOrRedirect();
 
@@ -26,7 +28,9 @@ const deleteMembership = async ({
     if (isLastMembership)
       return toActionState(
         "ERROR",
-        "You cannot delete the last membership of an organization!",
+        isOwnMembership
+          ? "You cannot leave the organization as you are the last member!"
+          : "You cannot delete the last membership of an organization!",
       );
 
     await prisma.membership.delete({
@@ -41,7 +45,12 @@ const deleteMembership = async ({
     return fromErrorToActionState(error);
   }
 
-  return toActionState("SUCCESS", "Membership deleted successfully!");
+  return toActionState(
+    "SUCCESS",
+    isOwnMembership
+      ? "You have left the organization successfully!"
+      : "Member removed successfully!",
+  );
 };
 
 export default deleteMembership;
