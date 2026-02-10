@@ -22,6 +22,13 @@ const ActiveOrganizationFooter = async () => {
           <span className="truncate">
             {activeOrganization ? activeOrganization.name : "None selected"}
           </span>
+          {activeOrganization && (
+            <span className="ml-2 text-[10px] capitalize">
+              (
+              {activeOrganization.membershipByUser.membershipRole.toLowerCase()}
+              )
+            </span>
+          )}
         </div>
         <ActiveOrganizationDropdown
           organizations={organizations}

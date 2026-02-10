@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import switchOrganization from "@/features/organization/actions/switch-organization";
-import { useActionState } from "react";
+import { Fragment, useActionState } from "react";
 import Form from "./form/form";
 import Spinner from "./spinner";
 import { LucideLoader } from "lucide-react";
@@ -21,6 +21,7 @@ type OrganizationOption = {
   name: string;
   membershipByUser: {
     isActive: boolean;
+    membershipRole: string;
   };
 };
 
@@ -52,9 +53,12 @@ const OrganizationSwitchMenuItem = ({
           disabled={isPending}
           className="flex w-full items-center justify-between gap-2"
         >
-          <span className="text-sm text-muted-foreground truncate my-1">
-            {organization.name}
-          </span>
+          <div className="flex flex-col items-start gap-1">
+            <span className="text-sm truncate">{organization.name}</span>
+            <span className="text-[10px] text-muted-foreground capitalize">
+              {organization.membershipByUser.membershipRole.toLowerCase()}
+            </span>
+          </div>
 
           <span className="text-[10px] text-muted-foreground">
             {isPending ? (
@@ -97,12 +101,14 @@ const ActiveOrganizationDropdown = ({
         {!hasOrganizations ? (
           <DropdownMenuItem disabled>No organizations yet</DropdownMenuItem>
         ) : (
-          organizations.map((organization) => (
-            <OrganizationSwitchMenuItem
-              key={organization.id}
-              organization={organization}
-              isActive={organization.id === activeOrganizationId}
-            />
+          organizations.map((organization, index) => (
+            <Fragment key={organization.id}>
+              <OrganizationSwitchMenuItem
+                organization={organization}
+                isActive={organization.id === activeOrganizationId}
+              />
+              {index < organizations.length - 1 && <DropdownMenuSeparator />}
+            </Fragment>
           ))
         )}
       </DropdownMenuContent>

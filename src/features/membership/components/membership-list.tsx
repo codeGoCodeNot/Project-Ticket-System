@@ -70,6 +70,15 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                     )}
                   </div>
                 </div>
+
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">
+                    Role
+                  </div>
+                  <div className="mt-1 capitalize">
+                    {membership.membershipRole}
+                  </div>
+                </div>
               </CardContent>
             </Card>
             <div className="flex flex-col gap-y-1">
@@ -91,6 +100,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
             <TableHead>Username</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Verified Email</TableHead>
+            <TableHead>Role</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -116,6 +126,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                   <LucideBan />
                 )}
               </TableCell>
+              <TableCell>{membership.membershipRole}</TableCell>
               <TableCell>
                 <MembershipDeleteButton
                   organizationId={organizationId}

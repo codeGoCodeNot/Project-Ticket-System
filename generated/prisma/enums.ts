@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const MembershipRole = {
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER'
+} as const
+
+export type MembershipRole = (typeof MembershipRole)[keyof typeof MembershipRole]
+
+
 export const TicketStatus = {
   OPEN: 'OPEN',
   IN_PROGRESS: 'IN_PROGRESS',

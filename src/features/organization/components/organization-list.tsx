@@ -116,6 +116,15 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                     </div>
                   </div>
 
+                  <div>
+                    <div className="text-sm font-medium text-muted-foreground">
+                      Role
+                    </div>
+                    <div className="mt-1 capitalize">
+                      {organization.membershipByUser.membershipRole.toLowerCase()}
+                    </div>
+                  </div>
+
                   <div className="pt-2">{switchButton}</div>
                 </CardContent>
               </Card>
@@ -140,6 +149,7 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
               <TableHead>Name</TableHead>
               <TableHead className="hidden md:table-cell">Joined At</TableHead>
               <TableHead className="hidden md:table-cell">Members</TableHead>
+              <TableHead className="hidden md:table-cell">Role</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -207,6 +217,10 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                     <div className="mt-1 space-y-0.5 text-xs text-muted-foreground md:hidden">
                       <div>Joined: {joinedAt}</div>
                       <div>Members: {organization._count.memberships}</div>
+                      <div className="capitalize">
+                        Role:{" "}
+                        {organization.membershipByUser.membershipRole.toLowerCase()}
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
@@ -214,6 +228,9 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {organization._count.memberships}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell capitalize">
+                    {organization.membershipByUser.membershipRole.toLowerCase()}
                   </TableCell>
                   <TableCell className="flex flex-wrap justify-end gap-2 lg:flex-nowrap">
                     {switchButton}

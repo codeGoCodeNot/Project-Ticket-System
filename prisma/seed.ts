@@ -16,12 +16,12 @@ const users = [
   {
     username: "johnsen30",
     email: "johnsenberdin30@gmail.com",
-    emailVerified: false,
+    emailVerified: true,
   },
   {
     username: "user2",
     email: "johnsenberdin2930@gmail.com",
-    emailVerified: false,
+    emailVerified: true,
   },
 ];
 
@@ -81,12 +81,21 @@ const seed = async () => {
     data: users.map((user) => ({ ...user, passwordHash })),
   });
 
-  await prisma.membership.create({
-    data: {
-      userId: dbUsers[0].id,
-      organizationId: dbOrganization.id,
-      isActive: true,
-    },
+  await prisma.membership.createMany({
+    data: [
+      {
+        userId: dbUsers[0].id,
+        organizationId: dbOrganization.id,
+        isActive: true,
+        membershipRole: "ADMIN",
+      },
+      {
+        userId: dbUsers[1].id,
+        organizationId: dbOrganization.id,
+        isActive: true,
+        membershipRole: "MEMBER",
+      },
+    ],
   });
 
   const dbTickets = await prisma.ticket.createManyAndReturn({
