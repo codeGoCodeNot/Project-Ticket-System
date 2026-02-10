@@ -19,6 +19,9 @@ export const organizationCreatePath = () => "/organization/create";
 export const selectActiveOrganizationPath = () =>
   "/onboarding/select-active-organization";
 
+export const membershipPath = (organizationId: string) =>
+  `/organization/${organizationId}/membership`;
+
 export const passwordResetPath = () => "/password-reset";
 export const passwordForgotPath = () => "/password-forgot";
 
