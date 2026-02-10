@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Card, CardContent } from "@/components/ui/card";
 import getMemberships from "../queries/get-memberships";
 import { LucideBan, LucideCheck } from "lucide-react";
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
@@ -26,43 +27,46 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
       {/* Mobile view - vertical cards */}
       <section className="sm:hidden space-y-4">
         {memberships.map((membership) => (
-          <article
-            key={membership.userId}
-            className="border rounded-lg p-4 space-y-2"
-          >
-            <dl>
-              <dt className="text-sm font-medium text-muted-foreground">
-                Username
-              </dt>
-              <dd className="mb-2">
-                {membership.user.username}
-                {membership.userId === currentUserId && (
-                  <span
-                    className="ml-1 text-xs text-muted-foreground"
-                    title="That's you!"
-                  >
-                    (you)
-                  </span>
-                )}
-              </dd>
+          <Card key={membership.userId}>
+            <CardContent className="space-y-3">
+              <div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Username
+                </div>
+                <div className="mt-1">
+                  {membership.user.username}
+                  {membership.userId === currentUserId && (
+                    <span
+                      className="ml-1 text-xs text-muted-foreground"
+                      title="That's you!"
+                    >
+                      (you)
+                    </span>
+                  )}
+                </div>
+              </div>
 
-              <dt className="text-sm font-medium text-muted-foreground">
-                Email
-              </dt>
-              <dd className="mb-2">{membership.user.email}</dd>
+              <div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Email
+                </div>
+                <div className="mt-1">{membership.user.email}</div>
+              </div>
 
-              <dt className="text-sm font-medium text-muted-foreground">
-                Verified Email
-              </dt>
-              <dd>
-                {membership.user.emailVerified ? (
-                  <LucideCheck />
-                ) : (
-                  <LucideBan />
-                )}
-              </dd>
-            </dl>
-          </article>
+              <div>
+                <div className="text-sm font-medium text-muted-foreground">
+                  Verified Email
+                </div>
+                <div className="mt-1">
+                  {membership.user.emailVerified ? (
+                    <LucideCheck />
+                  ) : (
+                    <LucideBan />
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </section>
 
