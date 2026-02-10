@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import getMemberships from "../queries/get-memberships";
 import { LucideBan, LucideCheck } from "lucide-react";
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
+import MembershipDeleteButton from "./membership-delete-button";
 
 type MembershipListProps = {
   organizationId: string;
@@ -25,48 +26,59 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
   return (
     <>
       {/* Mobile view - vertical cards */}
-      <section className="sm:hidden space-y-4">
+      <section className="sm:hidden flex flex-col items-center space-y-4">
         {memberships.map((membership) => (
-          <Card key={membership.userId}>
-            <CardContent className="space-y-3">
-              <div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Username
+          <div
+            key={membership.userId}
+            className="w-full max-w-[420px] flex gap-x-1"
+          >
+            <Card className="w-full">
+              <CardContent className="space-y-3">
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">
+                    Username
+                  </div>
+                  <div className="mt-1">
+                    {membership.user.username}
+                    {membership.userId === currentUserId && (
+                      <span
+                        className="ml-1 text-xs text-muted-foreground"
+                        title="That's you!"
+                      >
+                        (you)
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="mt-1">
-                  {membership.user.username}
-                  {membership.userId === currentUserId && (
-                    <span
-                      className="ml-1 text-xs text-muted-foreground"
-                      title="That's you!"
-                    >
-                      (you)
-                    </span>
-                  )}
-                </div>
-              </div>
 
-              <div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Email
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">
+                    Email
+                  </div>
+                  <div className="mt-1">{membership.user.email}</div>
                 </div>
-                <div className="mt-1">{membership.user.email}</div>
-              </div>
 
-              <div>
-                <div className="text-sm font-medium text-muted-foreground">
-                  Verified Email
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">
+                    Verified Email
+                  </div>
+                  <div className="mt-1">
+                    {membership.user.emailVerified ? (
+                      <LucideCheck />
+                    ) : (
+                      <LucideBan />
+                    )}
+                  </div>
                 </div>
-                <div className="mt-1">
-                  {membership.user.emailVerified ? (
-                    <LucideCheck />
-                  ) : (
-                    <LucideBan />
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+            <div className="flex flex-col gap-y-1">
+              <MembershipDeleteButton
+                organizationId={organizationId}
+                userId={membership.userId}
+              />
+            </div>
+          </div>
         ))}
       </section>
 
@@ -78,6 +90,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
             <TableHead>Username</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Verified Email</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -101,6 +114,12 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                 ) : (
                   <LucideBan />
                 )}
+              </TableCell>
+              <TableCell>
+                <MembershipDeleteButton
+                  organizationId={organizationId}
+                  userId={membership.userId}
+                />
               </TableCell>
             </TableRow>
           ))}

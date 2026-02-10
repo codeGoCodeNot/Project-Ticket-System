@@ -3,36 +3,39 @@
 import useConfirmDialog from "@/components/confirm-dialog";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
-import { LucideTrash } from "lucide-react";
+import { LucideLogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
-import deleteOrganization from "../actions/delete-organization";
+import deleteMembership from "../actions/delete-membership";
 
-type OrganizationDeleteButtonProps = {
+type MembershipDeleteButtonProps = {
+  userId: string;
   organizationId: string;
 };
 
-const OrganizationDeleteButton = ({
+const MembershipDeleteButton = ({
+  userId,
   organizationId,
-}: OrganizationDeleteButtonProps) => {
+}: MembershipDeleteButtonProps) => {
   const router = useRouter();
 
   const [deleteButton, deleteDialog] = useConfirmDialog({
-    action: deleteOrganization.bind(null, organizationId),
+    action: deleteMembership.bind(null, { userId, organizationId }),
     trigger: (isPending) => (
       <Button variant="destructive" size="icon">
-        {isPending ? <Spinner /> : <LucideTrash />}
+        {isPending ? <Spinner /> : <LucideLogOut />}
       </Button>
     ),
     onSuccess: () => {
       router.refresh();
     },
   });
+
   return (
-    <>
+    <div>
       {deleteDialog}
       {deleteButton}
-    </>
+    </div>
   );
 };
 
-export default OrganizationDeleteButton;
+export default MembershipDeleteButton;
