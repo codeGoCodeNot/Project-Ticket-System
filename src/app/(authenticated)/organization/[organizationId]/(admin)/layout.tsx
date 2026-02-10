@@ -7,7 +7,6 @@ const AuthenticatedLayout = async ({
   children: React.ReactNode;
   params: Promise<{
     organizationId: string;
-    admin: string;
   }>;
 }>) => {
   const { organizationId } = await params;
