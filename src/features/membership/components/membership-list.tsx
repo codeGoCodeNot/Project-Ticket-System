@@ -1,4 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -33,53 +39,37 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
             className="w-full max-w-[420px] flex gap-x-1"
           >
             <Card className="w-full">
-              <CardContent className="space-y-3">
-                <div>
-                  <div className="text-sm font-medium text-muted-foreground">
-                    Username
-                  </div>
-                  <div className="mt-1">
+              <CardHeader>
+                <CardTitle className="flex gap-x-2 items-center">
+                  <span>
                     {membership.user.username}
                     {membership.userId === currentUserId && (
                       <span
-                        className="ml-1 text-xs text-muted-foreground"
+                        className="ml-1 text-xs text-muted-foreground font-normal"
                         title="That's you!"
                       >
                         (you)
                       </span>
                     )}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-sm font-medium text-muted-foreground">
-                    Email
-                  </div>
-                  <div className="mt-1">{membership.user.email}</div>
-                </div>
-
-                <div>
-                  <div className="text-sm font-medium text-muted-foreground">
-                    Verified Email
-                  </div>
-                  <div className="mt-1">
-                    {membership.user.emailVerified ? (
-                      <LucideCheck />
-                    ) : (
-                      <LucideBan />
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-sm font-medium text-muted-foreground">
-                    Role
-                  </div>
-                  <div className="mt-1 capitalize">
-                    {membership.membershipRole}
-                  </div>
-                </div>
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex items-center gap-x-2">
+                <span className="text-sm text-muted-foreground">
+                  Email verified:
+                </span>
+                {membership.user.emailVerified ? (
+                  <LucideCheck className="h-4 w-4 text-green-600" />
+                ) : (
+                  <LucideBan className="h-4 w-4 text-red-600" />
+                )}
               </CardContent>
+              <CardFooter className="flex justify-between text-sm text-muted-foreground">
+                <span>{membership.user.email}</span>
+                <span className="capitalize">
+                  {membership.membershipRole.toLowerCase()}
+                </span>
+              </CardFooter>
             </Card>
             <div className="flex flex-col gap-y-1">
               <MembershipDeleteButton

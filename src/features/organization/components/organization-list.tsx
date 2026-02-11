@@ -1,6 +1,12 @@
 import SubmitButton from "@/components/form/submit-button";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -31,6 +37,9 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
   const organizations = await getOrganizationsByUser();
   const hasActive = organizations.some(
     (organization) => organization.membershipByUser.isActive,
+  );
+  const placeholder = (
+    <Button size="icon" disabled className="disabled:opacity-0"></Button>
   );
 
   return (
@@ -86,53 +95,36 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
             <OrganizationDeleteButton organizationId={organization.id} />
           );
 
+          const isAdmin =
+            organization.membershipByUser.membershipRole === "ADMIN";
+
           return (
             <div
               key={organization.id}
               className="w-full max-w-[420px] flex gap-x-1"
             >
               <Card className="w-full">
-                <CardContent className="space-y-3">
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Name
-                    </div>
-                    <div className="mt-1 font-medium">{organization.name}</div>
+                <CardHeader>
+                  <CardTitle className="flex gap-x-2 items-center">
+                    <span>{organization.name}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>{switchButton}</CardContent>
+                <CardFooter className="flex justify-between text-sm text-muted-foreground">
+                  <div className="flex gap-x-3">
+                    <span>{joinedAt}</span>
+                    <span>{organization._count.memberships} members</span>
                   </div>
-
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Joined At
-                    </div>
-                    <div className="mt-1">{joinedAt}</div>
-                  </div>
-
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Members
-                    </div>
-                    <div className="mt-1">
-                      {organization._count.memberships}
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Role
-                    </div>
-                    <div className="mt-1 capitalize">
-                      {organization.membershipByUser.membershipRole.toLowerCase()}
-                    </div>
-                  </div>
-
-                  <div className="pt-2">{switchButton}</div>
-                </CardContent>
+                  <span className="capitalize">
+                    {organization.membershipByUser.membershipRole.toLowerCase()}
+                  </span>
+                </CardFooter>
               </Card>
               <div className="flex flex-col gap-y-1">
-                {limitedAccess ? null : detailButton}
-                {limitedAccess ? null : editButton}
+                {limitedAccess ? null : isAdmin ? detailButton : null}
+                {limitedAccess ? null : isAdmin ? editButton : null}
                 {limitedAccess ? null : leaveButton}
-                {limitedAccess ? null : deleteButton}
+                {limitedAccess ? null : isAdmin ? deleteButton : null}
               </div>
             </div>
           );
@@ -156,7 +148,8 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
           <TableBody>
             {organizations.map((organization) => {
               const isActive = organization.membershipByUser.isActive;
-
+              const isAdmin =
+                organization.membershipByUser.membershipRole === "ADMIN";
               const switchButton = (
                 <OrganizationSwitchButton
                   organizationId={organization.id}
@@ -234,10 +227,18 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                   </TableCell>
                   <TableCell className="flex flex-wrap justify-end gap-2 lg:flex-nowrap">
                     {switchButton}
-                    {limitedAccess ? null : detailButton}
-                    {limitedAccess ? null : editButton}
+                    {limitedAccess
+                      ? null
+                      : isAdmin
+                        ? detailButton
+                        : placeholder}
+                    {limitedAccess ? null : isAdmin ? editButton : placeholder}
                     {limitedAccess ? null : leaveButton}
-                    {limitedAccess ? null : deleteButton}
+                    {limitedAccess
+                      ? null
+                      : isAdmin
+                        ? deleteButton
+                        : placeholder}
                   </TableCell>
                 </TableRow>
               );
