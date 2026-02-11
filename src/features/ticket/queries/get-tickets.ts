@@ -12,13 +12,16 @@ const getTickets = async (
   const { user } = await getAuth();
   const activeOrganization = await getActiveOrganization();
 
+  // Use byOrganization prop if explicitly set, otherwise use filter from searchParams
+  const filterByOrg = byOrganization || searchParams.filter === "active";
+
   const where = {
     userId,
     title: {
       contains: searchParams.search,
       mode: "insensitive" as const,
     },
-    ...(byOrganization && activeOrganization
+    ...(filterByOrg && activeOrganization
       ? {
           organizationId: activeOrganization.id,
         }
@@ -28,7 +31,7 @@ const getTickets = async (
   const skip = searchParams.page * searchParams.size;
   const take = searchParams.size;
 
-  const [tickets, count] = await prisma.$transaction([
+  const [tickets, count, totalCount] = await prisma.$transaction([
     prisma.ticket.findMany({
       where,
       skip,
@@ -47,6 +50,11 @@ const getTickets = async (
     prisma.ticket.count({
       where,
     }),
+    prisma.ticket.count({
+      where: {
+        userId,
+      },
+    }),
   ]);
 
   return {
@@ -56,6 +64,7 @@ const getTickets = async (
     })),
     metadata: {
       count,
+      totalCount,
       hasNextPage: count > skip + take,
     },
   };

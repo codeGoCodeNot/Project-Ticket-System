@@ -23,6 +23,11 @@ const TicketList = async ({
     searchParams,
   );
 
+  const showingText =
+    ticketMetadata.count === ticketMetadata.totalCount
+      ? `Showing all ${ticketMetadata.totalCount} tickets`
+      : `Showing ${ticketMetadata.count} of ${ticketMetadata.totalCount} tickets`;
+
   return (
     <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
       <div className="w-full max-w-[420px] flex gap-x-2">
@@ -52,6 +57,13 @@ const TicketList = async ({
           ]}
         />
       </div>
+
+      {ticketMetadata.totalCount > 0 && (
+        <div className="w-full max-w-[420px] text-sm text-muted-foreground text-center">
+          {showingText}
+        </div>
+      )}
+
       {tickets.length ? (
         tickets.map((ticket) => <TicketItem ticket={ticket} key={ticket.id} />)
       ) : (

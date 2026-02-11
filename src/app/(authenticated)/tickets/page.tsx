@@ -2,6 +2,7 @@ import CardCompact from "@/components/card-compact";
 import Heading from "@/components/heading";
 import SkeletonComponents from "@/components/skeleton-components";
 import getAuth from "@/features/auth/queries/get-auth";
+import TicketFilterTabs from "@/features/ticket/components/ticket-filter-tabs";
 import TicketList from "@/features/ticket/components/ticket-list";
 import TicketUpsertForm from "@/features/ticket/components/ticket-upsert-form";
 import { searchParamsCache } from "@/features/ticket/search-params";
@@ -26,6 +27,10 @@ const TicketsPage = async ({ searchParams }: TicketsPageProps) => {
           classname="w-full max-w-[420px] self-center"
           content={<TicketUpsertForm />}
         />
+
+        <div className="flex flex-col items-center gap-y-4">
+          <TicketFilterTabs />
+        </div>
 
         <Suspense fallback={<SkeletonComponents length={3} />}>
           <TicketList
