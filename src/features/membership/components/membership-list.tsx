@@ -18,6 +18,7 @@ import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
 import { LucideBan, LucideCheck } from "lucide-react";
 import getMemberships from "../queries/get-memberships";
 import MembershipDeleteButton from "./membership-delete-button";
+import MembershipMoreMenu from "./membership-more-menu";
 
 type MembershipListProps = {
   organizationId: string;
@@ -72,6 +73,11 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
               </CardFooter>
             </Card>
             <div className="flex flex-col gap-y-1">
+              <MembershipMoreMenu
+                userId={membership.userId}
+                organizationId={membership.organizationId}
+                membershipRole={membership.membershipRole}
+              />
               <MembershipDeleteButton
                 organizationId={organizationId}
                 userId={membership.userId}
@@ -117,7 +123,12 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                 )}
               </TableCell>
               <TableCell>{membership.membershipRole}</TableCell>
-              <TableCell>
+              <TableCell className="flex gap-x-1">
+                <MembershipMoreMenu
+                  userId={membership.userId}
+                  organizationId={membership.organizationId}
+                  membershipRole={membership.membershipRole}
+                />
                 <MembershipDeleteButton
                   organizationId={organizationId}
                   userId={membership.userId}
