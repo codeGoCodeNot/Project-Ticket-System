@@ -26,7 +26,7 @@ const upsertTicket = async (
   _actionState: ActionState,
   formData: FormData,
 ) => {
-  const { user } = await getAuthOrRedirect();
+  const { user, activeOrganization } = await getAuthOrRedirect();
   try {
     if (id) {
       const ticket = await prisma.ticket.findUnique({
@@ -47,14 +47,19 @@ const upsertTicket = async (
       bounty: formData.get("bounty"),
     });
 
-    const dbData = { ...data, userId: user.id, bounty: toCent(data.bounty) };
+    const dbData = {
+      ...data,
+      userId: user.id,
+      bounty: toCent(data.bounty),
+    };
+
     await prisma.ticket.upsert({
       where: {
         id: id || "",
       },
 
       update: dbData, // update data if record is found
-      create: dbData, // create data if record is not found
+      create: { ...dbData, organizationId: activeOrganization!.id }, // create data if record is not found
     });
   } catch (error) {
     return fromErrorToActionState(error, formData);
