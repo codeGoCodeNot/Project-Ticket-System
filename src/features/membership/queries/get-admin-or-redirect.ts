@@ -1,7 +1,7 @@
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
 import getMembership from "./get-membership";
 import { redirect } from "next/navigation";
-import { signInPath } from "@/path";
+import { contactAdminPath } from "@/path";
 
 export const getAdminOrRedirect = async (organizationId: string) => {
   const auth = await getAuthOrRedirect();
@@ -12,7 +12,7 @@ export const getAdminOrRedirect = async (organizationId: string) => {
   });
 
   if (!membership || membership.membershipRole !== "ADMIN") {
-    redirect(signInPath());
+    redirect(contactAdminPath());
   }
 
   return { ...auth, membership };

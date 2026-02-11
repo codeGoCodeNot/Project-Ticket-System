@@ -27,6 +27,7 @@ import {
 import Link from "next/link";
 import getOrganizationsByUser from "../queries/get-organizations-by-user";
 import OrganizationDeleteButton from "./organization-delete-button";
+import OrganizationRenameDialog from "./organization-rename-dialog";
 import OrganizationSwitchButton from "./organization-switch-button";
 
 type OrganizationListProps = {
@@ -79,9 +80,10 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
           );
 
           const editButton = (
-            <Button variant="outline" size="icon">
-              <LucidePen />
-            </Button>
+            <OrganizationRenameDialog
+              organizationId={organization.id}
+              currentName={organization.name}
+            />
           );
 
           const leaveButton = (
@@ -180,9 +182,10 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
               );
 
               const editButton = (
-                <Button variant="outline" size="icon">
-                  <LucidePen />
-                </Button>
+                <OrganizationRenameDialog
+                  organizationId={organization.id}
+                  currentName={organization.name}
+                />
               );
 
               const leaveButton = (
@@ -202,10 +205,10 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
 
               return (
                 <TableRow key={organization.id}>
-                  <TableCell className="hidden sm:table-cell">
+                  <TableCell className="hidden sm:table-cell align-middle">
                     {organization.id}
                   </TableCell>
-                  <TableCell className="align-top">
+                  <TableCell className="align-middle">
                     <div className="font-medium">{organization.name}</div>
                     <div className="mt-1 space-y-0.5 text-xs text-muted-foreground md:hidden">
                       <div>Joined: {joinedAt}</div>
@@ -216,16 +219,16 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="hidden md:table-cell align-middle">
                     {joinedAt}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="hidden md:table-cell align-middle">
                     {organization._count.memberships}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell capitalize">
+                  <TableCell className="hidden md:table-cell capitalize align-middle">
                     {organization.membershipByUser.membershipRole.toLowerCase()}
                   </TableCell>
-                  <TableCell className="flex flex-wrap justify-end gap-2 lg:flex-nowrap">
+                  <TableCell className="flex flex-wrap justify-end gap-x-1 lg:flex-nowrap align-middle">
                     {switchButton}
                     {limitedAccess
                       ? null
