@@ -1,5 +1,5 @@
 import Heading from "@/components/heading";
-import Spinner from "@/components/spinner";
+import OrganizationSkeleton from "@/components/organization-skeleton";
 import { Button } from "@/components/ui/button";
 import OrganizationList from "@/features/organization/components/organization-list";
 import getOrganizationsByUser from "@/features/organization/queries/get-organizations-by-user";
@@ -29,7 +29,7 @@ const SelectActiveOrganizationPage = async () => {
         }
       />
 
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<OrganizationSkeleton />}>
         <OrganizationList limitedAccess />
       </Suspense>
     </div>

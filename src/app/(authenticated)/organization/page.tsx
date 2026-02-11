@@ -1,5 +1,5 @@
 import Heading from "@/components/heading";
-import Spinner from "@/components/spinner";
+import OrganizationSkeleton from "@/components/organization-skeleton";
 import { Button } from "@/components/ui/button";
 import OrganizationList from "@/features/organization/components/organization-list";
 import { organizationCreatePath } from "@/path";
@@ -19,7 +19,7 @@ const OrganizationsPage = () => {
         }
       />
 
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<OrganizationSkeleton />}>
         <OrganizationList />
       </Suspense>
     </div>
