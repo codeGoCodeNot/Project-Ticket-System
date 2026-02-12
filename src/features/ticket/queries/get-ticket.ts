@@ -1,6 +1,9 @@
 import getAuth from "@/features/auth/queries/get-auth";
 import isOwner from "@/features/auth/utils/is-owner";
+
 import prisma from "@/lib/prisma";
+
+import getTicketPermissions from "../permissions/get-ticket-permission";
 
 const getTicket = async (id: string) => {
   const { user } = await getAuth();
@@ -20,9 +23,17 @@ const getTicket = async (id: string) => {
 
   if (!ticket) return null;
 
+  const permissions = await getTicketPermissions({
+    organizationId: ticket.organizationId,
+    userId: user?.id,
+  });
+
   return {
     ...ticket,
     isOwner: isOwner(user, ticket),
+    permissions: {
+      canDeleteTicket: isOwner(user, ticket) && !!permissions?.canDeleteTicket,
+    },
   };
 };
 

@@ -28,6 +28,8 @@ const TicketList = async ({
       ? `Showing all ${ticketMetadata.totalCount} tickets`
       : `Showing ${ticketMetadata.count} of ${ticketMetadata.totalCount} tickets`;
 
+  const resolvedTickets = await Promise.all(tickets);
+
   return (
     <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">
       <div className="w-full max-w-[420px] flex gap-x-2">
@@ -64,8 +66,10 @@ const TicketList = async ({
         </div>
       )}
 
-      {tickets.length ? (
-        tickets.map((ticket) => <TicketItem ticket={ticket} key={ticket.id} />)
+      {resolvedTickets.length ? (
+        resolvedTickets.map((ticket) => (
+          <TicketItem ticket={ticket} key={ticket.id} />
+        ))
       ) : (
         <Placeholder label="No tickets found" button={null} />
       )}
