@@ -30,6 +30,7 @@ export type MembershipMinAggregateOutputType = {
   joinedAt: Date | null
   isActive: boolean | null
   membershipRole: $Enums.MembershipRole | null
+  canDeleteTickets: boolean | null
 }
 
 export type MembershipMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type MembershipMaxAggregateOutputType = {
   joinedAt: Date | null
   isActive: boolean | null
   membershipRole: $Enums.MembershipRole | null
+  canDeleteTickets: boolean | null
 }
 
 export type MembershipCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type MembershipCountAggregateOutputType = {
   joinedAt: number
   isActive: number
   membershipRole: number
+  canDeleteTickets: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type MembershipMinAggregateInputType = {
   joinedAt?: true
   isActive?: true
   membershipRole?: true
+  canDeleteTickets?: true
 }
 
 export type MembershipMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type MembershipMaxAggregateInputType = {
   joinedAt?: true
   isActive?: true
   membershipRole?: true
+  canDeleteTickets?: true
 }
 
 export type MembershipCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type MembershipCountAggregateInputType = {
   joinedAt?: true
   isActive?: true
   membershipRole?: true
+  canDeleteTickets?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type MembershipGroupByOutputType = {
   joinedAt: Date
   isActive: boolean
   membershipRole: $Enums.MembershipRole
+  canDeleteTickets: boolean
   _count: MembershipCountAggregateOutputType | null
   _min: MembershipMinAggregateOutputType | null
   _max: MembershipMaxAggregateOutputType | null
@@ -182,6 +189,7 @@ export type MembershipWhereInput = {
   joinedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   isActive?: Prisma.BoolFilter<"Membership"> | boolean
   membershipRole?: Prisma.EnumMembershipRoleFilter<"Membership"> | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFilter<"Membership"> | boolean
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -192,6 +200,7 @@ export type MembershipOrderByWithRelationInput = {
   joinedAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   membershipRole?: Prisma.SortOrder
+  canDeleteTickets?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -206,6 +215,7 @@ export type MembershipWhereUniqueInput = Prisma.AtLeast<{
   joinedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   isActive?: Prisma.BoolFilter<"Membership"> | boolean
   membershipRole?: Prisma.EnumMembershipRoleFilter<"Membership"> | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFilter<"Membership"> | boolean
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "membershipId">
@@ -216,6 +226,7 @@ export type MembershipOrderByWithAggregationInput = {
   joinedAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   membershipRole?: Prisma.SortOrder
+  canDeleteTickets?: Prisma.SortOrder
   _count?: Prisma.MembershipCountOrderByAggregateInput
   _max?: Prisma.MembershipMaxOrderByAggregateInput
   _min?: Prisma.MembershipMinOrderByAggregateInput
@@ -230,12 +241,14 @@ export type MembershipScalarWhereWithAggregatesInput = {
   joinedAt?: Prisma.DateTimeWithAggregatesFilter<"Membership"> | Date | string
   isActive?: Prisma.BoolWithAggregatesFilter<"Membership"> | boolean
   membershipRole?: Prisma.EnumMembershipRoleWithAggregatesFilter<"Membership"> | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolWithAggregatesFilter<"Membership"> | boolean
 }
 
 export type MembershipCreateInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
   organization: Prisma.OrganizationCreateNestedOneWithoutMembershipsInput
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
 }
@@ -246,12 +259,14 @@ export type MembershipUncheckedCreateInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipUpdateInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
 }
@@ -262,6 +277,7 @@ export type MembershipUncheckedUpdateInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipCreateManyInput = {
@@ -270,12 +286,14 @@ export type MembershipCreateManyInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipUpdateManyMutationInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipUncheckedUpdateManyInput = {
@@ -284,6 +302,7 @@ export type MembershipUncheckedUpdateManyInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipListRelationFilter = {
@@ -307,6 +326,7 @@ export type MembershipCountOrderByAggregateInput = {
   joinedAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   membershipRole?: Prisma.SortOrder
+  canDeleteTickets?: Prisma.SortOrder
 }
 
 export type MembershipMaxOrderByAggregateInput = {
@@ -315,6 +335,7 @@ export type MembershipMaxOrderByAggregateInput = {
   joinedAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   membershipRole?: Prisma.SortOrder
+  canDeleteTickets?: Prisma.SortOrder
 }
 
 export type MembershipMinOrderByAggregateInput = {
@@ -323,6 +344,7 @@ export type MembershipMinOrderByAggregateInput = {
   joinedAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   membershipRole?: Prisma.SortOrder
+  canDeleteTickets?: Prisma.SortOrder
 }
 
 export type MembershipCreateNestedManyWithoutOrganizationInput = {
@@ -421,6 +443,7 @@ export type MembershipCreateWithoutOrganizationInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
   user: Prisma.UserCreateNestedOneWithoutMembershipsInput
 }
 
@@ -429,6 +452,7 @@ export type MembershipUncheckedCreateWithoutOrganizationInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipCreateOrConnectWithoutOrganizationInput = {
@@ -466,12 +490,14 @@ export type MembershipScalarWhereInput = {
   joinedAt?: Prisma.DateTimeFilter<"Membership"> | Date | string
   isActive?: Prisma.BoolFilter<"Membership"> | boolean
   membershipRole?: Prisma.EnumMembershipRoleFilter<"Membership"> | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFilter<"Membership"> | boolean
 }
 
 export type MembershipCreateWithoutUserInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
   organization: Prisma.OrganizationCreateNestedOneWithoutMembershipsInput
 }
 
@@ -480,6 +506,7 @@ export type MembershipUncheckedCreateWithoutUserInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipCreateOrConnectWithoutUserInput = {
@@ -513,12 +540,14 @@ export type MembershipCreateManyOrganizationInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipUpdateWithoutOrganizationInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
@@ -527,6 +556,7 @@ export type MembershipUncheckedUpdateWithoutOrganizationInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipUncheckedUpdateManyWithoutOrganizationInput = {
@@ -534,6 +564,7 @@ export type MembershipUncheckedUpdateManyWithoutOrganizationInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipCreateManyUserInput = {
@@ -541,12 +572,14 @@ export type MembershipCreateManyUserInput = {
   joinedAt?: Date | string
   isActive: boolean
   membershipRole?: $Enums.MembershipRole
+  canDeleteTickets?: boolean
 }
 
 export type MembershipUpdateWithoutUserInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
@@ -555,6 +588,7 @@ export type MembershipUncheckedUpdateWithoutUserInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type MembershipUncheckedUpdateManyWithoutUserInput = {
@@ -562,6 +596,7 @@ export type MembershipUncheckedUpdateManyWithoutUserInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   membershipRole?: Prisma.EnumMembershipRoleFieldUpdateOperationsInput | $Enums.MembershipRole
+  canDeleteTickets?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -572,6 +607,7 @@ export type MembershipSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   joinedAt?: boolean
   isActive?: boolean
   membershipRole?: boolean
+  canDeleteTickets?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
@@ -582,6 +618,7 @@ export type MembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   joinedAt?: boolean
   isActive?: boolean
   membershipRole?: boolean
+  canDeleteTickets?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
@@ -592,6 +629,7 @@ export type MembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   joinedAt?: boolean
   isActive?: boolean
   membershipRole?: boolean
+  canDeleteTickets?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["membership"]>
@@ -602,9 +640,10 @@ export type MembershipSelectScalar = {
   joinedAt?: boolean
   isActive?: boolean
   membershipRole?: boolean
+  canDeleteTickets?: boolean
 }
 
-export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"organizationId" | "userId" | "joinedAt" | "isActive" | "membershipRole", ExtArgs["result"]["membership"]>
+export type MembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"organizationId" | "userId" | "joinedAt" | "isActive" | "membershipRole" | "canDeleteTickets", ExtArgs["result"]["membership"]>
 export type MembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -630,6 +669,7 @@ export type $MembershipPayload<ExtArgs extends runtime.Types.Extensions.Internal
     joinedAt: Date
     isActive: boolean
     membershipRole: $Enums.MembershipRole
+    canDeleteTickets: boolean
   }, ExtArgs["result"]["membership"]>
   composites: {}
 }
@@ -1060,6 +1100,7 @@ export interface MembershipFieldRefs {
   readonly joinedAt: Prisma.FieldRef<"Membership", 'DateTime'>
   readonly isActive: Prisma.FieldRef<"Membership", 'Boolean'>
   readonly membershipRole: Prisma.FieldRef<"Membership", 'MembershipRole'>
+  readonly canDeleteTickets: Prisma.FieldRef<"Membership", 'Boolean'>
 }
     
 

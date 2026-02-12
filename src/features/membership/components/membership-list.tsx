@@ -19,6 +19,7 @@ import { LucideBan, LucideCheck } from "lucide-react";
 import getMemberships from "../queries/get-memberships";
 import MembershipDeleteButton from "./membership-delete-button";
 import MembershipMoreMenu from "./membership-more-menu";
+import PermissionToggle from "./permission-toggle";
 
 type MembershipListProps = {
   organizationId: string;
@@ -65,11 +66,22 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                   <LucideBan className="h-4 w-4 text-red-600" />
                 )}
               </CardContent>
-              <CardFooter className="flex justify-between text-sm text-muted-foreground">
-                <span>{membership.user.email}</span>
-                <span className="capitalize">
-                  {membership.membershipRole.toLowerCase()}
-                </span>
+              <CardFooter className="flex flex-col gap-y-2 text-sm text-muted-foreground">
+                <div className="flex justify-between w-full">
+                  <span>{membership.user.email}</span>
+                  <span className="capitalize">
+                    {membership.membershipRole.toLowerCase()}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between w-full">
+                  <span>Can Delete Ticket:</span>
+                  <PermissionToggle
+                    userId={membership.userId}
+                    organizationId={membership.organizationId}
+                    permissionKey="canDeleteTickets"
+                    permissionValue={membership.canDeleteTickets}
+                  />
+                </div>
               </CardFooter>
             </Card>
             <div className="flex flex-col gap-y-1">
@@ -97,6 +109,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
             <TableHead>Email</TableHead>
             <TableHead>Verified Email</TableHead>
             <TableHead>Role</TableHead>
+            <TableHead>Can Delete Ticket?</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -123,6 +136,14 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                 )}
               </TableCell>
               <TableCell>{membership.membershipRole}</TableCell>
+              <TableCell>
+                <PermissionToggle
+                  userId={membership.userId}
+                  organizationId={membership.organizationId}
+                  permissionKey="canDeleteTickets"
+                  permissionValue={membership.canDeleteTickets}
+                />
+              </TableCell>
               <TableCell className="flex gap-x-1">
                 <MembershipMoreMenu
                   userId={membership.userId}

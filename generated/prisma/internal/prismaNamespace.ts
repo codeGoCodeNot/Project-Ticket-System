@@ -1057,7 +1057,8 @@ export const MembershipScalarFieldEnum = {
   userId: 'userId',
   joinedAt: 'joinedAt',
   isActive: 'isActive',
-  membershipRole: 'membershipRole'
+  membershipRole: 'membershipRole',
+  canDeleteTickets: 'canDeleteTickets'
 } as const
 
 export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
