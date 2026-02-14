@@ -30,6 +30,7 @@ type TicketMoreMenuProps = {
 
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
   const canDeleteTicket = ticket.permissions.canDeleteTicket;
+  const canUpdateTicket = ticket.permissions.canUpdateTicket;
   const noDeletePermissionMessage =
     "You do not have permission to delete this ticket.";
 
@@ -44,6 +45,8 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
   });
 
   const handleUpdateTicketStatus = async (value: string) => {
+    if (!canUpdateTicket) return;
+
     const promise = updateTicketStatus(ticket.id, value as TicketStatus);
 
     toast.promise(promise, {
@@ -65,7 +68,11 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
       onValueChange={handleUpdateTicketStatus}
     >
       {(Object.keys(TICKET_STATUS_LABELS) as TicketStatus[]).map((key) => (
-        <DropdownMenuRadioItem value={key} key={key}>
+        <DropdownMenuRadioItem
+          value={key}
+          key={key}
+          disabled={!canUpdateTicket}
+        >
           {TICKET_STATUS_LABELS[key]}
         </DropdownMenuRadioItem>
       ))}

@@ -82,6 +82,15 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                     permissionValue={membership.canDeleteTickets}
                   />
                 </div>
+                <div className="flex items-center justify-between w-full">
+                  <span>Can Update Ticket:</span>
+                  <PermissionToggle
+                    userId={membership.userId}
+                    organizationId={membership.organizationId}
+                    permissionKey="canUpdateTickets"
+                    permissionValue={membership.canUpdateTickets}
+                  />
+                </div>
               </CardFooter>
             </Card>
             <div className="flex flex-col gap-y-1">
@@ -110,6 +119,7 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
             <TableHead>Verified Email</TableHead>
             <TableHead>Role</TableHead>
             <TableHead>Can Delete Ticket?</TableHead>
+            <TableHead>Can Update Ticket?</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -142,6 +152,14 @@ const MembershipList = async ({ organizationId }: MembershipListProps) => {
                   organizationId={membership.organizationId}
                   permissionKey="canDeleteTickets"
                   permissionValue={membership.canDeleteTickets}
+                />
+              </TableCell>
+              <TableCell>
+                <PermissionToggle
+                  userId={membership.userId}
+                  organizationId={membership.organizationId}
+                  permissionKey="canUpdateTickets"
+                  permissionValue={membership.canUpdateTickets}
                 />
               </TableCell>
               <TableCell className="flex gap-x-1">

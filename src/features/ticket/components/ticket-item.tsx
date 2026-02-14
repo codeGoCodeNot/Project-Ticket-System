@@ -39,7 +39,7 @@ const TicketItem = ({
     </Button>
   );
 
-  const editButton = ticket.isOwner ? (
+  const editButton = ticket.permissions.canUpdateTicket ? (
     <Button variant="outline" size="icon" asChild>
       <Link href={ticketEditPath(ticket.id)}>
         <LucidePencil className="h-4 w-4" />
@@ -47,16 +47,17 @@ const TicketItem = ({
     </Button>
   ) : null;
 
-  const moreMenu = ticket.isOwner ? (
-    <TicketMoreMenu
-      ticket={ticket}
-      trigger={
-        <Button variant="outline" size="icon">
-          <LucideMoreVertical className="h-4 w-4" />
-        </Button>
-      }
-    />
-  ) : null;
+  const moreMenu =
+    ticket.permissions.canUpdateTicket || ticket.permissions.canDeleteTicket ? (
+      <TicketMoreMenu
+        ticket={ticket}
+        trigger={
+          <Button variant="outline" size="icon">
+            <LucideMoreVertical className="h-4 w-4" />
+          </Button>
+        }
+      />
+    ) : null;
 
   return (
     <div

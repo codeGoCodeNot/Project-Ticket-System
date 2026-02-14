@@ -10,7 +10,7 @@ import togglePermission from "../actions/toggle-permission";
 type PermissionToggleProps = {
   userId: string;
   organizationId: string;
-  permissionKey: "canDeleteTickets"; // For now, we only have one permission, but this can be extended in the future
+  permissionKey: "canDeleteTickets" | "canUpdateTickets";
   permissionValue: boolean;
 };
 

@@ -73,6 +73,9 @@ const getTickets = async (
           canDeleteTicket:
             isOwner(user, ticket) &&
             !!organization?.membershipByUser.canDeleteTickets,
+          canUpdateTicket:
+            isOwner(user, ticket) &&
+            !!organization?.membershipByUser.canUpdateTickets,
         },
       };
     }),

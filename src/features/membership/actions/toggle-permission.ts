@@ -6,7 +6,7 @@ import { toActionState } from "@/components/form/utils/to-action-state";
 import { revalidatePath } from "next/cache";
 import { membershipPath } from "@/path";
 
-type PermissionKey = "canDeleteTickets"; // For now, we only have one permission, but this can be extended in the future
+type PermissionKey = "canDeleteTickets" | "canUpdateTickets";
 
 type TogglePermissionParams = {
   userId: string;

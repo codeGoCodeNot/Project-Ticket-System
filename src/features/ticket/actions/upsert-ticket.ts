@@ -13,6 +13,7 @@ import { toCent } from "@/utils/currency";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import * as z from "zod";
+import getTicketPermissions from "../permissions/get-ticket-permission";
 
 const upsertTicketSchema = z.object({
   title: z.string().min(1, "Title must not be empty").max(191),
@@ -36,6 +37,15 @@ const upsertTicket = async (
       });
 
       if (!ticket || !isOwner(user, ticket)) {
+        return toActionState("ERROR", "Not authorized");
+      }
+
+      const permissions = await getTicketPermissions({
+        organizationId: ticket.organizationId,
+        userId: user.id,
+      });
+
+      if (!permissions.canUpdateTicket) {
         return toActionState("ERROR", "Not authorized");
       }
     }

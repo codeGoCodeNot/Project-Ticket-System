@@ -9,6 +9,7 @@ import fromErrorToActionState, {
 } from "@/components/form/utils/to-action-state";
 import getAuthOrRedirect from "@/features/auth/queries/get-auth-or-redirect";
 import isOwner from "@/features/auth/utils/is-owner";
+import getTicketPermissions from "../permissions/get-ticket-permission";
 
 const updateTicketStatus = async (id: string, status: TicketStatus) => {
   const { user } = await getAuthOrRedirect();
@@ -21,6 +22,15 @@ const updateTicketStatus = async (id: string, status: TicketStatus) => {
     });
 
     if (!ticket || !isOwner(user, ticket)) {
+      return toActionState("ERROR", "Not authorized");
+    }
+
+    const permissions = await getTicketPermissions({
+      organizationId: ticket.organizationId,
+      userId: user.id,
+    });
+
+    if (!permissions.canUpdateTicket) {
       return toActionState("ERROR", "Not authorized");
     }
 
