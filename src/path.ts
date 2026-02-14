@@ -21,7 +21,9 @@ export const selectActiveOrganizationPath = () =>
   "/onboarding/select-active-organization";
 
 export const membershipPath = (organizationId: string) =>
-  `/organization/${organizationId}/membership`;
+  `/organization/${organizationId}/memberships`;
+export const invitationsPath = (organizationId: string) =>
+  `/organization/${organizationId}/invitations`;
 
 export const contactAdminPath = () => "/contact-admin";
 
