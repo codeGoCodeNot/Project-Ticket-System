@@ -12,6 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import deleteTickets from "@/features/ticket/actions/delete-ticket";
 import updateTicketStatus from "@/features/ticket/actions/update-ticket-status";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucideTrash2 } from "lucide-react";
 import { toast } from "sonner";
 import { TicketStatus } from "../../../../generated/prisma/client";
@@ -24,10 +29,14 @@ type TicketMoreMenuProps = {
 };
 
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
+  const canDeleteTicket = ticket.permissions.canDeleteTicket;
+  const noDeletePermissionMessage =
+    "You do not have permission to delete this ticket.";
+
   const [deleteButton, deleteDialog] = useConfirmDialog({
     action: deleteTickets.bind(null, ticket.id),
     trigger: (
-      <DropdownMenuItem disabled={!ticket.permissions.canDeleteTicket}>
+      <DropdownMenuItem>
         <LucideTrash2 className="h-4 w-4" />
         <span>Delete</span>
       </DropdownMenuItem>
@@ -71,7 +80,23 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
         <DropdownMenuContent className="w-56" side="right">
           {ticketStatusRadioGroupItems}
           <DropdownMenuSeparator />
-          {deleteButton}
+          {canDeleteTicket ? (
+            deleteButton
+          ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex w-full">
+                  <DropdownMenuItem disabled>
+                    <LucideTrash2 className="h-4 w-4" />
+                    <span>Delete</span>
+                  </DropdownMenuItem>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="left" sideOffset={8}>
+                {noDeletePermissionMessage}
+              </TooltipContent>
+            </Tooltip>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </>
