@@ -5,6 +5,11 @@ import Form from "@/components/form/form";
 import SubmitButton from "@/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useActionState } from "react";
 import createOrganization from "../actions/create-organization";
 
@@ -23,7 +28,14 @@ const OrganizationCreateForm = () => {
       />
       <FieldError actionState={actionState} name="name" />
 
-      <SubmitButton label="Create Organization" />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="inline-flex">
+            <SubmitButton label="Create Organization" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent>Create organization</TooltipContent>
+      </Tooltip>
     </Form>
   );
 };

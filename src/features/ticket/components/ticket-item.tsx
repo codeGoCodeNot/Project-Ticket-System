@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Card,
   CardContent,
   CardFooter,
@@ -32,19 +37,29 @@ const TicketItem = ({
   paginatedComments: comments,
 }: TicketItemProps) => {
   const detailButton = (
-    <Button asChild variant="outline" size="icon">
-      <Link prefetch href={ticketPath(ticket.id)}>
-        <LucideSquareArrowOutUpRight className="h-4 w-4" />
-      </Link>
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button asChild variant="outline" size="icon">
+          <Link prefetch href={ticketPath(ticket.id)}>
+            <LucideSquareArrowOutUpRight className="h-4 w-4" />
+          </Link>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>View ticket</TooltipContent>
+    </Tooltip>
   );
 
   const editButton = ticket.permissions.canUpdateTicket ? (
-    <Button variant="outline" size="icon" asChild>
-      <Link href={ticketEditPath(ticket.id)}>
-        <LucidePencil className="h-4 w-4" />
-      </Link>
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline" size="icon" asChild>
+          <Link href={ticketEditPath(ticket.id)}>
+            <LucidePencil className="h-4 w-4" />
+          </Link>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>Edit ticket</TooltipContent>
+    </Tooltip>
   ) : null;
 
   const moreMenu =

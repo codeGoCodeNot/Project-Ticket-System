@@ -1,6 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucideUserCog } from "lucide-react";
 import { MembershipRole } from "../../../../generated/prisma/enums";
 import { toast } from "sonner";
@@ -48,11 +53,16 @@ const MembershipMoreMenu = ({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <LucideUserCog />
-        </Button>
-      </DropdownMenuTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideUserCog />
+            </Button>
+          </DropdownMenuTrigger>
+        </TooltipTrigger>
+        <TooltipContent>Change role</TooltipContent>
+      </Tooltip>
       <DropdownMenuContent>
         <DropdownMenuLabel>Roles</DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -3,6 +3,11 @@
 import useConfirmDialog from "@/components/confirm-dialog";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucideLogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import deleteMembership from "../actions/delete-membership";
@@ -41,7 +46,12 @@ const MembershipDeleteButton = ({
   return (
     <div>
       {deleteDialog}
-      {deleteButton}
+      <Tooltip>
+        <TooltipTrigger asChild>{deleteButton}</TooltipTrigger>
+        <TooltipContent>
+          {isOwnMembership ? "Leave organization" : "Remove member"}
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };

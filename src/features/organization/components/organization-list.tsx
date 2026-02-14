@@ -1,6 +1,11 @@
 import SubmitButton from "@/components/form/submit-button";
 import { Button } from "@/components/ui/button";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Card,
   CardContent,
   CardFooter,
@@ -58,25 +63,51 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
             <OrganizationSwitchButton
               organizationId={organization.id}
               trigger={
-                <SubmitButton
-                  label={
-                    !hasActive ? "Activate" : isActive ? "Active" : "Switch"
-                  }
-                  variant={
-                    !hasActive ? "secondary" : isActive ? "default" : "outline"
-                  }
-                  icon={<LucideArrowLeftRight />}
-                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="inline-flex">
+                      <SubmitButton
+                        label={
+                          !hasActive
+                            ? "Activate"
+                            : isActive
+                              ? "Active"
+                              : "Switch"
+                        }
+                        variant={
+                          !hasActive
+                            ? "secondary"
+                            : isActive
+                              ? "default"
+                              : "outline"
+                        }
+                        icon={<LucideArrowLeftRight />}
+                      />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {!hasActive
+                      ? "Activate organization"
+                      : isActive
+                        ? "Active organization"
+                        : "Switch organization"}
+                  </TooltipContent>
+                </Tooltip>
               }
             />
           );
 
           const detailButton = (
-            <Button variant="outline" size="icon" asChild>
-              <Link href={membershipPath(organization.id)}>
-                <LucideArrowUpRightFromSquare />
-              </Link>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" asChild>
+                  <Link href={membershipPath(organization.id)}>
+                    <LucideArrowUpRightFromSquare />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>View members</TooltipContent>
+            </Tooltip>
           );
 
           const editButton = (
@@ -156,29 +187,51 @@ const OrganizationList = async ({ limitedAccess }: OrganizationListProps) => {
                 <OrganizationSwitchButton
                   organizationId={organization.id}
                   trigger={
-                    <SubmitButton
-                      label={
-                        !hasActive ? "Activate" : isActive ? "Active" : "Switch"
-                      }
-                      variant={
-                        !hasActive
-                          ? "secondary"
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="inline-flex">
+                          <SubmitButton
+                            label={
+                              !hasActive
+                                ? "Activate"
+                                : isActive
+                                  ? "Active"
+                                  : "Switch"
+                            }
+                            variant={
+                              !hasActive
+                                ? "secondary"
+                                : isActive
+                                  ? "default"
+                                  : "outline"
+                            }
+                            icon={<LucideArrowLeftRight />}
+                          />
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {!hasActive
+                          ? "Activate organization"
                           : isActive
-                            ? "default"
-                            : "outline"
-                      }
-                      icon={<LucideArrowLeftRight />}
-                    />
+                            ? "Active organization"
+                            : "Switch organization"}
+                      </TooltipContent>
+                    </Tooltip>
                   }
                 />
               );
 
               const detailButton = (
-                <Button variant="outline" size="icon" asChild>
-                  <Link href={membershipPath(organization.id)}>
-                    <LucideArrowUpRightFromSquare />
-                  </Link>
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="icon" asChild>
+                      <Link href={membershipPath(organization.id)}>
+                        <LucideArrowUpRightFromSquare />
+                      </Link>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>View members</TooltipContent>
+                </Tooltip>
               );
 
               const editButton = (

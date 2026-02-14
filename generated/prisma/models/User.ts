@@ -188,6 +188,7 @@ export type UserWhereInput = {
   passwordResetToken?: Prisma.PasswordResetTokenListRelationFilter
   emailVerificationToken?: Prisma.EmailVerificationTokenListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
+  invitateByUser?: Prisma.InvitationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -202,6 +203,7 @@ export type UserOrderByWithRelationInput = {
   passwordResetToken?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   emailVerificationToken?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
   memberships?: Prisma.MembershipOrderByRelationAggregateInput
+  invitateByUser?: Prisma.InvitationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -219,6 +221,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordResetToken?: Prisma.PasswordResetTokenListRelationFilter
   emailVerificationToken?: Prisma.EmailVerificationTokenListRelationFilter
   memberships?: Prisma.MembershipListRelationFilter
+  invitateByUser?: Prisma.InvitationListRelationFilter
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -255,6 +258,7 @@ export type UserCreateInput = {
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -269,6 +273,7 @@ export type UserUncheckedCreateInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUpdateInput = {
@@ -283,6 +288,7 @@ export type UserUpdateInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -297,6 +303,7 @@ export type UserUncheckedUpdateInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -321,6 +328,11 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserScalarRelationFilter = {
@@ -352,9 +364,20 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
+export type UserCreateNestedOneWithoutInvitateByUserInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInvitateByUserInput, Prisma.UserUncheckedCreateWithoutInvitateByUserInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInvitateByUserInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutInvitateByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInvitateByUserInput, Prisma.UserUncheckedCreateWithoutInvitateByUserInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInvitateByUserInput
+  upsert?: Prisma.UserUpsertWithoutInvitateByUserInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInvitateByUserInput, Prisma.UserUpdateWithoutInvitateByUserInput>, Prisma.UserUncheckedUpdateWithoutInvitateByUserInput>
 }
 
 export type UserCreateNestedOneWithoutMembershipsInput = {
@@ -443,6 +466,78 @@ export type UserUpdateOneWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentsInput, Prisma.UserUpdateWithoutCommentsInput>, Prisma.UserUncheckedUpdateWithoutCommentsInput>
 }
 
+export type UserCreateWithoutInvitateByUserInput = {
+  id?: string
+  username: string
+  email: string
+  emailVerified?: boolean
+  passwordHash: string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInvitateByUserInput = {
+  id?: string
+  username: string
+  email: string
+  emailVerified?: boolean
+  passwordHash: string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInvitateByUserInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInvitateByUserInput, Prisma.UserUncheckedCreateWithoutInvitateByUserInput>
+}
+
+export type UserUpsertWithoutInvitateByUserInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInvitateByUserInput, Prisma.UserUncheckedUpdateWithoutInvitateByUserInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInvitateByUserInput, Prisma.UserUncheckedCreateWithoutInvitateByUserInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInvitateByUserInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInvitateByUserInput, Prisma.UserUncheckedUpdateWithoutInvitateByUserInput>
+}
+
+export type UserUpdateWithoutInvitateByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInvitateByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutMembershipsInput = {
   id?: string
   username: string
@@ -454,6 +549,7 @@ export type UserCreateWithoutMembershipsInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -467,6 +563,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -496,6 +593,7 @@ export type UserUpdateWithoutMembershipsInput = {
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -509,6 +607,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokenInput = {
@@ -522,6 +621,7 @@ export type UserCreateWithoutEmailVerificationTokenInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokenInput = {
@@ -535,6 +635,7 @@ export type UserUncheckedCreateWithoutEmailVerificationTokenInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokenInput = {
@@ -564,6 +665,7 @@ export type UserUpdateWithoutEmailVerificationTokenInput = {
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokenInput = {
@@ -577,6 +679,7 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokenInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokenInput = {
@@ -590,6 +693,7 @@ export type UserCreateWithoutPasswordResetTokenInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
@@ -603,6 +707,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokenInput = {
@@ -632,6 +737,7 @@ export type UserUpdateWithoutPasswordResetTokenInput = {
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
@@ -645,6 +751,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -658,6 +765,7 @@ export type UserCreateWithoutSessionsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -671,6 +779,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -700,6 +809,7 @@ export type UserUpdateWithoutSessionsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -713,6 +823,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateWithoutTicketsInput = {
@@ -726,6 +837,7 @@ export type UserCreateWithoutTicketsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketsInput = {
@@ -739,6 +851,7 @@ export type UserUncheckedCreateWithoutTicketsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketsInput = {
@@ -768,6 +881,7 @@ export type UserUpdateWithoutTicketsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketsInput = {
@@ -781,6 +895,7 @@ export type UserUncheckedUpdateWithoutTicketsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -794,6 +909,7 @@ export type UserCreateWithoutCommentsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -807,6 +923,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  invitateByUser?: Prisma.InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -836,6 +953,7 @@ export type UserUpdateWithoutCommentsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUpdateManyWithoutInvitedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -849,6 +967,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   passwordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationToken?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  invitateByUser?: Prisma.InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
 }
 
 
@@ -863,6 +982,7 @@ export type UserCountOutputType = {
   passwordResetToken: number
   emailVerificationToken: number
   memberships: number
+  invitateByUser: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -872,6 +992,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   passwordResetToken?: boolean | UserCountOutputTypeCountPasswordResetTokenArgs
   emailVerificationToken?: boolean | UserCountOutputTypeCountEmailVerificationTokenArgs
   memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
+  invitateByUser?: boolean | UserCountOutputTypeCountInvitateByUserArgs
 }
 
 /**
@@ -926,6 +1047,13 @@ export type UserCountOutputTypeCountMembershipsArgs<ExtArgs extends runtime.Type
   where?: Prisma.MembershipWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInvitateByUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvitationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -939,6 +1067,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordResetToken?: boolean | Prisma.User$passwordResetTokenArgs<ExtArgs>
   emailVerificationToken?: boolean | Prisma.User$emailVerificationTokenArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
+  invitateByUser?: boolean | Prisma.User$invitateByUserArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -974,6 +1103,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   passwordResetToken?: boolean | Prisma.User$passwordResetTokenArgs<ExtArgs>
   emailVerificationToken?: boolean | Prisma.User$emailVerificationTokenArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
+  invitateByUser?: boolean | Prisma.User$invitateByUserArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -988,6 +1118,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordResetToken: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     emailVerificationToken: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
     memberships: Prisma.$MembershipPayload<ExtArgs>[]
+    invitateByUser: Prisma.$InvitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1395,6 +1526,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   passwordResetToken<T extends Prisma.User$passwordResetTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailVerificationToken<T extends Prisma.User$emailVerificationTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invitateByUser<T extends Prisma.User$invitateByUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$invitateByUserArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1958,6 +2090,30 @@ export type User$membershipsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.MembershipScalarFieldEnum | Prisma.MembershipScalarFieldEnum[]
+}
+
+/**
+ * User.invitateByUser
+ */
+export type User$invitateByUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invitation
+   */
+  select?: Prisma.InvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invitation
+   */
+  omit?: Prisma.InvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvitationInclude<ExtArgs> | null
+  where?: Prisma.InvitationWhereInput
+  orderBy?: Prisma.InvitationOrderByWithRelationInput | Prisma.InvitationOrderByWithRelationInput[]
+  cursor?: Prisma.InvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvitationScalarFieldEnum | Prisma.InvitationScalarFieldEnum[]
 }
 
 /**

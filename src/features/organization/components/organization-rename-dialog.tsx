@@ -12,6 +12,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucidePen } from "lucide-react";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -74,14 +79,14 @@ const OrganizationRenameDialog = ({
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => setIsOpen(true)}
-        title="Rename organization"
-      >
-        <LucidePen />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline" size="icon" onClick={() => setIsOpen(true)}>
+            <LucidePen />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Rename organization</TooltipContent>
+      </Tooltip>
 
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
         <AlertDialogContent>
@@ -110,17 +115,29 @@ const OrganizationRenameDialog = ({
               autoFocus
             />
             <div className="flex justify-end gap-2 mt-4">
-              <AlertDialogCancel disabled={isPending} type="button">
-                Cancel
-              </AlertDialogCancel>
-              <Button
-                type="submit"
-                disabled={
-                  isPending || !inputValue.trim() || inputValue === currentName
-                }
-              >
-                {isPending ? "Renaming..." : "Rename"}
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <AlertDialogCancel disabled={isPending} type="button">
+                    Cancel
+                  </AlertDialogCancel>
+                </TooltipTrigger>
+                <TooltipContent>Cancel renaming</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="submit"
+                    disabled={
+                      isPending ||
+                      !inputValue.trim() ||
+                      inputValue === currentName
+                    }
+                  >
+                    {isPending ? "Renaming..." : "Rename"}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Confirm rename</TooltipContent>
+              </Tooltip>
             </div>
           </Form>
         </AlertDialogContent>

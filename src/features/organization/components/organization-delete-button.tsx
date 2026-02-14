@@ -3,6 +3,11 @@
 import useConfirmDialog from "@/components/confirm-dialog";
 import Spinner from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucideTrash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import deleteOrganization from "../actions/delete-organization";
@@ -30,7 +35,10 @@ const OrganizationDeleteButton = ({
   return (
     <>
       {deleteDialog}
-      {deleteButton}
+      <Tooltip>
+        <TooltipTrigger asChild>{deleteButton}</TooltipTrigger>
+        <TooltipContent>Delete organization</TooltipContent>
+      </Tooltip>
     </>
   );
 };

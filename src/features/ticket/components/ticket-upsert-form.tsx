@@ -9,6 +9,11 @@ import SubmitButton from "@/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import upsertTicket from "@/features/ticket/actions/upsert-ticket";
 import { fromCent } from "@/utils/currency";
 import { Label } from "@radix-ui/react-label";
@@ -86,7 +91,19 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         </div>
       </div>
 
-      <SubmitButton label={ticket ? "Edit" : "Create"} variant="default" />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="inline-flex">
+            <SubmitButton
+              label={ticket ? "Edit" : "Create"}
+              variant="default"
+            />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent>
+          {ticket ? "Update ticket" : "Create ticket"}
+        </TooltipContent>
+      </Tooltip>
     </Form>
   );
 };

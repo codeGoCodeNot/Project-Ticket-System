@@ -3,6 +3,11 @@
 import Form from "@/components/form/form";
 import SubmitButton from "@/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { LucideBan, LucideCheck } from "lucide-react";
 import { useActionState } from "react";
 import togglePermission from "../actions/toggle-permission";
@@ -20,6 +25,11 @@ const PermissionToggle = ({
   permissionKey,
   permissionValue,
 }: PermissionToggleProps) => {
+  const permissionLabel =
+    permissionKey === "canDeleteTickets" ? "delete tickets" : "update tickets";
+  const tooltipLabel = permissionValue
+    ? `Disable ${permissionLabel}`
+    : `Enable ${permissionLabel}`;
   const [actionState, action] = useActionState(
     togglePermission.bind(null, {
       userId,
@@ -31,11 +41,18 @@ const PermissionToggle = ({
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton
-        icon={permissionValue ? <LucideCheck /> : <LucideBan />}
-        size="icon"
-        variant={permissionValue ? "secondary" : "outline"}
-      />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="inline-flex">
+            <SubmitButton
+              icon={permissionValue ? <LucideCheck /> : <LucideBan />}
+              size="icon"
+              variant={permissionValue ? "secondary" : "outline"}
+            />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent>{tooltipLabel}</TooltipContent>
+      </Tooltip>
     </Form>
   );
 };
