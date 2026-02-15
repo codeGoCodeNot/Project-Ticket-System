@@ -2,9 +2,11 @@ import { emailVerificationEvent } from "@/features/auth/events/event-email-verif
 import { welcomeEmailEvent } from "@/features/auth/events/event-welcome-email";
 import { passwordResetEvent } from "@/features/password/events/event-password-reset";
 import { emailChangeEvent } from "@/features/account/events/event-email-change";
+
 import { inngest } from "@/lib/inngest";
 import { serve } from "inngest/next";
 import { invitationCreateEvent } from "@/features/invitation/events/event-invitation-create";
+import { processInvitationsOnSignUp } from "@/features/auth/events/event-process-invitations-on-signup";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -14,5 +16,6 @@ export const { GET, POST, PUT } = serve({
     emailVerificationEvent,
     emailChangeEvent,
     invitationCreateEvent,
+    processInvitationsOnSignUp,
   ],
 });
