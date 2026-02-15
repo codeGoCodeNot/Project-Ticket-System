@@ -6,7 +6,10 @@ const getInvitations = async (organizationId: string) => {
 
   return await prisma.invitation.findMany({
     where: { organizationId },
-    include: {
+    select: {
+      email: true,
+      createdAt: true,
+      organizationId: true,
       invitedByUser: {
         select: {
           username: true,
