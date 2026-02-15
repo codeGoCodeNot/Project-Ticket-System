@@ -28,7 +28,7 @@ const generateInvitationLink = async (
   });
 
   const pageUrl = getBaseUrl() + emailInvitationPath();
-  const emailInvitationLink = pageUrl + `${tokenId}`;
+  const emailInvitationLink = pageUrl + `/${tokenId}`;
 
   return emailInvitationLink;
 };

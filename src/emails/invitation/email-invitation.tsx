@@ -1,14 +1,7 @@
-import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Html,
-  Section,
-  Tailwind,
-  Text,
-} from "@react-email/components";
-import { fr } from "date-fns/locale";
+import { Section, Text } from "@react-email/components";
+import { EmailLayout, mutedColor } from "../components/email-layout";
+import { EmailButton } from "../components/email-button";
+import { EmailHeading } from "../components/email-heading";
 
 type EmailInvitationProps = {
   fromUser: string;
@@ -22,29 +15,26 @@ const EmailInvitation = ({
   url,
 }: EmailInvitationProps) => {
   return (
-    <Html>
-      <Head />
-      <Tailwind>
-        <Body className="font-sans text-center">
-          <Container>
-            <Section>
-              <Text>
-                Hello there, {fromUser} invited you to join {fromOrganization}.
-                Click the link below to accept the invitation.
-              </Text>
-            </Section>
-            <Section>
-              <Button
-                href={url}
-                className="bg-black rounded text-white p-2 m-2"
-              >
-                Accept Invitation
-              </Button>
-            </Section>
-          </Container>
-        </Body>
-      </Tailwind>
-    </Html>
+    <EmailLayout previewText={`Invitation to join ${fromOrganization}`}>
+      <EmailHeading
+        title={`You're Invited to ${fromOrganization}`}
+        subtitle={`Accept your invitation from ${fromUser}.`}
+      />
+
+      {/* Main action button */}
+      <Section
+        style={{ textAlign: "center", marginBottom: "24px", marginTop: "24px" }}
+      >
+        <EmailButton href={url}>Accept Invitation</EmailButton>
+      </Section>
+
+      {/* Info notice */}
+      <Section style={{ textAlign: "center" }}>
+        <Text style={{ margin: 0, fontSize: "12px", color: mutedColor }}>
+          If you did not expect this invitation, you can ignore this email.
+        </Text>
+      </Section>
+    </EmailLayout>
   );
 };
 
