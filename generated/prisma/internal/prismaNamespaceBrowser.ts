@@ -94,7 +94,8 @@ export const InvitationScalarFieldEnum = {
   email: 'email',
   tokenHash: 'tokenHash',
   organizationId: 'organizationId',
-  invitedByUserId: 'invitedByUserId'
+  invitedByUserId: 'invitedByUserId',
+  status: 'status'
 } as const
 
 export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]

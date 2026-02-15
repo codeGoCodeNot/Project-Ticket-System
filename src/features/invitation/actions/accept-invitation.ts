@@ -45,6 +45,14 @@ export const acceptInvitation = async (tokenId: string) => {
         }),
       ]);
     } else {
+      await prisma.invitation.update({
+        where: {
+          tokenHash,
+        },
+        data: {
+          status: "ACCEPTED_WITHOUT_ACCOUNT",
+        },
+      });
     }
   } catch (error) {
     return fromErrorToActionState(error);
