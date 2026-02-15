@@ -5,6 +5,7 @@ import getOrganizationById from "@/features/organization/queries/get-organizatio
 import { Suspense } from "react";
 import OrganizationBreadcrumbs from "../_navigation/tabs";
 import { notFound } from "next/navigation";
+import InvitationCreateButton from "@/features/invitation/components/invitation-create-button";
 
 type InvitationsPageProps = {
   params: Promise<{ organizationId: string }>;
@@ -23,6 +24,7 @@ const InvitationsPage = async ({ params }: InvitationsPageProps) => {
         title="Invitations"
         desc="Manages your organization's invitations"
         tabs={<OrganizationBreadcrumbs organizationName={organization.name} />}
+        actions={<InvitationCreateButton organizationId={organizationId} />}
       />
 
       <Suspense fallback={<Spinner />}>

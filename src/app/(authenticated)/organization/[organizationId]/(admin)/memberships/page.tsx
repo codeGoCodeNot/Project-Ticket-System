@@ -5,6 +5,7 @@ import getOrganizationById from "@/features/organization/queries/get-organizatio
 import { Suspense } from "react";
 import OrganizationBreadcrumbs from "../_navigation/tabs";
 import { notFound } from "next/navigation";
+import InvitationCreateButton from "@/features/invitation/components/invitation-create-button";
 
 type MembershipPageProps = {
   params: Promise<{ organizationId: string }>;
@@ -24,6 +25,7 @@ const MembershipPage = async ({ params }: MembershipPageProps) => {
         title="Membership"
         desc="Manage members in your organization"
         tabs={<OrganizationBreadcrumbs organizationName={organization.name} />}
+        actions={<InvitationCreateButton organizationId={organizationId} />}
       />
       <Suspense fallback={<MembershipSkeleton />}>
         <MembershipList organizationId={organizationId} />

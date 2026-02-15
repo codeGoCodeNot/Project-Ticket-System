@@ -4,6 +4,7 @@ import { passwordResetEvent } from "@/features/password/events/event-password-re
 import { emailChangeEvent } from "@/features/account/events/event-email-change";
 import { inngest } from "@/lib/inngest";
 import { serve } from "inngest/next";
+import { invitationCreateEvent } from "@/features/invitation/events/event-invitation-create";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -12,5 +13,6 @@ export const { GET, POST, PUT } = serve({
     welcomeEmailEvent,
     emailVerificationEvent,
     emailChangeEvent,
+    invitationCreateEvent,
   ],
 });

@@ -10,7 +10,6 @@ import prisma from "@/lib/prisma";
 import { ticketsPath } from "@/path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import getTicket from "../queries/get-ticket";
 import getTicketPermissions from "../permissions/get-ticket-permission";
 
 const deleteTickets = async (id: string) => {
