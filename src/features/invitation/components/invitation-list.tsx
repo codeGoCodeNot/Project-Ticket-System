@@ -1,5 +1,4 @@
 import Placeholder from "@/components/placeholder";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,13 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { format } from "date-fns";
-import { LucideTrash } from "lucide-react";
 import getInvitations from "../queries/get-invitations";
 import InvitationDeleteButton from "./invitation-delete-button";
 
@@ -41,6 +34,13 @@ const InvitationList = async ({ organizationId }: InvitationListProps) => {
       {/* Mobile view - vertical cards */}
       <section className="sm:hidden flex flex-col items-center space-y-4">
         {invitations.map((invitation) => {
+          const deleteButton = (
+            <InvitationDeleteButton
+              email={invitation.email}
+              organizationId={invitation.organizationId}
+            />
+          );
+
           return (
             <div
               key={invitation.email}
@@ -65,15 +65,7 @@ const InvitationList = async ({ organizationId }: InvitationListProps) => {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <InvitationDeleteButton
-                        email={invitation.email}
-                        organizationId={invitation.organizationId}
-                      />
-                    </TooltipTrigger>
-                    <TooltipContent>Delete invitation</TooltipContent>
-                  </Tooltip>
+                  {deleteButton}
                 </CardFooter>
               </Card>
             </div>
@@ -93,26 +85,26 @@ const InvitationList = async ({ organizationId }: InvitationListProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invitations.map((invitation) => (
-            <TableRow key={invitation.email}>
-              <TableCell>{invitation.email}</TableCell>
-              <TableCell>
-                {format(invitation.createdAt, "MMM dd, yyyy, HH:mm")}
-              </TableCell>
-              <TableCell>{invitation.invitedByUser?.username}</TableCell>
-              <TableCell className="flex gap-x-1">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <InvitationDeleteButton
-                      email={invitation.email}
-                      organizationId={invitation.organizationId}
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent>Delete invitation</TooltipContent>
-                </Tooltip>
-              </TableCell>
-            </TableRow>
-          ))}
+          {invitations.map((invitation) => {
+            const deleteButton = (
+              <InvitationDeleteButton
+                email={invitation.email}
+                organizationId={invitation.organizationId}
+              />
+            );
+
+            const buttons = <>{deleteButton}</>;
+            return (
+              <TableRow key={invitation.email}>
+                <TableCell>{invitation.email}</TableCell>
+                <TableCell>
+                  {format(invitation.createdAt, "MMM dd, yyyy, HH:mm")}
+                </TableCell>
+                <TableCell>{invitation.invitedByUser?.username}</TableCell>
+                <TableCell className="flex gap-x-1">{buttons}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </>
